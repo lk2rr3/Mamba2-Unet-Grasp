@@ -1,0 +1,197 @@
+(grconv) xinda-wang@xinda-wang-Legion-Y9000P-IRX8:~/Desktop/robotic-grasping$ python train_network.py --network grconvnet3 --dataset jacquard --dataset-path /home/xinda-wang/Downloads/Jacquard_V2/data --description train-jac-large
+root        : INFO     CUDA detected. Running with GPU acceleration.
+root        : INFO     Loading Jacquard Dataset...
+root        : INFO     Dataset size is 51601
+root        : INFO     Training size: 46440
+root        : INFO     Validation size: 5161
+root        : INFO     Done
+root        : INFO     Loading Network...
+root        : INFO     Done
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 32, 224, 224]          10,400
+       BatchNorm2d-2         [-1, 32, 224, 224]              64
+            Conv2d-3         [-1, 64, 112, 112]          32,832
+       BatchNorm2d-4         [-1, 64, 112, 112]             128
+            Conv2d-5          [-1, 128, 56, 56]         131,200
+       BatchNorm2d-6          [-1, 128, 56, 56]             256
+            Conv2d-7          [-1, 128, 56, 56]         147,584
+       BatchNorm2d-8          [-1, 128, 56, 56]             256
+            Conv2d-9          [-1, 128, 56, 56]         147,584
+      BatchNorm2d-10          [-1, 128, 56, 56]             256
+    ResidualBlock-11          [-1, 128, 56, 56]               0
+           Conv2d-12          [-1, 128, 56, 56]         147,584
+      BatchNorm2d-13          [-1, 128, 56, 56]             256
+           Conv2d-14          [-1, 128, 56, 56]         147,584
+      BatchNorm2d-15          [-1, 128, 56, 56]             256
+    ResidualBlock-16          [-1, 128, 56, 56]               0
+           Conv2d-17          [-1, 128, 56, 56]         147,584
+      BatchNorm2d-18          [-1, 128, 56, 56]             256
+           Conv2d-19          [-1, 128, 56, 56]         147,584
+      BatchNorm2d-20          [-1, 128, 56, 56]             256
+    ResidualBlock-21          [-1, 128, 56, 56]               0
+           Conv2d-22          [-1, 128, 56, 56]         147,584
+      BatchNorm2d-23          [-1, 128, 56, 56]             256
+           Conv2d-24          [-1, 128, 56, 56]         147,584
+      BatchNorm2d-25          [-1, 128, 56, 56]             256
+    ResidualBlock-26          [-1, 128, 56, 56]               0
+           Conv2d-27          [-1, 128, 56, 56]         147,584
+      BatchNorm2d-28          [-1, 128, 56, 56]             256
+           Conv2d-29          [-1, 128, 56, 56]         147,584
+      BatchNorm2d-30          [-1, 128, 56, 56]             256
+    ResidualBlock-31          [-1, 128, 56, 56]               0
+  ConvTranspose2d-32         [-1, 64, 113, 113]         131,136
+      BatchNorm2d-33         [-1, 64, 113, 113]             128
+  ConvTranspose2d-34         [-1, 32, 225, 225]          32,800
+      BatchNorm2d-35         [-1, 32, 225, 225]              64
+  ConvTranspose2d-36         [-1, 32, 225, 225]          82,976
+          Dropout-37         [-1, 32, 225, 225]               0
+           Conv2d-38          [-1, 1, 224, 224]             129
+          Dropout-39         [-1, 32, 225, 225]               0
+           Conv2d-40          [-1, 1, 224, 224]             129
+          Dropout-41         [-1, 32, 225, 225]               0
+           Conv2d-42          [-1, 1, 224, 224]             129
+          Dropout-43         [-1, 32, 225, 225]               0
+           Conv2d-44          [-1, 1, 224, 224]             129
+================================================================
+Total params: 1,900,900
+Trainable params: 1,900,900
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.77
+Forward/backward pass size (MB): 219.96
+Params size (MB): 7.25
+Estimated Total Size (MB): 227.97
+----------------------------------------------------------------
+root        : INFO     Beginning Epoch 00
+root        : INFO     Epoch: 0, Batch: 100, Loss: 0.0967
+root        : INFO     Epoch: 0, Batch: 200, Loss: 0.0622
+root        : INFO     Epoch: 0, Batch: 300, Loss: 0.0375
+root        : INFO     Epoch: 0, Batch: 400, Loss: 0.0573
+root        : INFO     Epoch: 0, Batch: 500, Loss: 0.0530
+root        : INFO     Epoch: 0, Batch: 600, Loss: 0.0475
+root        : INFO     Epoch: 0, Batch: 700, Loss: 0.0356
+root        : INFO     Epoch: 0, Batch: 800, Loss: 0.0428
+root        : INFO     Epoch: 0, Batch: 900, Loss: 0.0397
+root        : INFO     Validating...
+root        : INFO     3290/5161 = 0.637473
+root        : INFO     Validation Loss for Epoch 0: 0.0413
+root        : INFO     Beginning Epoch 01
+root        : INFO     Epoch: 1, Batch: 100, Loss: 0.0262
+root        : INFO     Epoch: 1, Batch: 200, Loss: 0.0204
+root        : INFO     Epoch: 1, Batch: 300, Loss: 0.0456
+root        : INFO     Epoch: 1, Batch: 400, Loss: 0.0314
+root        : INFO     Epoch: 1, Batch: 500, Loss: 0.0393
+root        : INFO     Epoch: 1, Batch: 600, Loss: 0.0422
+root        : INFO     Epoch: 1, Batch: 700, Loss: 0.0621
+root        : INFO     Epoch: 1, Batch: 800, Loss: 0.0430
+root        : INFO     Epoch: 1, Batch: 900, Loss: 0.0263
+root        : INFO     Validating...
+root        : INFO     3764/5161 = 0.729316
+root        : INFO     Validation Loss for Epoch 1: 0.0361
+root        : INFO     Beginning Epoch 02
+root        : INFO     Epoch: 2, Batch: 100, Loss: 0.0595
+root        : INFO     Epoch: 2, Batch: 200, Loss: 0.0384
+root        : INFO     Epoch: 2, Batch: 300, Loss: 0.0306
+root        : INFO     Epoch: 2, Batch: 400, Loss: 0.0276
+root        : INFO     Epoch: 2, Batch: 500, Loss: 0.0353
+root        : INFO     Epoch: 2, Batch: 600, Loss: 0.0325
+root        : INFO     Epoch: 2, Batch: 700, Loss: 0.0201
+root        : INFO     Epoch: 2, Batch: 800, Loss: 0.0489
+root        : INFO     Epoch: 2, Batch: 900, Loss: 0.0244
+root        : INFO     Validating...
+root        : INFO     4020/5161 = 0.778919
+root        : INFO     Validation Loss for Epoch 2: 0.0323
+root        : INFO     Beginning Epoch 03
+root        : INFO     Epoch: 3, Batch: 100, Loss: 0.0528
+root        : INFO     Epoch: 3, Batch: 200, Loss: 0.0327
+root        : INFO     Epoch: 3, Batch: 300, Loss: 0.0216
+root        : INFO     Epoch: 3, Batch: 400, Loss: 0.0211
+root        : INFO     Epoch: 3, Batch: 500, Loss: 0.0266
+root        : INFO     Epoch: 3, Batch: 600, Loss: 0.0431
+root        : INFO     Epoch: 3, Batch: 700, Loss: 0.0201
+root        : INFO     Epoch: 3, Batch: 800, Loss: 0.0213
+root        : INFO     Epoch: 3, Batch: 900, Loss: 0.0221
+root        : INFO     Validating...
+root        : INFO     4047/5161 = 0.784150
+root        : INFO     Validation Loss for Epoch 3: 0.0305
+root        : INFO     Beginning Epoch 04
+root        : INFO     Epoch: 4, Batch: 100, Loss: 0.0296
+root        : INFO     Epoch: 4, Batch: 200, Loss: 0.0267
+root        : INFO     Epoch: 4, Batch: 300, Loss: 0.0706
+root        : INFO     Epoch: 4, Batch: 400, Loss: 0.0347
+root        : INFO     Epoch: 4, Batch: 500, Loss: 0.0321
+root        : INFO     Epoch: 4, Batch: 600, Loss: 0.0372
+root        : INFO     Epoch: 4, Batch: 700, Loss: 0.0314
+root        : INFO     Epoch: 4, Batch: 800, Loss: 0.0240
+root        : INFO     Epoch: 4, Batch: 900, Loss: 0.0235
+root        : INFO     Validating...
+root        : INFO     4401/5161 = 0.852742
+root        : INFO     Validation Loss for Epoch 4: 0.0279
+root        : INFO     Beginning Epoch 05
+root        : INFO     Epoch: 5, Batch: 100, Loss: 0.0257
+root        : INFO     Epoch: 5, Batch: 200, Loss: 0.0226
+root        : INFO     Epoch: 5, Batch: 300, Loss: 0.0228
+root        : INFO     Epoch: 5, Batch: 400, Loss: 0.0193
+root        : INFO     Epoch: 5, Batch: 500, Loss: 0.0160
+root        : INFO     Epoch: 5, Batch: 600, Loss: 0.0193
+root        : INFO     Epoch: 5, Batch: 700, Loss: 0.0442
+root        : INFO     Epoch: 5, Batch: 800, Loss: 0.0241
+root        : INFO     Epoch: 5, Batch: 900, Loss: 0.0201
+root        : INFO     Validating...
+root        : INFO     4470/5161 = 0.866111
+root        : INFO     Validation Loss for Epoch 5: 0.0268
+root        : INFO     Beginning Epoch 06
+root        : INFO     Epoch: 6, Batch: 100, Loss: 0.0202
+root        : INFO     Epoch: 6, Batch: 200, Loss: 0.0241
+root        : INFO     Epoch: 6, Batch: 300, Loss: 0.0443
+root        : INFO     Epoch: 6, Batch: 400, Loss: 0.0179
+root        : INFO     Epoch: 6, Batch: 500, Loss: 0.0182
+root        : INFO     Epoch: 6, Batch: 600, Loss: 0.0132
+root        : INFO     Epoch: 6, Batch: 700, Loss: 0.0228
+root        : INFO     Epoch: 6, Batch: 800, Loss: 0.0205
+root        : INFO     Epoch: 6, Batch: 900, Loss: 0.0368
+root        : INFO     Validating...
+root        : INFO     4481/5161 = 0.868243
+root        : INFO     Validation Loss for Epoch 6: 0.0260
+root        : INFO     Beginning Epoch 07
+root        : INFO     Epoch: 7, Batch: 100, Loss: 0.0175
+root        : INFO     Epoch: 7, Batch: 200, Loss: 0.0259
+root        : INFO     Epoch: 7, Batch: 300, Loss: 0.0218
+root        : INFO     Epoch: 7, Batch: 400, Loss: 0.0176
+root        : INFO     Epoch: 7, Batch: 500, Loss: 0.0170
+root        : INFO     Epoch: 7, Batch: 600, Loss: 0.0380
+root        : INFO     Epoch: 7, Batch: 700, Loss: 0.0219
+root        : INFO     Epoch: 7, Batch: 800, Loss: 0.0247
+root        : INFO     Epoch: 7, Batch: 900, Loss: 0.0174
+root        : INFO     Validating...
+root        : INFO     4521/5161 = 0.875993
+root        : INFO     Validation Loss for Epoch 7: 0.0256
+root        : INFO     Beginning Epoch 08
+root        : INFO     Epoch: 8, Batch: 100, Loss: 0.0302
+root        : INFO     Epoch: 8, Batch: 200, Loss: 0.0204
+root        : INFO     Epoch: 8, Batch: 300, Loss: 0.0291
+root        : INFO     Epoch: 8, Batch: 400, Loss: 0.0170
+root        : INFO     Epoch: 8, Batch: 500, Loss: 0.0427
+root        : INFO     Epoch: 8, Batch: 600, Loss: 0.0365
+root        : INFO     Epoch: 8, Batch: 700, Loss: 0.0246
+root        : INFO     Epoch: 8, Batch: 800, Loss: 0.0199
+root        : INFO     Epoch: 8, Batch: 900, Loss: 0.0189
+root        : INFO     Validating...
+root        : INFO     4369/5161 = 0.846541
+root        : INFO     Validation Loss for Epoch 8: 0.0263
+root        : INFO     Beginning Epoch 09
+root        : INFO     Epoch: 9, Batch: 100, Loss: 0.0365
+root        : INFO     Epoch: 9, Batch: 200, Loss: 0.0142
+root        : INFO     Epoch: 9, Batch: 300, Loss: 0.0250
+root        : INFO     Epoch: 9, Batch: 400, Loss: 0.0106
+root        : INFO     Epoch: 9, Batch: 500, Loss: 0.0138
+root        : INFO     Epoch: 9, Batch: 600, Loss: 0.0187
+root        : INFO     Epoch: 9, Batch: 700, Loss: 0.0333
+root        : INFO     Epoch: 9, Batch: 800, Loss: 0.0133
+root        : INFO     Epoch: 9, Batch: 900, Loss: 0.0186
+root        : INFO     Validating...
+root        : INFO     4358/5161 = 0.844410
+root        : INFO     Validation Loss for Epoch 9: 0.0258
+root        : INFO     Total training time: 108.12 minutes

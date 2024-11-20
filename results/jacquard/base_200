@@ -1,0 +1,3046 @@
+(base) xinda-wang@xinda-wang-Legion-Y9000P-IRX8:~/Desktop/robotic-grasping$ conda activate grconv
+(grconv) xinda-wang@xinda-wang-Legion-Y9000P-IRX8:~/Desktop/robotic-grasping$ python train_network.py --network base --epochs 200 --dataset jacquard --dataset-path /home/xinda-wang/Downloads/Jacquard_V2/data --description training_jacquard_base200
+root        : INFO     CUDA detected. Running with GPU acceleration.
+root        : INFO     Loading Jacquard Dataset...
+root        : INFO     Dataset size is 51601
+root        : INFO     Training size: 46440
+root        : INFO     Validation size: 5161
+root        : INFO     Done
+root        : INFO     Loading Network...
+root        : INFO     Done
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+          Identity-1          [-1, 4, 224, 224]               0
+            Conv2d-2         [-1, 32, 112, 112]           1,152
+       BatchNorm2d-3         [-1, 32, 112, 112]              64
+              ReLU-4         [-1, 32, 112, 112]               0
+         ConvLayer-5         [-1, 32, 112, 112]               0
+          Identity-6         [-1, 32, 112, 112]               0
+            Conv2d-7         [-1, 32, 112, 112]           9,216
+       BatchNorm2d-8         [-1, 32, 112, 112]              64
+              ReLU-9         [-1, 32, 112, 112]               0
+        ConvLayer-10         [-1, 32, 112, 112]               0
+         Identity-11         [-1, 32, 112, 112]               0
+           Conv2d-12         [-1, 32, 112, 112]           9,216
+      BatchNorm2d-13         [-1, 32, 112, 112]              64
+         Identity-14         [-1, 32, 112, 112]               0
+        ConvLayer-15         [-1, 32, 112, 112]               0
+         Identity-16         [-1, 32, 112, 112]               0
+           Conv2d-17          [-1, 256, 56, 56]          73,728
+      BatchNorm2d-18          [-1, 256, 56, 56]             512
+             ReLU-19          [-1, 256, 56, 56]               0
+        ConvLayer-20          [-1, 256, 56, 56]               0
+         Identity-21          [-1, 256, 56, 56]               0
+           Conv2d-22           [-1, 64, 56, 56]          16,384
+      BatchNorm2d-23           [-1, 64, 56, 56]             128
+         Identity-24           [-1, 64, 56, 56]               0
+        ConvLayer-25           [-1, 64, 56, 56]               0
+             Stem-26             [-1, 3136, 64]               0
+           Conv2d-27           [-1, 64, 56, 56]             640
+        LayerNorm-28             [-1, 3136, 64]             128
+           Mamba2-29             [-1, 3136, 64]               0
+         Identity-30             [-1, 3136, 64]               0
+           Conv2d-31           [-1, 64, 56, 56]             640
+        LayerNorm-32             [-1, 3136, 64]             128
+           Linear-33            [-1, 3136, 256]          16,640
+             GELU-34            [-1, 3136, 256]               0
+          Dropout-35            [-1, 3136, 256]               0
+           Linear-36             [-1, 3136, 64]          16,448
+          Dropout-37             [-1, 3136, 64]               0
+              Mlp-38             [-1, 3136, 64]               0
+         Identity-39             [-1, 3136, 64]               0
+     VMAMBA2Block-40             [-1, 3136, 64]               0
+           Conv2d-41           [-1, 64, 56, 56]             640
+        LayerNorm-42             [-1, 3136, 64]             128
+           Mamba2-43             [-1, 3136, 64]               0
+         DropPath-44             [-1, 3136, 64]               0
+           Conv2d-45           [-1, 64, 56, 56]             640
+        LayerNorm-46             [-1, 3136, 64]             128
+           Linear-47            [-1, 3136, 256]          16,640
+             GELU-48            [-1, 3136, 256]               0
+          Dropout-49            [-1, 3136, 256]               0
+           Linear-50             [-1, 3136, 64]          16,448
+          Dropout-51             [-1, 3136, 64]               0
+              Mlp-52             [-1, 3136, 64]               0
+         DropPath-53             [-1, 3136, 64]               0
+     VMAMBA2Block-54             [-1, 3136, 64]               0
+         Identity-55           [-1, 64, 56, 56]               0
+           Conv2d-56          [-1, 512, 56, 56]          33,280
+         Identity-57          [-1, 512, 56, 56]               0
+             ReLU-58          [-1, 512, 56, 56]               0
+        ConvLayer-59          [-1, 512, 56, 56]               0
+         Identity-60          [-1, 512, 56, 56]               0
+           Conv2d-61          [-1, 512, 28, 28]           5,120
+         Identity-62          [-1, 512, 28, 28]               0
+             ReLU-63          [-1, 512, 28, 28]               0
+        ConvLayer-64          [-1, 512, 28, 28]               0
+         Identity-65          [-1, 512, 28, 28]               0
+           Conv2d-66          [-1, 128, 28, 28]          65,664
+      BatchNorm2d-67          [-1, 128, 28, 28]             256
+         Identity-68          [-1, 128, 28, 28]               0
+        ConvLayer-69          [-1, 128, 28, 28]               0
+     PatchMerging-70             [-1, 784, 128]               0
+       BasicLayer-71  [[-1, 3136, 64], [-1, 784, 128]]               0
+        LayerNorm-72             [-1, 3136, 64]             128
+           Conv2d-73          [-1, 128, 28, 28]           1,280
+        LayerNorm-74             [-1, 784, 128]             256
+           Mamba2-75             [-1, 784, 128]               0
+         DropPath-76             [-1, 784, 128]               0
+           Conv2d-77          [-1, 128, 28, 28]           1,280
+        LayerNorm-78             [-1, 784, 128]             256
+           Linear-79             [-1, 784, 512]          66,048
+             GELU-80             [-1, 784, 512]               0
+          Dropout-81             [-1, 784, 512]               0
+           Linear-82             [-1, 784, 128]          65,664
+          Dropout-83             [-1, 784, 128]               0
+              Mlp-84             [-1, 784, 128]               0
+         DropPath-85             [-1, 784, 128]               0
+     VMAMBA2Block-86             [-1, 784, 128]               0
+           Conv2d-87          [-1, 128, 28, 28]           1,280
+        LayerNorm-88             [-1, 784, 128]             256
+           Mamba2-89             [-1, 784, 128]               0
+         DropPath-90             [-1, 784, 128]               0
+           Conv2d-91          [-1, 128, 28, 28]           1,280
+        LayerNorm-92             [-1, 784, 128]             256
+           Linear-93             [-1, 784, 512]          66,048
+             GELU-94             [-1, 784, 512]               0
+          Dropout-95             [-1, 784, 512]               0
+           Linear-96             [-1, 784, 128]          65,664
+          Dropout-97             [-1, 784, 128]               0
+              Mlp-98             [-1, 784, 128]               0
+         DropPath-99             [-1, 784, 128]               0
+    VMAMBA2Block-100             [-1, 784, 128]               0
+          Conv2d-101          [-1, 128, 28, 28]           1,280
+       LayerNorm-102             [-1, 784, 128]             256
+          Mamba2-103             [-1, 784, 128]               0
+        DropPath-104             [-1, 784, 128]               0
+          Conv2d-105          [-1, 128, 28, 28]           1,280
+       LayerNorm-106             [-1, 784, 128]             256
+          Linear-107             [-1, 784, 512]          66,048
+            GELU-108             [-1, 784, 512]               0
+         Dropout-109             [-1, 784, 512]               0
+          Linear-110             [-1, 784, 128]          65,664
+         Dropout-111             [-1, 784, 128]               0
+             Mlp-112             [-1, 784, 128]               0
+        DropPath-113             [-1, 784, 128]               0
+    VMAMBA2Block-114             [-1, 784, 128]               0
+          Conv2d-115          [-1, 128, 28, 28]           1,280
+       LayerNorm-116             [-1, 784, 128]             256
+          Mamba2-117             [-1, 784, 128]               0
+        DropPath-118             [-1, 784, 128]               0
+          Conv2d-119          [-1, 128, 28, 28]           1,280
+       LayerNorm-120             [-1, 784, 128]             256
+          Linear-121             [-1, 784, 512]          66,048
+            GELU-122             [-1, 784, 512]               0
+         Dropout-123             [-1, 784, 512]               0
+          Linear-124             [-1, 784, 128]          65,664
+         Dropout-125             [-1, 784, 128]               0
+             Mlp-126             [-1, 784, 128]               0
+        DropPath-127             [-1, 784, 128]               0
+    VMAMBA2Block-128             [-1, 784, 128]               0
+        Identity-129          [-1, 128, 28, 28]               0
+          Conv2d-130         [-1, 1024, 28, 28]         132,096
+        Identity-131         [-1, 1024, 28, 28]               0
+            ReLU-132         [-1, 1024, 28, 28]               0
+       ConvLayer-133         [-1, 1024, 28, 28]               0
+        Identity-134         [-1, 1024, 28, 28]               0
+          Conv2d-135         [-1, 1024, 14, 14]          10,240
+        Identity-136         [-1, 1024, 14, 14]               0
+            ReLU-137         [-1, 1024, 14, 14]               0
+       ConvLayer-138         [-1, 1024, 14, 14]               0
+        Identity-139         [-1, 1024, 14, 14]               0
+          Conv2d-140          [-1, 256, 14, 14]         262,400
+     BatchNorm2d-141          [-1, 256, 14, 14]             512
+        Identity-142          [-1, 256, 14, 14]               0
+       ConvLayer-143          [-1, 256, 14, 14]               0
+    PatchMerging-144             [-1, 196, 256]               0
+      BasicLayer-145  [[-1, 784, 128], [-1, 196, 256]]               0
+       LayerNorm-146             [-1, 784, 128]             256
+          Conv2d-147          [-1, 256, 14, 14]           2,560
+       LayerNorm-148             [-1, 196, 256]             512
+          Mamba2-149             [-1, 196, 256]               0
+        DropPath-150             [-1, 196, 256]               0
+          Conv2d-151          [-1, 256, 14, 14]           2,560
+       LayerNorm-152             [-1, 196, 256]             512
+          Linear-153            [-1, 196, 1024]         263,168
+            GELU-154            [-1, 196, 1024]               0
+         Dropout-155            [-1, 196, 1024]               0
+          Linear-156             [-1, 196, 256]         262,400
+         Dropout-157             [-1, 196, 256]               0
+             Mlp-158             [-1, 196, 256]               0
+        DropPath-159             [-1, 196, 256]               0
+    VMAMBA2Block-160             [-1, 196, 256]               0
+          Conv2d-161          [-1, 256, 14, 14]           2,560
+       LayerNorm-162             [-1, 196, 256]             512
+          Mamba2-163             [-1, 196, 256]               0
+        DropPath-164             [-1, 196, 256]               0
+          Conv2d-165          [-1, 256, 14, 14]           2,560
+       LayerNorm-166             [-1, 196, 256]             512
+          Linear-167            [-1, 196, 1024]         263,168
+            GELU-168            [-1, 196, 1024]               0
+         Dropout-169            [-1, 196, 1024]               0
+          Linear-170             [-1, 196, 256]         262,400
+         Dropout-171             [-1, 196, 256]               0
+             Mlp-172             [-1, 196, 256]               0
+        DropPath-173             [-1, 196, 256]               0
+    VMAMBA2Block-174             [-1, 196, 256]               0
+          Conv2d-175          [-1, 256, 14, 14]           2,560
+       LayerNorm-176             [-1, 196, 256]             512
+          Mamba2-177             [-1, 196, 256]               0
+        DropPath-178             [-1, 196, 256]               0
+          Conv2d-179          [-1, 256, 14, 14]           2,560
+       LayerNorm-180             [-1, 196, 256]             512
+          Linear-181            [-1, 196, 1024]         263,168
+            GELU-182            [-1, 196, 1024]               0
+         Dropout-183            [-1, 196, 1024]               0
+          Linear-184             [-1, 196, 256]         262,400
+         Dropout-185             [-1, 196, 256]               0
+             Mlp-186             [-1, 196, 256]               0
+        DropPath-187             [-1, 196, 256]               0
+    VMAMBA2Block-188             [-1, 196, 256]               0
+          Conv2d-189          [-1, 256, 14, 14]           2,560
+       LayerNorm-190             [-1, 196, 256]             512
+          Mamba2-191             [-1, 196, 256]               0
+        DropPath-192             [-1, 196, 256]               0
+          Conv2d-193          [-1, 256, 14, 14]           2,560
+       LayerNorm-194             [-1, 196, 256]             512
+          Linear-195            [-1, 196, 1024]         263,168
+            GELU-196            [-1, 196, 1024]               0
+         Dropout-197            [-1, 196, 1024]               0
+          Linear-198             [-1, 196, 256]         262,400
+         Dropout-199             [-1, 196, 256]               0
+             Mlp-200             [-1, 196, 256]               0
+        DropPath-201             [-1, 196, 256]               0
+    VMAMBA2Block-202             [-1, 196, 256]               0
+          Conv2d-203          [-1, 256, 14, 14]           2,560
+       LayerNorm-204             [-1, 196, 256]             512
+          Mamba2-205             [-1, 196, 256]               0
+        DropPath-206             [-1, 196, 256]               0
+          Conv2d-207          [-1, 256, 14, 14]           2,560
+       LayerNorm-208             [-1, 196, 256]             512
+          Linear-209            [-1, 196, 1024]         263,168
+            GELU-210            [-1, 196, 1024]               0
+         Dropout-211            [-1, 196, 1024]               0
+          Linear-212             [-1, 196, 256]         262,400
+         Dropout-213             [-1, 196, 256]               0
+             Mlp-214             [-1, 196, 256]               0
+        DropPath-215             [-1, 196, 256]               0
+    VMAMBA2Block-216             [-1, 196, 256]               0
+          Conv2d-217          [-1, 256, 14, 14]           2,560
+       LayerNorm-218             [-1, 196, 256]             512
+          Mamba2-219             [-1, 196, 256]               0
+        DropPath-220             [-1, 196, 256]               0
+          Conv2d-221          [-1, 256, 14, 14]           2,560
+       LayerNorm-222             [-1, 196, 256]             512
+          Linear-223            [-1, 196, 1024]         263,168
+            GELU-224            [-1, 196, 1024]               0
+         Dropout-225            [-1, 196, 1024]               0
+          Linear-226             [-1, 196, 256]         262,400
+         Dropout-227             [-1, 196, 256]               0
+             Mlp-228             [-1, 196, 256]               0
+        DropPath-229             [-1, 196, 256]               0
+    VMAMBA2Block-230             [-1, 196, 256]               0
+          Conv2d-231          [-1, 256, 14, 14]           2,560
+       LayerNorm-232             [-1, 196, 256]             512
+          Mamba2-233             [-1, 196, 256]               0
+        DropPath-234             [-1, 196, 256]               0
+          Conv2d-235          [-1, 256, 14, 14]           2,560
+       LayerNorm-236             [-1, 196, 256]             512
+          Linear-237            [-1, 196, 1024]         263,168
+            GELU-238            [-1, 196, 1024]               0
+         Dropout-239            [-1, 196, 1024]               0
+          Linear-240             [-1, 196, 256]         262,400
+         Dropout-241             [-1, 196, 256]               0
+             Mlp-242             [-1, 196, 256]               0
+        DropPath-243             [-1, 196, 256]               0
+    VMAMBA2Block-244             [-1, 196, 256]               0
+          Conv2d-245          [-1, 256, 14, 14]           2,560
+       LayerNorm-246             [-1, 196, 256]             512
+          Mamba2-247             [-1, 196, 256]               0
+        DropPath-248             [-1, 196, 256]               0
+          Conv2d-249          [-1, 256, 14, 14]           2,560
+       LayerNorm-250             [-1, 196, 256]             512
+          Linear-251            [-1, 196, 1024]         263,168
+            GELU-252            [-1, 196, 1024]               0
+         Dropout-253            [-1, 196, 1024]               0
+          Linear-254             [-1, 196, 256]         262,400
+         Dropout-255             [-1, 196, 256]               0
+             Mlp-256             [-1, 196, 256]               0
+        DropPath-257             [-1, 196, 256]               0
+    VMAMBA2Block-258             [-1, 196, 256]               0
+          Conv2d-259          [-1, 256, 14, 14]           2,560
+       LayerNorm-260             [-1, 196, 256]             512
+          Mamba2-261             [-1, 196, 256]               0
+        DropPath-262             [-1, 196, 256]               0
+          Conv2d-263          [-1, 256, 14, 14]           2,560
+       LayerNorm-264             [-1, 196, 256]             512
+          Linear-265            [-1, 196, 1024]         263,168
+            GELU-266            [-1, 196, 1024]               0
+         Dropout-267            [-1, 196, 1024]               0
+          Linear-268             [-1, 196, 256]         262,400
+         Dropout-269             [-1, 196, 256]               0
+             Mlp-270             [-1, 196, 256]               0
+        DropPath-271             [-1, 196, 256]               0
+    VMAMBA2Block-272             [-1, 196, 256]               0
+          Conv2d-273          [-1, 256, 14, 14]           2,560
+       LayerNorm-274             [-1, 196, 256]             512
+          Mamba2-275             [-1, 196, 256]               0
+        DropPath-276             [-1, 196, 256]               0
+          Conv2d-277          [-1, 256, 14, 14]           2,560
+       LayerNorm-278             [-1, 196, 256]             512
+          Linear-279            [-1, 196, 1024]         263,168
+            GELU-280            [-1, 196, 1024]               0
+         Dropout-281            [-1, 196, 1024]               0
+          Linear-282             [-1, 196, 256]         262,400
+         Dropout-283             [-1, 196, 256]               0
+             Mlp-284             [-1, 196, 256]               0
+        DropPath-285             [-1, 196, 256]               0
+    VMAMBA2Block-286             [-1, 196, 256]               0
+          Conv2d-287          [-1, 256, 14, 14]           2,560
+       LayerNorm-288             [-1, 196, 256]             512
+          Mamba2-289             [-1, 196, 256]               0
+        DropPath-290             [-1, 196, 256]               0
+          Conv2d-291          [-1, 256, 14, 14]           2,560
+       LayerNorm-292             [-1, 196, 256]             512
+          Linear-293            [-1, 196, 1024]         263,168
+            GELU-294            [-1, 196, 1024]               0
+         Dropout-295            [-1, 196, 1024]               0
+          Linear-296             [-1, 196, 256]         262,400
+         Dropout-297             [-1, 196, 256]               0
+             Mlp-298             [-1, 196, 256]               0
+        DropPath-299             [-1, 196, 256]               0
+    VMAMBA2Block-300             [-1, 196, 256]               0
+          Conv2d-301          [-1, 256, 14, 14]           2,560
+       LayerNorm-302             [-1, 196, 256]             512
+          Mamba2-303             [-1, 196, 256]               0
+        DropPath-304             [-1, 196, 256]               0
+          Conv2d-305          [-1, 256, 14, 14]           2,560
+       LayerNorm-306             [-1, 196, 256]             512
+          Linear-307            [-1, 196, 1024]         263,168
+            GELU-308            [-1, 196, 1024]               0
+         Dropout-309            [-1, 196, 1024]               0
+          Linear-310             [-1, 196, 256]         262,400
+         Dropout-311             [-1, 196, 256]               0
+             Mlp-312             [-1, 196, 256]               0
+        DropPath-313             [-1, 196, 256]               0
+    VMAMBA2Block-314             [-1, 196, 256]               0
+        Identity-315          [-1, 256, 14, 14]               0
+          Conv2d-316         [-1, 2048, 14, 14]         526,336
+        Identity-317         [-1, 2048, 14, 14]               0
+            ReLU-318         [-1, 2048, 14, 14]               0
+       ConvLayer-319         [-1, 2048, 14, 14]               0
+        Identity-320         [-1, 2048, 14, 14]               0
+          Conv2d-321           [-1, 2048, 7, 7]          20,480
+        Identity-322           [-1, 2048, 7, 7]               0
+            ReLU-323           [-1, 2048, 7, 7]               0
+       ConvLayer-324           [-1, 2048, 7, 7]               0
+        Identity-325           [-1, 2048, 7, 7]               0
+          Conv2d-326            [-1, 512, 7, 7]       1,049,088
+     BatchNorm2d-327            [-1, 512, 7, 7]           1,024
+        Identity-328            [-1, 512, 7, 7]               0
+       ConvLayer-329            [-1, 512, 7, 7]               0
+    PatchMerging-330              [-1, 49, 512]               0
+      BasicLayer-331  [[-1, 196, 256], [-1, 49, 512]]               0
+       LayerNorm-332             [-1, 196, 256]             512
+          Conv2d-333            [-1, 512, 7, 7]           5,120
+       LayerNorm-334              [-1, 49, 512]           1,024
+          Linear-335             [-1, 49, 1536]         786,432
+         Dropout-336           [-1, 16, 49, 49]               0
+          Linear-337              [-1, 49, 512]         262,656
+StandardAttention-338              [-1, 49, 512]               0
+        DropPath-339              [-1, 49, 512]               0
+          Conv2d-340            [-1, 512, 7, 7]           5,120
+       LayerNorm-341              [-1, 49, 512]           1,024
+          Linear-342             [-1, 49, 2048]       1,050,624
+            GELU-343             [-1, 49, 2048]               0
+         Dropout-344             [-1, 49, 2048]               0
+          Linear-345              [-1, 49, 512]       1,049,088
+         Dropout-346              [-1, 49, 512]               0
+             Mlp-347              [-1, 49, 512]               0
+        DropPath-348              [-1, 49, 512]               0
+    VMAMBA2Block-349              [-1, 49, 512]               0
+          Conv2d-350            [-1, 512, 7, 7]           5,120
+       LayerNorm-351              [-1, 49, 512]           1,024
+          Linear-352             [-1, 49, 1536]         786,432
+         Dropout-353           [-1, 16, 49, 49]               0
+          Linear-354              [-1, 49, 512]         262,656
+StandardAttention-355              [-1, 49, 512]               0
+        DropPath-356              [-1, 49, 512]               0
+          Conv2d-357            [-1, 512, 7, 7]           5,120
+       LayerNorm-358              [-1, 49, 512]           1,024
+          Linear-359             [-1, 49, 2048]       1,050,624
+            GELU-360             [-1, 49, 2048]               0
+         Dropout-361             [-1, 49, 2048]               0
+          Linear-362              [-1, 49, 512]       1,049,088
+         Dropout-363              [-1, 49, 512]               0
+             Mlp-364              [-1, 49, 512]               0
+        DropPath-365              [-1, 49, 512]               0
+    VMAMBA2Block-366              [-1, 49, 512]               0
+          Conv2d-367            [-1, 512, 7, 7]           5,120
+       LayerNorm-368              [-1, 49, 512]           1,024
+          Linear-369             [-1, 49, 1536]         786,432
+         Dropout-370           [-1, 16, 49, 49]               0
+          Linear-371              [-1, 49, 512]         262,656
+StandardAttention-372              [-1, 49, 512]               0
+        DropPath-373              [-1, 49, 512]               0
+          Conv2d-374            [-1, 512, 7, 7]           5,120
+       LayerNorm-375              [-1, 49, 512]           1,024
+          Linear-376             [-1, 49, 2048]       1,050,624
+            GELU-377             [-1, 49, 2048]               0
+         Dropout-378             [-1, 49, 2048]               0
+          Linear-379              [-1, 49, 512]       1,049,088
+         Dropout-380              [-1, 49, 512]               0
+             Mlp-381              [-1, 49, 512]               0
+        DropPath-382              [-1, 49, 512]               0
+    VMAMBA2Block-383              [-1, 49, 512]               0
+          Conv2d-384            [-1, 512, 7, 7]           5,120
+       LayerNorm-385              [-1, 49, 512]           1,024
+          Linear-386             [-1, 49, 1536]         786,432
+         Dropout-387           [-1, 16, 49, 49]               0
+          Linear-388              [-1, 49, 512]         262,656
+StandardAttention-389              [-1, 49, 512]               0
+        DropPath-390              [-1, 49, 512]               0
+          Conv2d-391            [-1, 512, 7, 7]           5,120
+       LayerNorm-392              [-1, 49, 512]           1,024
+          Linear-393             [-1, 49, 2048]       1,050,624
+            GELU-394             [-1, 49, 2048]               0
+         Dropout-395             [-1, 49, 2048]               0
+          Linear-396              [-1, 49, 512]       1,049,088
+         Dropout-397              [-1, 49, 512]               0
+             Mlp-398              [-1, 49, 512]               0
+        DropPath-399              [-1, 49, 512]               0
+    VMAMBA2Block-400              [-1, 49, 512]               0
+      BasicLayer-401  [[-1, 49, 512], [-1, 49, 512]]               0
+       LayerNorm-402              [-1, 49, 512]           1,024
+Backbone_VMAMBA2-403  [[-1, 64, 56, 56], [-1, 128, 28, 28], [-1, 256, 14, 14], [-1, 512, 7, 7]]               0
+ ConvTranspose2d-404          [-1, 256, 14, 14]       2,097,408
+ ConvTranspose2d-405          [-1, 128, 28, 28]       1,048,704
+ ConvTranspose2d-406           [-1, 64, 56, 56]         262,208
+ ConvTranspose2d-407        [-1, 128, 112, 112]         262,272
+ ConvTranspose2d-408         [-1, 32, 224, 224]          65,568
+         Dropout-409         [-1, 32, 224, 224]               0
+          Conv2d-410          [-1, 1, 224, 224]              33
+         Dropout-411         [-1, 32, 224, 224]               0
+          Conv2d-412          [-1, 1, 224, 224]              33
+         Dropout-413         [-1, 32, 224, 224]               0
+          Conv2d-414          [-1, 1, 224, 224]              33
+         Dropout-415         [-1, 32, 224, 224]               0
+          Conv2d-416          [-1, 1, 224, 224]              33
+================================================================
+Total params: 25,588,516
+Trainable params: 25,588,516
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.77
+Forward/backward pass size (MB): 52697134998611.93
+Params size (MB): 97.61
+Estimated Total Size (MB): 52697134998710.30
+----------------------------------------------------------------
+root        : INFO     Beginning Epoch 00
+root        : INFO     Epoch: 0, Batch: 100, Loss: 0.0452
+root        : INFO     Epoch: 0, Batch: 200, Loss: 0.0377
+root        : INFO     Epoch: 0, Batch: 300, Loss: 0.0232
+root        : INFO     Epoch: 0, Batch: 400, Loss: 0.0356
+root        : INFO     Epoch: 0, Batch: 500, Loss: 0.0189
+root        : INFO     Epoch: 0, Batch: 600, Loss: 0.0233
+root        : INFO     Epoch: 0, Batch: 700, Loss: 0.0321
+root        : INFO     Epoch: 0, Batch: 800, Loss: 0.0262
+root        : INFO     Epoch: 0, Batch: 900, Loss: 0.0216
+root        : INFO     Validating...
+root        : INFO     4331/5161 = 0.839178
+root        : INFO     Validation Loss for Epoch 0: 0.0272
+root        : INFO     Beginning Epoch 01
+root        : INFO     Epoch: 1, Batch: 100, Loss: 0.0292
+root        : INFO     Epoch: 1, Batch: 200, Loss: 0.0128
+root        : INFO     Epoch: 1, Batch: 300, Loss: 0.0206
+root        : INFO     Epoch: 1, Batch: 400, Loss: 0.0262
+root        : INFO     Epoch: 1, Batch: 500, Loss: 0.0238
+root        : INFO     Epoch: 1, Batch: 600, Loss: 0.0249
+root        : INFO     Epoch: 1, Batch: 700, Loss: 0.0141
+root        : INFO     Epoch: 1, Batch: 800, Loss: 0.0398
+root        : INFO     Epoch: 1, Batch: 900, Loss: 0.0181
+root        : INFO     Validating...
+root        : INFO     4532/5161 = 0.878124
+root        : INFO     Validation Loss for Epoch 1: 0.0249
+root        : INFO     Beginning Epoch 02
+root        : INFO     Epoch: 2, Batch: 100, Loss: 0.0429
+root        : INFO     Epoch: 2, Batch: 200, Loss: 0.0329
+root        : INFO     Epoch: 2, Batch: 300, Loss: 0.0189
+root        : INFO     Epoch: 2, Batch: 400, Loss: 0.0234
+root        : INFO     Epoch: 2, Batch: 500, Loss: 0.0243
+root        : INFO     Epoch: 2, Batch: 600, Loss: 0.0172
+root        : INFO     Epoch: 2, Batch: 700, Loss: 0.0132
+root        : INFO     Epoch: 2, Batch: 800, Loss: 0.0577
+root        : INFO     Epoch: 2, Batch: 900, Loss: 0.0306
+root        : INFO     Validating...
+root        : INFO     4586/5161 = 0.888587
+root        : INFO     Validation Loss for Epoch 2: 0.0253
+root        : INFO     Beginning Epoch 03
+root        : INFO     Epoch: 3, Batch: 100, Loss: 0.0207
+root        : INFO     Epoch: 3, Batch: 200, Loss: 0.0186
+root        : INFO     Epoch: 3, Batch: 300, Loss: 0.0278
+root        : INFO     Epoch: 3, Batch: 400, Loss: 0.0306
+root        : INFO     Epoch: 3, Batch: 500, Loss: 0.0234
+root        : INFO     Epoch: 3, Batch: 600, Loss: 0.0148
+root        : INFO     Epoch: 3, Batch: 700, Loss: 0.0273
+root        : INFO     Epoch: 3, Batch: 800, Loss: 0.0252
+root        : INFO     Epoch: 3, Batch: 900, Loss: 0.0258
+root        : INFO     Validating...
+root        : INFO     4715/5161 = 0.913583
+root        : INFO     Validation Loss for Epoch 3: 0.0232
+root        : INFO     Beginning Epoch 04
+root        : INFO     Epoch: 4, Batch: 100, Loss: 0.0116
+root        : INFO     Epoch: 4, Batch: 200, Loss: 0.0166
+root        : INFO     Epoch: 4, Batch: 300, Loss: 0.0461
+root        : INFO     Epoch: 4, Batch: 400, Loss: 0.0266
+root        : INFO     Epoch: 4, Batch: 500, Loss: 0.0200
+root        : INFO     Epoch: 4, Batch: 600, Loss: 0.0199
+root        : INFO     Epoch: 4, Batch: 700, Loss: 0.0634
+root        : INFO     Epoch: 4, Batch: 800, Loss: 0.0167
+root        : INFO     Epoch: 4, Batch: 900, Loss: 0.0173
+root        : INFO     Validating...
+root        : INFO     4463/5161 = 0.864755
+root        : INFO     Validation Loss for Epoch 4: 0.0255
+root        : INFO     Beginning Epoch 05
+root        : INFO     Epoch: 5, Batch: 100, Loss: 0.0230
+root        : INFO     Epoch: 5, Batch: 200, Loss: 0.0353
+root        : INFO     Epoch: 5, Batch: 300, Loss: 0.0297
+root        : INFO     Epoch: 5, Batch: 400, Loss: 0.0222
+root        : INFO     Epoch: 5, Batch: 500, Loss: 0.0112
+root        : INFO     Epoch: 5, Batch: 600, Loss: 0.0241
+root        : INFO     Epoch: 5, Batch: 700, Loss: 0.0221
+root        : INFO     Epoch: 5, Batch: 800, Loss: 0.0206
+root        : INFO     Epoch: 5, Batch: 900, Loss: 0.0203
+root        : INFO     Validating...
+root        : INFO     4629/5161 = 0.896919
+root        : INFO     Validation Loss for Epoch 5: 0.0258
+root        : INFO     Beginning Epoch 06
+root        : INFO     Epoch: 6, Batch: 100, Loss: 0.0223
+root        : INFO     Epoch: 6, Batch: 200, Loss: 0.0298
+root        : INFO     Epoch: 6, Batch: 300, Loss: 0.0155
+root        : INFO     Epoch: 6, Batch: 400, Loss: 0.0200
+root        : INFO     Epoch: 6, Batch: 500, Loss: 0.0325
+root        : INFO     Epoch: 6, Batch: 600, Loss: 0.0221
+root        : INFO     Epoch: 6, Batch: 700, Loss: 0.0262
+root        : INFO     Epoch: 6, Batch: 800, Loss: 0.0223
+root        : INFO     Epoch: 6, Batch: 900, Loss: 0.0219
+root        : INFO     Validating...
+root        : INFO     4595/5161 = 0.890331
+root        : INFO     Validation Loss for Epoch 6: 0.0239
+root        : INFO     Beginning Epoch 07
+root        : INFO     Epoch: 7, Batch: 100, Loss: 0.0249
+root        : INFO     Epoch: 7, Batch: 200, Loss: 0.0150
+root        : INFO     Epoch: 7, Batch: 300, Loss: 0.0228
+root        : INFO     Epoch: 7, Batch: 400, Loss: 0.0257
+root        : INFO     Epoch: 7, Batch: 500, Loss: 0.0117
+root        : INFO     Epoch: 7, Batch: 600, Loss: 0.0228
+root        : INFO     Epoch: 7, Batch: 700, Loss: 0.0191
+root        : INFO     Epoch: 7, Batch: 800, Loss: 0.0213
+root        : INFO     Epoch: 7, Batch: 900, Loss: 0.0137
+root        : INFO     Validating...
+root        : INFO     4603/5161 = 0.891881
+root        : INFO     Validation Loss for Epoch 7: 0.0239
+root        : INFO     Beginning Epoch 08
+root        : INFO     Epoch: 8, Batch: 100, Loss: 0.0346
+root        : INFO     Epoch: 8, Batch: 200, Loss: 0.0401
+root        : INFO     Epoch: 8, Batch: 300, Loss: 0.0177
+root        : INFO     Epoch: 8, Batch: 400, Loss: 0.0150
+root        : INFO     Epoch: 8, Batch: 500, Loss: 0.0302
+root        : INFO     Epoch: 8, Batch: 600, Loss: 0.0249
+root        : INFO     Epoch: 8, Batch: 700, Loss: 0.0283
+root        : INFO     Epoch: 8, Batch: 800, Loss: 0.0217
+root        : INFO     Epoch: 8, Batch: 900, Loss: 0.0191
+root        : INFO     Validating...
+root        : INFO     4623/5161 = 0.895757
+root        : INFO     Validation Loss for Epoch 8: 0.0230
+root        : INFO     Beginning Epoch 09
+root        : INFO     Epoch: 9, Batch: 100, Loss: 0.0318
+root        : INFO     Epoch: 9, Batch: 200, Loss: 0.0214
+root        : INFO     Epoch: 9, Batch: 300, Loss: 0.0148
+root        : INFO     Epoch: 9, Batch: 400, Loss: 0.0153
+root        : INFO     Epoch: 9, Batch: 500, Loss: 0.0094
+root        : INFO     Epoch: 9, Batch: 600, Loss: 0.0207
+root        : INFO     Epoch: 9, Batch: 700, Loss: 0.0144
+root        : INFO     Epoch: 9, Batch: 800, Loss: 0.0247
+root        : INFO     Epoch: 9, Batch: 900, Loss: 0.0340
+root        : INFO     Validating...
+root        : INFO     4675/5161 = 0.905832
+root        : INFO     Validation Loss for Epoch 9: 0.0227
+root        : INFO     Beginning Epoch 10
+root        : INFO     Epoch: 10, Batch: 100, Loss: 0.0157
+root        : INFO     Epoch: 10, Batch: 200, Loss: 0.0213
+root        : INFO     Epoch: 10, Batch: 300, Loss: 0.0303
+root        : INFO     Epoch: 10, Batch: 400, Loss: 0.0321
+root        : INFO     Epoch: 10, Batch: 500, Loss: 0.0141
+root        : INFO     Epoch: 10, Batch: 600, Loss: 0.0190
+root        : INFO     Epoch: 10, Batch: 700, Loss: 0.0164
+root        : INFO     Epoch: 10, Batch: 800, Loss: 0.0126
+root        : INFO     Epoch: 10, Batch: 900, Loss: 0.0250
+root        : INFO     Validating...
+root        : INFO     4653/5161 = 0.901569
+root        : INFO     Validation Loss for Epoch 10: 0.0230
+root        : INFO     Beginning Epoch 11
+root        : INFO     Epoch: 11, Batch: 100, Loss: 0.0134
+root        : INFO     Epoch: 11, Batch: 200, Loss: 0.0169
+root        : INFO     Epoch: 11, Batch: 300, Loss: 0.0199
+root        : INFO     Epoch: 11, Batch: 400, Loss: 0.0191
+root        : INFO     Epoch: 11, Batch: 500, Loss: 0.0259
+root        : INFO     Epoch: 11, Batch: 600, Loss: 0.0182
+root        : INFO     Epoch: 11, Batch: 700, Loss: 0.0100
+root        : INFO     Epoch: 11, Batch: 800, Loss: 0.0265
+root        : INFO     Epoch: 11, Batch: 900, Loss: 0.0229
+root        : INFO     Validating...
+root        : INFO     4646/5161 = 0.900213
+root        : INFO     Validation Loss for Epoch 11: 0.0229
+root        : INFO     Beginning Epoch 12
+root        : INFO     Epoch: 12, Batch: 100, Loss: 0.0183
+root        : INFO     Epoch: 12, Batch: 200, Loss: 0.0201
+root        : INFO     Epoch: 12, Batch: 300, Loss: 0.0222
+root        : INFO     Epoch: 12, Batch: 400, Loss: 0.0160
+root        : INFO     Epoch: 12, Batch: 500, Loss: 0.0340
+root        : INFO     Epoch: 12, Batch: 600, Loss: 0.0244
+root        : INFO     Epoch: 12, Batch: 700, Loss: 0.0118
+root        : INFO     Epoch: 12, Batch: 800, Loss: 0.0148
+root        : INFO     Epoch: 12, Batch: 900, Loss: 0.0192
+root        : INFO     Validating...
+root        : INFO     4661/5161 = 0.903120
+root        : INFO     Validation Loss for Epoch 12: 0.0227
+root        : INFO     Beginning Epoch 13
+root        : INFO     Epoch: 13, Batch: 100, Loss: 0.0135
+root        : INFO     Epoch: 13, Batch: 200, Loss: 0.0161
+root        : INFO     Epoch: 13, Batch: 300, Loss: 0.0189
+root        : INFO     Epoch: 13, Batch: 400, Loss: 0.0347
+root        : INFO     Epoch: 13, Batch: 500, Loss: 0.0110
+root        : INFO     Epoch: 13, Batch: 600, Loss: 0.0193
+root        : INFO     Epoch: 13, Batch: 700, Loss: 0.0111
+root        : INFO     Epoch: 13, Batch: 800, Loss: 0.0148
+root        : INFO     Epoch: 13, Batch: 900, Loss: 0.0129
+root        : INFO     Validating...
+root        : INFO     4701/5161 = 0.910870
+root        : INFO     Validation Loss for Epoch 13: 0.0226
+root        : INFO     Beginning Epoch 14
+root        : INFO     Epoch: 14, Batch: 100, Loss: 0.0195
+root        : INFO     Epoch: 14, Batch: 200, Loss: 0.0153
+root        : INFO     Epoch: 14, Batch: 300, Loss: 0.0290
+root        : INFO     Epoch: 14, Batch: 400, Loss: 0.0341
+root        : INFO     Epoch: 14, Batch: 500, Loss: 0.0105
+root        : INFO     Epoch: 14, Batch: 600, Loss: 0.0122
+root        : INFO     Epoch: 14, Batch: 700, Loss: 0.0114
+root        : INFO     Epoch: 14, Batch: 800, Loss: 0.0204
+root        : INFO     Epoch: 14, Batch: 900, Loss: 0.0159
+root        : INFO     Validating...
+root        : INFO     4692/5161 = 0.909126
+root        : INFO     Validation Loss for Epoch 14: 0.0224
+root        : INFO     Beginning Epoch 15
+root        : INFO     Epoch: 15, Batch: 100, Loss: 0.0168
+root        : INFO     Epoch: 15, Batch: 200, Loss: 0.0315
+root        : INFO     Epoch: 15, Batch: 300, Loss: 0.0214
+root        : INFO     Epoch: 15, Batch: 400, Loss: 0.0184
+root        : INFO     Epoch: 15, Batch: 500, Loss: 0.0183
+root        : INFO     Epoch: 15, Batch: 600, Loss: 0.0191
+root        : INFO     Epoch: 15, Batch: 700, Loss: 0.0125
+root        : INFO     Epoch: 15, Batch: 800, Loss: 0.0143
+root        : INFO     Epoch: 15, Batch: 900, Loss: 0.0173
+root        : INFO     Validating...
+root        : INFO     4770/5161 = 0.924239
+root        : INFO     Validation Loss for Epoch 15: 0.0220
+root        : INFO     Beginning Epoch 16
+root        : INFO     Epoch: 16, Batch: 100, Loss: 0.0323
+root        : INFO     Epoch: 16, Batch: 200, Loss: 0.0255
+root        : INFO     Epoch: 16, Batch: 300, Loss: 0.0208
+root        : INFO     Epoch: 16, Batch: 400, Loss: 0.0177
+root        : INFO     Epoch: 16, Batch: 500, Loss: 0.0190
+root        : INFO     Epoch: 16, Batch: 600, Loss: 0.0165
+root        : INFO     Epoch: 16, Batch: 700, Loss: 0.0273
+root        : INFO     Epoch: 16, Batch: 800, Loss: 0.0098
+root        : INFO     Epoch: 16, Batch: 900, Loss: 0.0098
+root        : INFO     Validating...
+root        : INFO     4613/5161 = 0.893819
+root        : INFO     Validation Loss for Epoch 16: 0.0220
+root        : INFO     Beginning Epoch 17
+root        : INFO     Epoch: 17, Batch: 100, Loss: 0.0177
+root        : INFO     Epoch: 17, Batch: 200, Loss: 0.0138
+root        : INFO     Epoch: 17, Batch: 300, Loss: 0.0158
+root        : INFO     Epoch: 17, Batch: 400, Loss: 0.0182
+root        : INFO     Epoch: 17, Batch: 500, Loss: 0.0103
+root        : INFO     Epoch: 17, Batch: 600, Loss: 0.0119
+root        : INFO     Epoch: 17, Batch: 700, Loss: 0.0215
+root        : INFO     Epoch: 17, Batch: 800, Loss: 0.0102
+root        : INFO     Epoch: 17, Batch: 900, Loss: 0.0313
+root        : INFO     Validating...
+root        : INFO     4688/5161 = 0.908351
+root        : INFO     Validation Loss for Epoch 17: 0.0224
+root        : INFO     Beginning Epoch 18
+root        : INFO     Epoch: 18, Batch: 100, Loss: 0.0097
+root        : INFO     Epoch: 18, Batch: 200, Loss: 0.0280
+root        : INFO     Epoch: 18, Batch: 300, Loss: 0.0243
+root        : INFO     Epoch: 18, Batch: 400, Loss: 0.0218
+root        : INFO     Epoch: 18, Batch: 500, Loss: 0.0108
+root        : INFO     Epoch: 18, Batch: 600, Loss: 0.0207
+root        : INFO     Epoch: 18, Batch: 700, Loss: 0.0160
+root        : INFO     Epoch: 18, Batch: 800, Loss: 0.0220
+root        : INFO     Epoch: 18, Batch: 900, Loss: 0.0224
+root        : INFO     Validating...
+root        : INFO     4766/5161 = 0.923464
+root        : INFO     Validation Loss for Epoch 18: 0.0218
+root        : INFO     Beginning Epoch 19
+root        : INFO     Epoch: 19, Batch: 100, Loss: 0.0173
+root        : INFO     Epoch: 19, Batch: 200, Loss: 0.0084
+root        : INFO     Epoch: 19, Batch: 300, Loss: 0.0221
+root        : INFO     Epoch: 19, Batch: 400, Loss: 0.0224
+root        : INFO     Epoch: 19, Batch: 500, Loss: 0.0270
+root        : INFO     Epoch: 19, Batch: 600, Loss: 0.0185
+root        : INFO     Epoch: 19, Batch: 700, Loss: 0.0130
+root        : INFO     Epoch: 19, Batch: 800, Loss: 0.0298
+root        : INFO     Epoch: 19, Batch: 900, Loss: 0.0303
+root        : INFO     Validating...
+root        : INFO     4702/5161 = 0.911064
+root        : INFO     Validation Loss for Epoch 19: 0.0219
+root        : INFO     Beginning Epoch 20
+root        : INFO     Epoch: 20, Batch: 100, Loss: 0.0154
+root        : INFO     Epoch: 20, Batch: 200, Loss: 0.0327
+root        : INFO     Epoch: 20, Batch: 300, Loss: 0.0111
+root        : INFO     Epoch: 20, Batch: 400, Loss: 0.0235
+root        : INFO     Epoch: 20, Batch: 500, Loss: 0.0172
+root        : INFO     Epoch: 20, Batch: 600, Loss: 0.0227
+root        : INFO     Epoch: 20, Batch: 700, Loss: 0.0340
+root        : INFO     Epoch: 20, Batch: 800, Loss: 0.0171
+root        : INFO     Epoch: 20, Batch: 900, Loss: 0.0158
+root        : INFO     Validating...
+root        : INFO     4691/5161 = 0.908932
+root        : INFO     Validation Loss for Epoch 20: 0.0221
+root        : INFO     Beginning Epoch 21
+root        : INFO     Epoch: 21, Batch: 100, Loss: 0.0195
+root        : INFO     Epoch: 21, Batch: 200, Loss: 0.0105
+root        : INFO     Epoch: 21, Batch: 300, Loss: 0.0155
+root        : INFO     Epoch: 21, Batch: 400, Loss: 0.0190
+root        : INFO     Epoch: 21, Batch: 500, Loss: 0.0324
+root        : INFO     Epoch: 21, Batch: 600, Loss: 0.0263
+root        : INFO     Epoch: 21, Batch: 700, Loss: 0.0199
+root        : INFO     Epoch: 21, Batch: 800, Loss: 0.0142
+root        : INFO     Epoch: 21, Batch: 900, Loss: 0.0135
+root        : INFO     Validating...
+root        : INFO     4757/5161 = 0.921721
+root        : INFO     Validation Loss for Epoch 21: 0.0219
+root        : INFO     Beginning Epoch 22
+root        : INFO     Epoch: 22, Batch: 100, Loss: 0.0123
+root        : INFO     Epoch: 22, Batch: 200, Loss: 0.0172
+root        : INFO     Epoch: 22, Batch: 300, Loss: 0.0175
+root        : INFO     Epoch: 22, Batch: 400, Loss: 0.0256
+root        : INFO     Epoch: 22, Batch: 500, Loss: 0.0214
+root        : INFO     Epoch: 22, Batch: 600, Loss: 0.0096
+root        : INFO     Epoch: 22, Batch: 700, Loss: 0.0240
+root        : INFO     Epoch: 22, Batch: 800, Loss: 0.0214
+root        : INFO     Epoch: 22, Batch: 900, Loss: 0.0171
+root        : INFO     Validating...
+root        : INFO     4786/5161 = 0.927340
+root        : INFO     Validation Loss for Epoch 22: 0.0221
+root        : INFO     Beginning Epoch 23
+root        : INFO     Epoch: 23, Batch: 100, Loss: 0.0105
+root        : INFO     Epoch: 23, Batch: 200, Loss: 0.0176
+root        : INFO     Epoch: 23, Batch: 300, Loss: 0.0180
+root        : INFO     Epoch: 23, Batch: 400, Loss: 0.0153
+root        : INFO     Epoch: 23, Batch: 500, Loss: 0.0263
+root        : INFO     Epoch: 23, Batch: 600, Loss: 0.0128
+root        : INFO     Epoch: 23, Batch: 700, Loss: 0.0115
+root        : INFO     Epoch: 23, Batch: 800, Loss: 0.0156
+root        : INFO     Epoch: 23, Batch: 900, Loss: 0.0252
+root        : INFO     Validating...
+root        : INFO     4663/5161 = 0.903507
+root        : INFO     Validation Loss for Epoch 23: 0.0228
+root        : INFO     Beginning Epoch 24
+root        : INFO     Epoch: 24, Batch: 100, Loss: 0.0148
+root        : INFO     Epoch: 24, Batch: 200, Loss: 0.0117
+root        : INFO     Epoch: 24, Batch: 300, Loss: 0.0214
+root        : INFO     Epoch: 24, Batch: 400, Loss: 0.0135
+root        : INFO     Epoch: 24, Batch: 500, Loss: 0.0148
+root        : INFO     Epoch: 24, Batch: 600, Loss: 0.0118
+root        : INFO     Epoch: 24, Batch: 700, Loss: 0.0172
+root        : INFO     Epoch: 24, Batch: 800, Loss: 0.0140
+root        : INFO     Epoch: 24, Batch: 900, Loss: 0.0139
+root        : INFO     Validating...
+root        : INFO     4774/5161 = 0.925015
+root        : INFO     Validation Loss for Epoch 24: 0.0216
+root        : INFO     Beginning Epoch 25
+root        : INFO     Epoch: 25, Batch: 100, Loss: 0.0196
+root        : INFO     Epoch: 25, Batch: 200, Loss: 0.0154
+root        : INFO     Epoch: 25, Batch: 300, Loss: 0.0202
+root        : INFO     Epoch: 25, Batch: 400, Loss: 0.0188
+root        : INFO     Epoch: 25, Batch: 500, Loss: 0.0097
+root        : INFO     Epoch: 25, Batch: 600, Loss: 0.0209
+root        : INFO     Epoch: 25, Batch: 700, Loss: 0.0235
+root        : INFO     Epoch: 25, Batch: 800, Loss: 0.0351
+root        : INFO     Epoch: 25, Batch: 900, Loss: 0.0152
+root        : INFO     Validating...
+root        : INFO     4686/5161 = 0.907964
+root        : INFO     Validation Loss for Epoch 25: 0.0217
+root        : INFO     Beginning Epoch 26
+root        : INFO     Epoch: 26, Batch: 100, Loss: 0.0198
+root        : INFO     Epoch: 26, Batch: 200, Loss: 0.0128
+root        : INFO     Epoch: 26, Batch: 300, Loss: 0.0214
+root        : INFO     Epoch: 26, Batch: 400, Loss: 0.0180
+root        : INFO     Epoch: 26, Batch: 500, Loss: 0.0127
+root        : INFO     Epoch: 26, Batch: 600, Loss: 0.0197
+root        : INFO     Epoch: 26, Batch: 700, Loss: 0.0130
+root        : INFO     Epoch: 26, Batch: 800, Loss: 0.0142
+root        : INFO     Epoch: 26, Batch: 900, Loss: 0.0109
+root        : INFO     Validating...
+root        : INFO     4787/5161 = 0.927533
+root        : INFO     Validation Loss for Epoch 26: 0.0218
+root        : INFO     Beginning Epoch 27
+root        : INFO     Epoch: 27, Batch: 100, Loss: 0.0255
+root        : INFO     Epoch: 27, Batch: 200, Loss: 0.0096
+root        : INFO     Epoch: 27, Batch: 300, Loss: 0.0254
+root        : INFO     Epoch: 27, Batch: 400, Loss: 0.0168
+root        : INFO     Epoch: 27, Batch: 500, Loss: 0.0150
+root        : INFO     Epoch: 27, Batch: 600, Loss: 0.0426
+root        : INFO     Epoch: 27, Batch: 700, Loss: 0.0347
+root        : INFO     Epoch: 27, Batch: 800, Loss: 0.0221
+root        : INFO     Epoch: 27, Batch: 900, Loss: 0.0206
+root        : INFO     Validating...
+root        : INFO     4789/5161 = 0.927921
+root        : INFO     Validation Loss for Epoch 27: 0.0216
+root        : INFO     Beginning Epoch 28
+root        : INFO     Epoch: 28, Batch: 100, Loss: 0.0239
+root        : INFO     Epoch: 28, Batch: 200, Loss: 0.0165
+root        : INFO     Epoch: 28, Batch: 300, Loss: 0.0236
+root        : INFO     Epoch: 28, Batch: 400, Loss: 0.0216
+root        : INFO     Epoch: 28, Batch: 500, Loss: 0.0106
+root        : INFO     Epoch: 28, Batch: 600, Loss: 0.0176
+root        : INFO     Epoch: 28, Batch: 700, Loss: 0.0156
+root        : INFO     Epoch: 28, Batch: 800, Loss: 0.0153
+root        : INFO     Epoch: 28, Batch: 900, Loss: 0.0102
+root        : INFO     Validating...
+root        : INFO     4721/5161 = 0.914745
+root        : INFO     Validation Loss for Epoch 28: 0.0213
+root        : INFO     Beginning Epoch 29
+root        : INFO     Epoch: 29, Batch: 100, Loss: 0.0430
+root        : INFO     Epoch: 29, Batch: 200, Loss: 0.0171
+root        : INFO     Epoch: 29, Batch: 300, Loss: 0.0236
+root        : INFO     Epoch: 29, Batch: 400, Loss: 0.0289
+root        : INFO     Epoch: 29, Batch: 500, Loss: 0.0321
+root        : INFO     Epoch: 29, Batch: 600, Loss: 0.0226
+root        : INFO     Epoch: 29, Batch: 700, Loss: 0.0236
+root        : INFO     Epoch: 29, Batch: 800, Loss: 0.0118
+root        : INFO     Epoch: 29, Batch: 900, Loss: 0.0314
+root        : INFO     Validating...
+root        : INFO     4808/5161 = 0.931602
+root        : INFO     Validation Loss for Epoch 29: 0.0216
+root        : INFO     Beginning Epoch 30
+root        : INFO     Epoch: 30, Batch: 100, Loss: 0.0313
+root        : INFO     Epoch: 30, Batch: 200, Loss: 0.0100
+root        : INFO     Epoch: 30, Batch: 300, Loss: 0.0133
+root        : INFO     Epoch: 30, Batch: 400, Loss: 0.0224
+root        : INFO     Epoch: 30, Batch: 500, Loss: 0.0256
+root        : INFO     Epoch: 30, Batch: 600, Loss: 0.0160
+root        : INFO     Epoch: 30, Batch: 700, Loss: 0.0297
+root        : INFO     Epoch: 30, Batch: 800, Loss: 0.0091
+root        : INFO     Epoch: 30, Batch: 900, Loss: 0.0133
+root        : INFO     Validating...
+root        : INFO     4769/5161 = 0.924046
+root        : INFO     Validation Loss for Epoch 30: 0.0221
+root        : INFO     Beginning Epoch 31
+root        : INFO     Epoch: 31, Batch: 100, Loss: 0.0181
+root        : INFO     Epoch: 31, Batch: 200, Loss: 0.0314
+root        : INFO     Epoch: 31, Batch: 300, Loss: 0.0121
+root        : INFO     Epoch: 31, Batch: 400, Loss: 0.0309
+root        : INFO     Epoch: 31, Batch: 500, Loss: 0.0153
+root        : INFO     Epoch: 31, Batch: 600, Loss: 0.0180
+root        : INFO     Epoch: 31, Batch: 700, Loss: 0.0773
+root        : INFO     Epoch: 31, Batch: 800, Loss: 0.0178
+root        : INFO     Epoch: 31, Batch: 900, Loss: 0.0161
+root        : INFO     Validating...
+root        : INFO     4808/5161 = 0.931602
+root        : INFO     Validation Loss for Epoch 31: 0.0220
+root        : INFO     Beginning Epoch 32
+root        : INFO     Epoch: 32, Batch: 100, Loss: 0.0254
+root        : INFO     Epoch: 32, Batch: 200, Loss: 0.0205
+root        : INFO     Epoch: 32, Batch: 300, Loss: 0.0116
+root        : INFO     Epoch: 32, Batch: 400, Loss: 0.0137
+root        : INFO     Epoch: 32, Batch: 500, Loss: 0.0299
+root        : INFO     Epoch: 32, Batch: 600, Loss: 0.0117
+root        : INFO     Epoch: 32, Batch: 700, Loss: 0.0118
+root        : INFO     Epoch: 32, Batch: 800, Loss: 0.0175
+root        : INFO     Epoch: 32, Batch: 900, Loss: 0.0207
+root        : INFO     Validating...
+root        : INFO     4718/5161 = 0.914164
+root        : INFO     Validation Loss for Epoch 32: 0.0222
+root        : INFO     Beginning Epoch 33
+root        : INFO     Epoch: 33, Batch: 100, Loss: 0.0119
+root        : INFO     Epoch: 33, Batch: 200, Loss: 0.0262
+root        : INFO     Epoch: 33, Batch: 300, Loss: 0.0113
+root        : INFO     Epoch: 33, Batch: 400, Loss: 0.0144
+root        : INFO     Epoch: 33, Batch: 500, Loss: 0.0184
+root        : INFO     Epoch: 33, Batch: 600, Loss: 0.0205
+root        : INFO     Epoch: 33, Batch: 700, Loss: 0.0152
+root        : INFO     Epoch: 33, Batch: 800, Loss: 0.0325
+root        : INFO     Epoch: 33, Batch: 900, Loss: 0.0161
+root        : INFO     Validating...
+root        : INFO     4773/5161 = 0.924821
+root        : INFO     Validation Loss for Epoch 33: 0.0216
+root        : INFO     Beginning Epoch 34
+root        : INFO     Epoch: 34, Batch: 100, Loss: 0.0170
+root        : INFO     Epoch: 34, Batch: 200, Loss: 0.0202
+root        : INFO     Epoch: 34, Batch: 300, Loss: 0.0142
+root        : INFO     Epoch: 34, Batch: 400, Loss: 0.0156
+root        : INFO     Epoch: 34, Batch: 500, Loss: 0.0183
+root        : INFO     Epoch: 34, Batch: 600, Loss: 0.0188
+root        : INFO     Epoch: 34, Batch: 700, Loss: 0.0277
+root        : INFO     Epoch: 34, Batch: 800, Loss: 0.0102
+root        : INFO     Epoch: 34, Batch: 900, Loss: 0.0201
+root        : INFO     Validating...
+root        : INFO     4765/5161 = 0.923271
+root        : INFO     Validation Loss for Epoch 34: 0.0213
+root        : INFO     Beginning Epoch 35
+root        : INFO     Epoch: 35, Batch: 100, Loss: 0.0152
+root        : INFO     Epoch: 35, Batch: 200, Loss: 0.0339
+root        : INFO     Epoch: 35, Batch: 300, Loss: 0.0328
+root        : INFO     Epoch: 35, Batch: 400, Loss: 0.0112
+root        : INFO     Epoch: 35, Batch: 500, Loss: 0.0160
+root        : INFO     Epoch: 35, Batch: 600, Loss: 0.0158
+root        : INFO     Epoch: 35, Batch: 700, Loss: 0.0120
+root        : INFO     Epoch: 35, Batch: 800, Loss: 0.0106
+root        : INFO     Epoch: 35, Batch: 900, Loss: 0.0177
+root        : INFO     Validating...
+root        : INFO     4725/5161 = 0.915520
+root        : INFO     Validation Loss for Epoch 35: 0.0212
+root        : INFO     Beginning Epoch 36
+root        : INFO     Epoch: 36, Batch: 100, Loss: 0.0302
+root        : INFO     Epoch: 36, Batch: 200, Loss: 0.0181
+root        : INFO     Epoch: 36, Batch: 300, Loss: 0.0249
+root        : INFO     Epoch: 36, Batch: 400, Loss: 0.0232
+root        : INFO     Epoch: 36, Batch: 500, Loss: 0.0294
+root        : INFO     Epoch: 36, Batch: 600, Loss: 0.0154
+root        : INFO     Epoch: 36, Batch: 700, Loss: 0.0157
+root        : INFO     Epoch: 36, Batch: 800, Loss: 0.0145
+root        : INFO     Epoch: 36, Batch: 900, Loss: 0.0183
+root        : INFO     Validating...
+root        : INFO     4764/5161 = 0.923077
+root        : INFO     Validation Loss for Epoch 36: 0.0213
+root        : INFO     Beginning Epoch 37
+root        : INFO     Epoch: 37, Batch: 100, Loss: 0.0249
+root        : INFO     Epoch: 37, Batch: 200, Loss: 0.0167
+root        : INFO     Epoch: 37, Batch: 300, Loss: 0.0213
+root        : INFO     Epoch: 37, Batch: 400, Loss: 0.0119
+root        : INFO     Epoch: 37, Batch: 500, Loss: 0.0192
+root        : INFO     Epoch: 37, Batch: 600, Loss: 0.0327
+root        : INFO     Epoch: 37, Batch: 700, Loss: 0.0119
+root        : INFO     Epoch: 37, Batch: 800, Loss: 0.0132
+root        : INFO     Epoch: 37, Batch: 900, Loss: 0.0196
+root        : INFO     Validating...
+root        : INFO     4835/5161 = 0.936834
+root        : INFO     Validation Loss for Epoch 37: 0.0210
+root        : INFO     Beginning Epoch 38
+root        : INFO     Epoch: 38, Batch: 100, Loss: 0.0115
+root        : INFO     Epoch: 38, Batch: 200, Loss: 0.0281
+root        : INFO     Epoch: 38, Batch: 300, Loss: 0.0402
+root        : INFO     Epoch: 38, Batch: 400, Loss: 0.0107
+root        : INFO     Epoch: 38, Batch: 500, Loss: 0.0228
+root        : INFO     Epoch: 38, Batch: 600, Loss: 0.0200
+root        : INFO     Epoch: 38, Batch: 700, Loss: 0.0238
+root        : INFO     Epoch: 38, Batch: 800, Loss: 0.0156
+root        : INFO     Epoch: 38, Batch: 900, Loss: 0.0232
+root        : INFO     Validating...
+root        : INFO     4814/5161 = 0.932765
+root        : INFO     Validation Loss for Epoch 38: 0.0209
+root        : INFO     Beginning Epoch 39
+root        : INFO     Epoch: 39, Batch: 100, Loss: 0.0208
+root        : INFO     Epoch: 39, Batch: 200, Loss: 0.0156
+root        : INFO     Epoch: 39, Batch: 300, Loss: 0.0199
+root        : INFO     Epoch: 39, Batch: 400, Loss: 0.0278
+root        : INFO     Epoch: 39, Batch: 500, Loss: 0.0150
+root        : INFO     Epoch: 39, Batch: 600, Loss: 0.0145
+root        : INFO     Epoch: 39, Batch: 700, Loss: 0.0099
+root        : INFO     Epoch: 39, Batch: 800, Loss: 0.0228
+root        : INFO     Epoch: 39, Batch: 900, Loss: 0.0252
+root        : INFO     Validating...
+root        : INFO     4721/5161 = 0.914745
+root        : INFO     Validation Loss for Epoch 39: 0.0228
+root        : INFO     Beginning Epoch 40
+root        : INFO     Epoch: 40, Batch: 100, Loss: 0.0226
+root        : INFO     Epoch: 40, Batch: 200, Loss: 0.0269
+root        : INFO     Epoch: 40, Batch: 300, Loss: 0.0131
+root        : INFO     Epoch: 40, Batch: 400, Loss: 0.0255
+root        : INFO     Epoch: 40, Batch: 500, Loss: 0.0116
+root        : INFO     Epoch: 40, Batch: 600, Loss: 0.0144
+root        : INFO     Epoch: 40, Batch: 700, Loss: 0.0205
+root        : INFO     Epoch: 40, Batch: 800, Loss: 0.0219
+root        : INFO     Epoch: 40, Batch: 900, Loss: 0.0148
+root        : INFO     Validating...
+root        : INFO     4747/5161 = 0.919783
+root        : INFO     Validation Loss for Epoch 40: 0.0211
+root        : INFO     Beginning Epoch 41
+root        : INFO     Epoch: 41, Batch: 100, Loss: 0.0111
+root        : INFO     Epoch: 41, Batch: 200, Loss: 0.0323
+root        : INFO     Epoch: 41, Batch: 300, Loss: 0.0104
+root        : INFO     Epoch: 41, Batch: 400, Loss: 0.0107
+root        : INFO     Epoch: 41, Batch: 500, Loss: 0.0235
+root        : INFO     Epoch: 41, Batch: 600, Loss: 0.0166
+root        : INFO     Epoch: 41, Batch: 700, Loss: 0.0204
+root        : INFO     Epoch: 41, Batch: 800, Loss: 0.0129
+root        : INFO     Epoch: 41, Batch: 900, Loss: 0.0123
+root        : INFO     Validating...
+root        : INFO     4793/5161 = 0.928696
+root        : INFO     Validation Loss for Epoch 41: 0.0214
+root        : INFO     Beginning Epoch 42
+root        : INFO     Epoch: 42, Batch: 100, Loss: 0.0273
+root        : INFO     Epoch: 42, Batch: 200, Loss: 0.0168
+root        : INFO     Epoch: 42, Batch: 300, Loss: 0.0104
+root        : INFO     Epoch: 42, Batch: 400, Loss: 0.0296
+root        : INFO     Epoch: 42, Batch: 500, Loss: 0.0208
+root        : INFO     Epoch: 42, Batch: 600, Loss: 0.0188
+root        : INFO     Epoch: 42, Batch: 700, Loss: 0.0109
+root        : INFO     Epoch: 42, Batch: 800, Loss: 0.0253
+root        : INFO     Epoch: 42, Batch: 900, Loss: 0.0394
+root        : INFO     Validating...
+root        : INFO     4801/5161 = 0.930246
+root        : INFO     Validation Loss for Epoch 42: 0.0211
+root        : INFO     Beginning Epoch 43
+root        : INFO     Epoch: 43, Batch: 100, Loss: 0.0103
+root        : INFO     Epoch: 43, Batch: 200, Loss: 0.0151
+root        : INFO     Epoch: 43, Batch: 300, Loss: 0.0120
+root        : INFO     Epoch: 43, Batch: 400, Loss: 0.0128
+root        : INFO     Epoch: 43, Batch: 500, Loss: 0.0182
+root        : INFO     Epoch: 43, Batch: 600, Loss: 0.0130
+root        : INFO     Epoch: 43, Batch: 700, Loss: 0.0187
+root        : INFO     Epoch: 43, Batch: 800, Loss: 0.0264
+root        : INFO     Epoch: 43, Batch: 900, Loss: 0.0139
+root        : INFO     Validating...
+root        : INFO     4827/5161 = 0.935284
+root        : INFO     Validation Loss for Epoch 43: 0.0210
+root        : INFO     Beginning Epoch 44
+root        : INFO     Epoch: 44, Batch: 100, Loss: 0.0160
+root        : INFO     Epoch: 44, Batch: 200, Loss: 0.0141
+root        : INFO     Epoch: 44, Batch: 300, Loss: 0.0232
+root        : INFO     Epoch: 44, Batch: 400, Loss: 0.0286
+root        : INFO     Epoch: 44, Batch: 500, Loss: 0.0099
+root        : INFO     Epoch: 44, Batch: 600, Loss: 0.0285
+root        : INFO     Epoch: 44, Batch: 700, Loss: 0.0189
+root        : INFO     Epoch: 44, Batch: 800, Loss: 0.0201
+root        : INFO     Epoch: 44, Batch: 900, Loss: 0.0227
+root        : INFO     Validating...
+root        : INFO     4739/5161 = 0.918233
+root        : INFO     Validation Loss for Epoch 44: 0.0214
+root        : INFO     Beginning Epoch 45
+root        : INFO     Epoch: 45, Batch: 100, Loss: 0.0232
+root        : INFO     Epoch: 45, Batch: 200, Loss: 0.0165
+root        : INFO     Epoch: 45, Batch: 300, Loss: 0.0191
+root        : INFO     Epoch: 45, Batch: 400, Loss: 0.0165
+root        : INFO     Epoch: 45, Batch: 500, Loss: 0.0332
+root        : INFO     Epoch: 45, Batch: 600, Loss: 0.0168
+root        : INFO     Epoch: 45, Batch: 700, Loss: 0.0145
+root        : INFO     Epoch: 45, Batch: 800, Loss: 0.0152
+root        : INFO     Epoch: 45, Batch: 900, Loss: 0.0157
+root        : INFO     Validating...
+root        : INFO     4789/5161 = 0.927921
+root        : INFO     Validation Loss for Epoch 45: 0.0215
+root        : INFO     Beginning Epoch 46
+root        : INFO     Epoch: 46, Batch: 100, Loss: 0.0201
+root        : INFO     Epoch: 46, Batch: 200, Loss: 0.0169
+root        : INFO     Epoch: 46, Batch: 300, Loss: 0.0169
+root        : INFO     Epoch: 46, Batch: 400, Loss: 0.0461
+root        : INFO     Epoch: 46, Batch: 500, Loss: 0.0090
+root        : INFO     Epoch: 46, Batch: 600, Loss: 0.0206
+root        : INFO     Epoch: 46, Batch: 700, Loss: 0.0105
+root        : INFO     Epoch: 46, Batch: 800, Loss: 0.0126
+root        : INFO     Epoch: 46, Batch: 900, Loss: 0.0155
+root        : INFO     Validating...
+root        : INFO     4743/5161 = 0.919008
+root        : INFO     Validation Loss for Epoch 46: 0.0216
+root        : INFO     Beginning Epoch 47
+root        : INFO     Epoch: 47, Batch: 100, Loss: 0.0240
+root        : INFO     Epoch: 47, Batch: 200, Loss: 0.0159
+root        : INFO     Epoch: 47, Batch: 300, Loss: 0.0168
+root        : INFO     Epoch: 47, Batch: 400, Loss: 0.0111
+root        : INFO     Epoch: 47, Batch: 500, Loss: 0.0088
+root        : INFO     Epoch: 47, Batch: 600, Loss: 0.0224
+root        : INFO     Epoch: 47, Batch: 700, Loss: 0.0225
+root        : INFO     Epoch: 47, Batch: 800, Loss: 0.0207
+root        : INFO     Epoch: 47, Batch: 900, Loss: 0.0251
+root        : INFO     Validating...
+root        : INFO     4760/5161 = 0.922302
+root        : INFO     Validation Loss for Epoch 47: 0.0211
+root        : INFO     Beginning Epoch 48
+root        : INFO     Epoch: 48, Batch: 100, Loss: 0.0177
+root        : INFO     Epoch: 48, Batch: 200, Loss: 0.0284
+root        : INFO     Epoch: 48, Batch: 300, Loss: 0.0306
+root        : INFO     Epoch: 48, Batch: 400, Loss: 0.0102
+root        : INFO     Epoch: 48, Batch: 500, Loss: 0.0188
+root        : INFO     Epoch: 48, Batch: 600, Loss: 0.0196
+root        : INFO     Epoch: 48, Batch: 700, Loss: 0.0297
+root        : INFO     Epoch: 48, Batch: 800, Loss: 0.0140
+root        : INFO     Epoch: 48, Batch: 900, Loss: 0.0165
+root        : INFO     Validating...
+root        : INFO     4703/5161 = 0.911258
+root        : INFO     Validation Loss for Epoch 48: 0.0212
+root        : INFO     Beginning Epoch 49
+root        : INFO     Epoch: 49, Batch: 100, Loss: 0.0152
+root        : INFO     Epoch: 49, Batch: 200, Loss: 0.0118
+root        : INFO     Epoch: 49, Batch: 300, Loss: 0.0191
+root        : INFO     Epoch: 49, Batch: 400, Loss: 0.0304
+root        : INFO     Epoch: 49, Batch: 500, Loss: 0.0169
+root        : INFO     Epoch: 49, Batch: 600, Loss: 0.0238
+root        : INFO     Epoch: 49, Batch: 700, Loss: 0.0240
+root        : INFO     Epoch: 49, Batch: 800, Loss: 0.0186
+root        : INFO     Epoch: 49, Batch: 900, Loss: 0.0127
+root        : INFO     Validating...
+root        : INFO     4742/5161 = 0.918814
+root        : INFO     Validation Loss for Epoch 49: 0.0213
+root        : INFO     Beginning Epoch 50
+root        : INFO     Epoch: 50, Batch: 100, Loss: 0.0147
+root        : INFO     Epoch: 50, Batch: 200, Loss: 0.0153
+root        : INFO     Epoch: 50, Batch: 300, Loss: 0.0194
+root        : INFO     Epoch: 50, Batch: 400, Loss: 0.0139
+root        : INFO     Epoch: 50, Batch: 500, Loss: 0.0239
+root        : INFO     Epoch: 50, Batch: 600, Loss: 0.0259
+root        : INFO     Epoch: 50, Batch: 700, Loss: 0.0121
+root        : INFO     Epoch: 50, Batch: 800, Loss: 0.0284
+root        : INFO     Epoch: 50, Batch: 900, Loss: 0.0190
+root        : INFO     Validating...
+root        : INFO     4864/5161 = 0.942453
+root        : INFO     Validation Loss for Epoch 50: 0.0205
+root        : INFO     Beginning Epoch 51
+root        : INFO     Epoch: 51, Batch: 100, Loss: 0.0197
+root        : INFO     Epoch: 51, Batch: 200, Loss: 0.0120
+root        : INFO     Epoch: 51, Batch: 300, Loss: 0.0345
+root        : INFO     Epoch: 51, Batch: 400, Loss: 0.0117
+root        : INFO     Epoch: 51, Batch: 500, Loss: 0.0421
+root        : INFO     Epoch: 51, Batch: 600, Loss: 0.0130
+root        : INFO     Epoch: 51, Batch: 700, Loss: 0.0136
+root        : INFO     Epoch: 51, Batch: 800, Loss: 0.0149
+root        : INFO     Epoch: 51, Batch: 900, Loss: 0.0298
+root        : INFO     Validating...
+root        : INFO     4692/5161 = 0.909126
+root        : INFO     Validation Loss for Epoch 51: 0.0224
+root        : INFO     Beginning Epoch 52
+root        : INFO     Epoch: 52, Batch: 100, Loss: 0.0274
+root        : INFO     Epoch: 52, Batch: 200, Loss: 0.0217
+root        : INFO     Epoch: 52, Batch: 300, Loss: 0.0290
+root        : INFO     Epoch: 52, Batch: 400, Loss: 0.0295
+root        : INFO     Epoch: 52, Batch: 500, Loss: 0.0142
+root        : INFO     Epoch: 52, Batch: 600, Loss: 0.0183
+root        : INFO     Epoch: 52, Batch: 700, Loss: 0.0186
+root        : INFO     Epoch: 52, Batch: 800, Loss: 0.0162
+root        : INFO     Epoch: 52, Batch: 900, Loss: 0.0209
+root        : INFO     Validating...
+root        : INFO     4825/5161 = 0.934896
+root        : INFO     Validation Loss for Epoch 52: 0.0212
+root        : INFO     Beginning Epoch 53
+root        : INFO     Epoch: 53, Batch: 100, Loss: 0.0127
+root        : INFO     Epoch: 53, Batch: 200, Loss: 0.0143
+root        : INFO     Epoch: 53, Batch: 300, Loss: 0.0139
+root        : INFO     Epoch: 53, Batch: 400, Loss: 0.0175
+root        : INFO     Epoch: 53, Batch: 500, Loss: 0.0331
+root        : INFO     Epoch: 53, Batch: 600, Loss: 0.0226
+root        : INFO     Epoch: 53, Batch: 700, Loss: 0.0098
+root        : INFO     Epoch: 53, Batch: 800, Loss: 0.0248
+root        : INFO     Epoch: 53, Batch: 900, Loss: 0.0179
+root        : INFO     Validating...
+root        : INFO     4738/5161 = 0.918039
+root        : INFO     Validation Loss for Epoch 53: 0.0219
+root        : INFO     Beginning Epoch 54
+root        : INFO     Epoch: 54, Batch: 100, Loss: 0.0158
+root        : INFO     Epoch: 54, Batch: 200, Loss: 0.0210
+root        : INFO     Epoch: 54, Batch: 300, Loss: 0.0248
+root        : INFO     Epoch: 54, Batch: 400, Loss: 0.0120
+root        : INFO     Epoch: 54, Batch: 500, Loss: 0.0150
+root        : INFO     Epoch: 54, Batch: 600, Loss: 0.0094
+root        : INFO     Epoch: 54, Batch: 700, Loss: 0.0285
+root        : INFO     Epoch: 54, Batch: 800, Loss: 0.0274
+root        : INFO     Epoch: 54, Batch: 900, Loss: 0.0164
+root        : INFO     Validating...
+root        : INFO     4800/5161 = 0.930052
+root        : INFO     Validation Loss for Epoch 54: 0.0206
+root        : INFO     Beginning Epoch 55
+root        : INFO     Epoch: 55, Batch: 100, Loss: 0.0144
+root        : INFO     Epoch: 55, Batch: 200, Loss: 0.0101
+root        : INFO     Epoch: 55, Batch: 300, Loss: 0.0229
+root        : INFO     Epoch: 55, Batch: 400, Loss: 0.0135
+root        : INFO     Epoch: 55, Batch: 500, Loss: 0.0083
+root        : INFO     Epoch: 55, Batch: 600, Loss: 0.0194
+root        : INFO     Epoch: 55, Batch: 700, Loss: 0.0211
+root        : INFO     Epoch: 55, Batch: 800, Loss: 0.0107
+root        : INFO     Epoch: 55, Batch: 900, Loss: 0.0178
+root        : INFO     Validating...
+root        : INFO     4822/5161 = 0.934315
+root        : INFO     Validation Loss for Epoch 55: 0.0211
+root        : INFO     Beginning Epoch 56
+root        : INFO     Epoch: 56, Batch: 100, Loss: 0.0322
+root        : INFO     Epoch: 56, Batch: 200, Loss: 0.0180
+root        : INFO     Epoch: 56, Batch: 300, Loss: 0.0445
+root        : INFO     Epoch: 56, Batch: 400, Loss: 0.0058
+root        : INFO     Epoch: 56, Batch: 500, Loss: 0.0220
+root        : INFO     Epoch: 56, Batch: 600, Loss: 0.0216
+root        : INFO     Epoch: 56, Batch: 700, Loss: 0.0139
+root        : INFO     Epoch: 56, Batch: 800, Loss: 0.0193
+root        : INFO     Epoch: 56, Batch: 900, Loss: 0.0187
+root        : INFO     Validating...
+root        : INFO     4757/5161 = 0.921721
+root        : INFO     Validation Loss for Epoch 56: 0.0212
+root        : INFO     Beginning Epoch 57
+root        : INFO     Epoch: 57, Batch: 100, Loss: 0.0141
+root        : INFO     Epoch: 57, Batch: 200, Loss: 0.0340
+root        : INFO     Epoch: 57, Batch: 300, Loss: 0.0119
+root        : INFO     Epoch: 57, Batch: 400, Loss: 0.0311
+root        : INFO     Epoch: 57, Batch: 500, Loss: 0.0133
+root        : INFO     Epoch: 57, Batch: 600, Loss: 0.0080
+root        : INFO     Epoch: 57, Batch: 700, Loss: 0.0167
+root        : INFO     Epoch: 57, Batch: 800, Loss: 0.0601
+root        : INFO     Epoch: 57, Batch: 900, Loss: 0.0140
+root        : INFO     Validating...
+root        : INFO     4632/5161 = 0.897500
+root        : INFO     Validation Loss for Epoch 57: 0.0219
+root        : INFO     Beginning Epoch 58
+root        : INFO     Epoch: 58, Batch: 100, Loss: 0.0196
+root        : INFO     Epoch: 58, Batch: 200, Loss: 0.0224
+root        : INFO     Epoch: 58, Batch: 300, Loss: 0.0129
+root        : INFO     Epoch: 58, Batch: 400, Loss: 0.0160
+root        : INFO     Epoch: 58, Batch: 500, Loss: 0.0127
+root        : INFO     Epoch: 58, Batch: 600, Loss: 0.0169
+root        : INFO     Epoch: 58, Batch: 700, Loss: 0.0348
+root        : INFO     Epoch: 58, Batch: 800, Loss: 0.0233
+root        : INFO     Epoch: 58, Batch: 900, Loss: 0.0121
+root        : INFO     Validating...
+root        : INFO     4842/5161 = 0.938190
+root        : INFO     Validation Loss for Epoch 58: 0.0210
+root        : INFO     Beginning Epoch 59
+root        : INFO     Epoch: 59, Batch: 100, Loss: 0.0109
+root        : INFO     Epoch: 59, Batch: 200, Loss: 0.0211
+root        : INFO     Epoch: 59, Batch: 300, Loss: 0.0119
+root        : INFO     Epoch: 59, Batch: 400, Loss: 0.0224
+root        : INFO     Epoch: 59, Batch: 500, Loss: 0.0174
+root        : INFO     Epoch: 59, Batch: 600, Loss: 0.0140
+root        : INFO     Epoch: 59, Batch: 700, Loss: 0.0276
+root        : INFO     Epoch: 59, Batch: 800, Loss: 0.0335
+root        : INFO     Epoch: 59, Batch: 900, Loss: 0.0208
+root        : INFO     Validating...
+root        : INFO     4785/5161 = 0.927146
+root        : INFO     Validation Loss for Epoch 59: 0.0210
+root        : INFO     Beginning Epoch 60
+root        : INFO     Epoch: 60, Batch: 100, Loss: 0.0456
+root        : INFO     Epoch: 60, Batch: 200, Loss: 0.0166
+root        : INFO     Epoch: 60, Batch: 300, Loss: 0.0092
+root        : INFO     Epoch: 60, Batch: 400, Loss: 0.0107
+root        : INFO     Epoch: 60, Batch: 500, Loss: 0.0263
+root        : INFO     Epoch: 60, Batch: 600, Loss: 0.0117
+root        : INFO     Epoch: 60, Batch: 700, Loss: 0.0110
+root        : INFO     Epoch: 60, Batch: 800, Loss: 0.0210
+root        : INFO     Epoch: 60, Batch: 900, Loss: 0.0286
+root        : INFO     Validating...
+root        : INFO     4838/5161 = 0.937415
+root        : INFO     Validation Loss for Epoch 60: 0.0211
+root        : INFO     Beginning Epoch 61
+root        : INFO     Epoch: 61, Batch: 100, Loss: 0.0130
+root        : INFO     Epoch: 61, Batch: 200, Loss: 0.0153
+root        : INFO     Epoch: 61, Batch: 300, Loss: 0.0150
+root        : INFO     Epoch: 61, Batch: 400, Loss: 0.0273
+root        : INFO     Epoch: 61, Batch: 500, Loss: 0.0177
+root        : INFO     Epoch: 61, Batch: 600, Loss: 0.0134
+root        : INFO     Epoch: 61, Batch: 700, Loss: 0.0206
+root        : INFO     Epoch: 61, Batch: 800, Loss: 0.0245
+root        : INFO     Epoch: 61, Batch: 900, Loss: 0.0100
+root        : INFO     Validating...
+root        : INFO     4706/5161 = 0.911839
+root        : INFO     Validation Loss for Epoch 61: 0.0214
+root        : INFO     Beginning Epoch 62
+root        : INFO     Epoch: 62, Batch: 100, Loss: 0.0325
+root        : INFO     Epoch: 62, Batch: 200, Loss: 0.0384
+root        : INFO     Epoch: 62, Batch: 300, Loss: 0.0130
+root        : INFO     Epoch: 62, Batch: 400, Loss: 0.0080
+root        : INFO     Epoch: 62, Batch: 500, Loss: 0.0188
+root        : INFO     Epoch: 62, Batch: 600, Loss: 0.0064
+root        : INFO     Epoch: 62, Batch: 700, Loss: 0.0079
+root        : INFO     Epoch: 62, Batch: 800, Loss: 0.0201
+root        : INFO     Epoch: 62, Batch: 900, Loss: 0.0321
+root        : INFO     Validating...
+root        : INFO     4819/5161 = 0.933734
+root        : INFO     Validation Loss for Epoch 62: 0.0204
+root        : INFO     Beginning Epoch 63
+root        : INFO     Epoch: 63, Batch: 100, Loss: 0.0135
+root        : INFO     Epoch: 63, Batch: 200, Loss: 0.0172
+root        : INFO     Epoch: 63, Batch: 300, Loss: 0.0235
+root        : INFO     Epoch: 63, Batch: 400, Loss: 0.0543
+root        : INFO     Epoch: 63, Batch: 500, Loss: 0.0114
+root        : INFO     Epoch: 63, Batch: 600, Loss: 0.0153
+root        : INFO     Epoch: 63, Batch: 700, Loss: 0.0257
+root        : INFO     Epoch: 63, Batch: 800, Loss: 0.0116
+root        : INFO     Epoch: 63, Batch: 900, Loss: 0.0121
+root        : INFO     Validating...
+root        : INFO     4526/5161 = 0.876962
+root        : INFO     Validation Loss for Epoch 63: 0.0223
+root        : INFO     Beginning Epoch 64
+root        : INFO     Epoch: 64, Batch: 100, Loss: 0.0212
+root        : INFO     Epoch: 64, Batch: 200, Loss: 0.0299
+root        : INFO     Epoch: 64, Batch: 300, Loss: 0.0144
+root        : INFO     Epoch: 64, Batch: 400, Loss: 0.0144
+root        : INFO     Epoch: 64, Batch: 500, Loss: 0.0230
+root        : INFO     Epoch: 64, Batch: 600, Loss: 0.0369
+root        : INFO     Epoch: 64, Batch: 700, Loss: 0.0110
+root        : INFO     Epoch: 64, Batch: 800, Loss: 0.0183
+root        : INFO     Epoch: 64, Batch: 900, Loss: 0.0153
+root        : INFO     Validating...
+root        : INFO     4745/5161 = 0.919395
+root        : INFO     Validation Loss for Epoch 64: 0.0210
+root        : INFO     Beginning Epoch 65
+root        : INFO     Epoch: 65, Batch: 100, Loss: 0.0167
+root        : INFO     Epoch: 65, Batch: 200, Loss: 0.0292
+root        : INFO     Epoch: 65, Batch: 300, Loss: 0.0375
+root        : INFO     Epoch: 65, Batch: 400, Loss: 0.0170
+root        : INFO     Epoch: 65, Batch: 500, Loss: 0.0143
+root        : INFO     Epoch: 65, Batch: 600, Loss: 0.0198
+root        : INFO     Epoch: 65, Batch: 700, Loss: 0.0212
+root        : INFO     Epoch: 65, Batch: 800, Loss: 0.0181
+root        : INFO     Epoch: 65, Batch: 900, Loss: 0.0154
+root        : INFO     Validating...
+root        : INFO     4753/5161 = 0.920946
+root        : INFO     Validation Loss for Epoch 65: 0.0208
+root        : INFO     Beginning Epoch 66
+root        : INFO     Epoch: 66, Batch: 100, Loss: 0.0256
+root        : INFO     Epoch: 66, Batch: 200, Loss: 0.0118
+root        : INFO     Epoch: 66, Batch: 300, Loss: 0.0206
+root        : INFO     Epoch: 66, Batch: 400, Loss: 0.0114
+root        : INFO     Epoch: 66, Batch: 500, Loss: 0.0212
+root        : INFO     Epoch: 66, Batch: 600, Loss: 0.0175
+root        : INFO     Epoch: 66, Batch: 700, Loss: 0.0363
+root        : INFO     Epoch: 66, Batch: 800, Loss: 0.0194
+root        : INFO     Epoch: 66, Batch: 900, Loss: 0.0267
+root        : INFO     Validating...
+root        : INFO     4715/5161 = 0.913583
+root        : INFO     Validation Loss for Epoch 66: 0.0219
+root        : INFO     Beginning Epoch 67
+root        : INFO     Epoch: 67, Batch: 100, Loss: 0.0212
+root        : INFO     Epoch: 67, Batch: 200, Loss: 0.0235
+root        : INFO     Epoch: 67, Batch: 300, Loss: 0.0276
+root        : INFO     Epoch: 67, Batch: 400, Loss: 0.0130
+root        : INFO     Epoch: 67, Batch: 500, Loss: 0.0102
+root        : INFO     Epoch: 67, Batch: 600, Loss: 0.0128
+root        : INFO     Epoch: 67, Batch: 700, Loss: 0.0173
+root        : INFO     Epoch: 67, Batch: 800, Loss: 0.0174
+root        : INFO     Epoch: 67, Batch: 900, Loss: 0.0138
+root        : INFO     Validating...
+root        : INFO     4779/5161 = 0.925983
+root        : INFO     Validation Loss for Epoch 67: 0.0209
+root        : INFO     Beginning Epoch 68
+root        : INFO     Epoch: 68, Batch: 100, Loss: 0.0077
+root        : INFO     Epoch: 68, Batch: 200, Loss: 0.0137
+root        : INFO     Epoch: 68, Batch: 300, Loss: 0.0126
+root        : INFO     Epoch: 68, Batch: 400, Loss: 0.0193
+root        : INFO     Epoch: 68, Batch: 500, Loss: 0.0265
+root        : INFO     Epoch: 68, Batch: 600, Loss: 0.0308
+root        : INFO     Epoch: 68, Batch: 700, Loss: 0.0114
+root        : INFO     Epoch: 68, Batch: 800, Loss: 0.0192
+root        : INFO     Epoch: 68, Batch: 900, Loss: 0.0140
+root        : INFO     Validating...
+root        : INFO     4783/5161 = 0.926758
+root        : INFO     Validation Loss for Epoch 68: 0.0209
+root        : INFO     Beginning Epoch 69
+root        : INFO     Epoch: 69, Batch: 100, Loss: 0.0236
+root        : INFO     Epoch: 69, Batch: 200, Loss: 0.0201
+root        : INFO     Epoch: 69, Batch: 300, Loss: 0.0193
+root        : INFO     Epoch: 69, Batch: 400, Loss: 0.0159
+root        : INFO     Epoch: 69, Batch: 500, Loss: 0.0203
+root        : INFO     Epoch: 69, Batch: 600, Loss: 0.0145
+root        : INFO     Epoch: 69, Batch: 700, Loss: 0.0169
+root        : INFO     Epoch: 69, Batch: 800, Loss: 0.0159
+root        : INFO     Epoch: 69, Batch: 900, Loss: 0.0230
+root        : INFO     Validating...
+root        : INFO     4799/5161 = 0.929859
+root        : INFO     Validation Loss for Epoch 69: 0.0207
+root        : INFO     Beginning Epoch 70
+root        : INFO     Epoch: 70, Batch: 100, Loss: 0.0091
+root        : INFO     Epoch: 70, Batch: 200, Loss: 0.0376
+root        : INFO     Epoch: 70, Batch: 300, Loss: 0.0194
+root        : INFO     Epoch: 70, Batch: 400, Loss: 0.0183
+root        : INFO     Epoch: 70, Batch: 500, Loss: 0.0234
+root        : INFO     Epoch: 70, Batch: 600, Loss: 0.0133
+root        : INFO     Epoch: 70, Batch: 700, Loss: 0.0335
+root        : INFO     Epoch: 70, Batch: 800, Loss: 0.0112
+root        : INFO     Epoch: 70, Batch: 900, Loss: 0.0257
+root        : INFO     Validating...
+root        : INFO     4843/5161 = 0.938384
+root        : INFO     Validation Loss for Epoch 70: 0.0204
+root        : INFO     Beginning Epoch 71
+root        : INFO     Epoch: 71, Batch: 100, Loss: 0.0137
+root        : INFO     Epoch: 71, Batch: 200, Loss: 0.0138
+root        : INFO     Epoch: 71, Batch: 300, Loss: 0.0390
+root        : INFO     Epoch: 71, Batch: 400, Loss: 0.0098
+root        : INFO     Epoch: 71, Batch: 500, Loss: 0.0225
+root        : INFO     Epoch: 71, Batch: 600, Loss: 0.0188
+root        : INFO     Epoch: 71, Batch: 700, Loss: 0.0224
+root        : INFO     Epoch: 71, Batch: 800, Loss: 0.0196
+root        : INFO     Epoch: 71, Batch: 900, Loss: 0.0123
+root        : INFO     Validating...
+root        : INFO     4713/5161 = 0.913195
+root        : INFO     Validation Loss for Epoch 71: 0.0208
+root        : INFO     Beginning Epoch 72
+root        : INFO     Epoch: 72, Batch: 100, Loss: 0.0139
+root        : INFO     Epoch: 72, Batch: 200, Loss: 0.0133
+root        : INFO     Epoch: 72, Batch: 300, Loss: 0.0223
+root        : INFO     Epoch: 72, Batch: 400, Loss: 0.0126
+root        : INFO     Epoch: 72, Batch: 500, Loss: 0.0157
+root        : INFO     Epoch: 72, Batch: 600, Loss: 0.0172
+root        : INFO     Epoch: 72, Batch: 700, Loss: 0.0218
+root        : INFO     Epoch: 72, Batch: 800, Loss: 0.0125
+root        : INFO     Epoch: 72, Batch: 900, Loss: 0.0130
+root        : INFO     Validating...
+root        : INFO     4681/5161 = 0.906995
+root        : INFO     Validation Loss for Epoch 72: 0.0223
+root        : INFO     Beginning Epoch 73
+root        : INFO     Epoch: 73, Batch: 100, Loss: 0.0251
+root        : INFO     Epoch: 73, Batch: 200, Loss: 0.0189
+root        : INFO     Epoch: 73, Batch: 300, Loss: 0.0131
+root        : INFO     Epoch: 73, Batch: 400, Loss: 0.0129
+root        : INFO     Epoch: 73, Batch: 500, Loss: 0.0182
+root        : INFO     Epoch: 73, Batch: 600, Loss: 0.0151
+root        : INFO     Epoch: 73, Batch: 700, Loss: 0.0199
+root        : INFO     Epoch: 73, Batch: 800, Loss: 0.0138
+root        : INFO     Epoch: 73, Batch: 900, Loss: 0.0165
+root        : INFO     Validating...
+root        : INFO     4677/5161 = 0.906220
+root        : INFO     Validation Loss for Epoch 73: 0.0228
+root        : INFO     Beginning Epoch 74
+root        : INFO     Epoch: 74, Batch: 100, Loss: 0.0288
+root        : INFO     Epoch: 74, Batch: 200, Loss: 0.0108
+root        : INFO     Epoch: 74, Batch: 300, Loss: 0.0127
+root        : INFO     Epoch: 74, Batch: 400, Loss: 0.0138
+root        : INFO     Epoch: 74, Batch: 500, Loss: 0.0181
+root        : INFO     Epoch: 74, Batch: 600, Loss: 0.0222
+root        : INFO     Epoch: 74, Batch: 700, Loss: 0.0242
+root        : INFO     Epoch: 74, Batch: 800, Loss: 0.0117
+root        : INFO     Epoch: 74, Batch: 900, Loss: 0.0254
+root        : INFO     Validating...
+root        : INFO     4781/5161 = 0.926371
+root        : INFO     Validation Loss for Epoch 74: 0.0208
+root        : INFO     Beginning Epoch 75
+root        : INFO     Epoch: 75, Batch: 100, Loss: 0.0286
+root        : INFO     Epoch: 75, Batch: 200, Loss: 0.0196
+root        : INFO     Epoch: 75, Batch: 300, Loss: 0.0062
+root        : INFO     Epoch: 75, Batch: 400, Loss: 0.0149
+root        : INFO     Epoch: 75, Batch: 500, Loss: 0.0202
+root        : INFO     Epoch: 75, Batch: 600, Loss: 0.0197
+root        : INFO     Epoch: 75, Batch: 700, Loss: 0.0102
+root        : INFO     Epoch: 75, Batch: 800, Loss: 0.0119
+root        : INFO     Epoch: 75, Batch: 900, Loss: 0.0151
+root        : INFO     Validating...
+root        : INFO     4827/5161 = 0.935284
+root        : INFO     Validation Loss for Epoch 75: 0.0207
+root        : INFO     Beginning Epoch 76
+root        : INFO     Epoch: 76, Batch: 100, Loss: 0.0242
+root        : INFO     Epoch: 76, Batch: 200, Loss: 0.0118
+root        : INFO     Epoch: 76, Batch: 300, Loss: 0.0135
+root        : INFO     Epoch: 76, Batch: 400, Loss: 0.0141
+root        : INFO     Epoch: 76, Batch: 500, Loss: 0.0191
+root        : INFO     Epoch: 76, Batch: 600, Loss: 0.0221
+root        : INFO     Epoch: 76, Batch: 700, Loss: 0.0149
+root        : INFO     Epoch: 76, Batch: 800, Loss: 0.0327
+root        : INFO     Epoch: 76, Batch: 900, Loss: 0.0148
+root        : INFO     Validating...
+root        : INFO     4814/5161 = 0.932765
+root        : INFO     Validation Loss for Epoch 76: 0.0209
+root        : INFO     Beginning Epoch 77
+root        : INFO     Epoch: 77, Batch: 100, Loss: 0.0165
+root        : INFO     Epoch: 77, Batch: 200, Loss: 0.0221
+root        : INFO     Epoch: 77, Batch: 300, Loss: 0.0131
+root        : INFO     Epoch: 77, Batch: 400, Loss: 0.0209
+root        : INFO     Epoch: 77, Batch: 500, Loss: 0.0196
+root        : INFO     Epoch: 77, Batch: 600, Loss: 0.0202
+root        : INFO     Epoch: 77, Batch: 700, Loss: 0.0167
+root        : INFO     Epoch: 77, Batch: 800, Loss: 0.0200
+root        : INFO     Epoch: 77, Batch: 900, Loss: 0.0339
+root        : INFO     Validating...
+root        : INFO     4778/5161 = 0.925790
+root        : INFO     Validation Loss for Epoch 77: 0.0204
+root        : INFO     Beginning Epoch 78
+root        : INFO     Epoch: 78, Batch: 100, Loss: 0.0142
+root        : INFO     Epoch: 78, Batch: 200, Loss: 0.0175
+root        : INFO     Epoch: 78, Batch: 300, Loss: 0.0251
+root        : INFO     Epoch: 78, Batch: 400, Loss: 0.0302
+root        : INFO     Epoch: 78, Batch: 500, Loss: 0.0143
+root        : INFO     Epoch: 78, Batch: 600, Loss: 0.0147
+root        : INFO     Epoch: 78, Batch: 700, Loss: 0.0097
+root        : INFO     Epoch: 78, Batch: 800, Loss: 0.0159
+root        : INFO     Epoch: 78, Batch: 900, Loss: 0.0205
+root        : INFO     Validating...
+root        : INFO     4823/5161 = 0.934509
+root        : INFO     Validation Loss for Epoch 78: 0.0209
+root        : INFO     Beginning Epoch 79
+root        : INFO     Epoch: 79, Batch: 100, Loss: 0.0239
+root        : INFO     Epoch: 79, Batch: 200, Loss: 0.0445
+root        : INFO     Epoch: 79, Batch: 300, Loss: 0.0142
+root        : INFO     Epoch: 79, Batch: 400, Loss: 0.0164
+root        : INFO     Epoch: 79, Batch: 500, Loss: 0.0184
+root        : INFO     Epoch: 79, Batch: 600, Loss: 0.0091
+root        : INFO     Epoch: 79, Batch: 700, Loss: 0.0145
+root        : INFO     Epoch: 79, Batch: 800, Loss: 0.0097
+root        : INFO     Epoch: 79, Batch: 900, Loss: 0.0135
+root        : INFO     Validating...
+root        : INFO     4680/5161 = 0.906801
+root        : INFO     Validation Loss for Epoch 79: 0.0220
+root        : INFO     Beginning Epoch 80
+root        : INFO     Epoch: 80, Batch: 100, Loss: 0.0174
+root        : INFO     Epoch: 80, Batch: 200, Loss: 0.0106
+root        : INFO     Epoch: 80, Batch: 300, Loss: 0.0102
+root        : INFO     Epoch: 80, Batch: 400, Loss: 0.0203
+root        : INFO     Epoch: 80, Batch: 500, Loss: 0.0185
+root        : INFO     Epoch: 80, Batch: 600, Loss: 0.0187
+root        : INFO     Epoch: 80, Batch: 700, Loss: 0.0138
+root        : INFO     Epoch: 80, Batch: 800, Loss: 0.0238
+root        : INFO     Epoch: 80, Batch: 900, Loss: 0.0167
+root        : INFO     Validating...
+root        : INFO     4728/5161 = 0.916102
+root        : INFO     Validation Loss for Epoch 80: 0.0214
+root        : INFO     Beginning Epoch 81
+root        : INFO     Epoch: 81, Batch: 100, Loss: 0.0240
+root        : INFO     Epoch: 81, Batch: 200, Loss: 0.0233
+root        : INFO     Epoch: 81, Batch: 300, Loss: 0.0191
+root        : INFO     Epoch: 81, Batch: 400, Loss: 0.0291
+root        : INFO     Epoch: 81, Batch: 500, Loss: 0.0119
+root        : INFO     Epoch: 81, Batch: 600, Loss: 0.0269
+root        : INFO     Epoch: 81, Batch: 700, Loss: 0.0204
+root        : INFO     Epoch: 81, Batch: 800, Loss: 0.0235
+root        : INFO     Epoch: 81, Batch: 900, Loss: 0.0165
+root        : INFO     Validating...
+root        : INFO     4756/5161 = 0.921527
+root        : INFO     Validation Loss for Epoch 81: 0.0207
+root        : INFO     Beginning Epoch 82
+root        : INFO     Epoch: 82, Batch: 100, Loss: 0.0260
+root        : INFO     Epoch: 82, Batch: 200, Loss: 0.0118
+root        : INFO     Epoch: 82, Batch: 300, Loss: 0.0210
+root        : INFO     Epoch: 82, Batch: 400, Loss: 0.0221
+root        : INFO     Epoch: 82, Batch: 500, Loss: 0.0323
+root        : INFO     Epoch: 82, Batch: 600, Loss: 0.0123
+root        : INFO     Epoch: 82, Batch: 700, Loss: 0.0264
+root        : INFO     Epoch: 82, Batch: 800, Loss: 0.0264
+root        : INFO     Epoch: 82, Batch: 900, Loss: 0.0185
+root        : INFO     Validating...
+root        : INFO     4748/5161 = 0.919977
+root        : INFO     Validation Loss for Epoch 82: 0.0208
+root        : INFO     Beginning Epoch 83
+root        : INFO     Epoch: 83, Batch: 100, Loss: 0.0158
+root        : INFO     Epoch: 83, Batch: 200, Loss: 0.0175
+root        : INFO     Epoch: 83, Batch: 300, Loss: 0.0187
+root        : INFO     Epoch: 83, Batch: 400, Loss: 0.0224
+root        : INFO     Epoch: 83, Batch: 500, Loss: 0.0237
+root        : INFO     Epoch: 83, Batch: 600, Loss: 0.0071
+root        : INFO     Epoch: 83, Batch: 700, Loss: 0.0166
+root        : INFO     Epoch: 83, Batch: 800, Loss: 0.0197
+root        : INFO     Epoch: 83, Batch: 900, Loss: 0.0117
+root        : INFO     Validating...
+root        : INFO     4847/5161 = 0.939159
+root        : INFO     Validation Loss for Epoch 83: 0.0202
+root        : INFO     Beginning Epoch 84
+root        : INFO     Epoch: 84, Batch: 100, Loss: 0.0129
+root        : INFO     Epoch: 84, Batch: 200, Loss: 0.0225
+root        : INFO     Epoch: 84, Batch: 300, Loss: 0.0269
+root        : INFO     Epoch: 84, Batch: 400, Loss: 0.0218
+root        : INFO     Epoch: 84, Batch: 500, Loss: 0.0251
+root        : INFO     Epoch: 84, Batch: 600, Loss: 0.0353
+root        : INFO     Epoch: 84, Batch: 700, Loss: 0.0120
+root        : INFO     Epoch: 84, Batch: 800, Loss: 0.0176
+root        : INFO     Epoch: 84, Batch: 900, Loss: 0.0223
+root        : INFO     Validating...
+root        : INFO     4884/5161 = 0.946328
+root        : INFO     Validation Loss for Epoch 84: 0.0201
+root        : INFO     Beginning Epoch 85
+root        : INFO     Epoch: 85, Batch: 100, Loss: 0.0141
+root        : INFO     Epoch: 85, Batch: 200, Loss: 0.0124
+root        : INFO     Epoch: 85, Batch: 300, Loss: 0.0178
+root        : INFO     Epoch: 85, Batch: 400, Loss: 0.0118
+root        : INFO     Epoch: 85, Batch: 500, Loss: 0.0173
+root        : INFO     Epoch: 85, Batch: 600, Loss: 0.0262
+root        : INFO     Epoch: 85, Batch: 700, Loss: 0.0249
+root        : INFO     Epoch: 85, Batch: 800, Loss: 0.0083
+root        : INFO     Epoch: 85, Batch: 900, Loss: 0.0233
+root        : INFO     Validating...
+root        : INFO     4805/5161 = 0.931021
+root        : INFO     Validation Loss for Epoch 85: 0.0201
+root        : INFO     Beginning Epoch 86
+root        : INFO     Epoch: 86, Batch: 100, Loss: 0.0166
+root        : INFO     Epoch: 86, Batch: 200, Loss: 0.0103
+root        : INFO     Epoch: 86, Batch: 300, Loss: 0.0164
+root        : INFO     Epoch: 86, Batch: 400, Loss: 0.0156
+root        : INFO     Epoch: 86, Batch: 500, Loss: 0.0196
+root        : INFO     Epoch: 86, Batch: 600, Loss: 0.0133
+root        : INFO     Epoch: 86, Batch: 700, Loss: 0.0177
+root        : INFO     Epoch: 86, Batch: 800, Loss: 0.0273
+root        : INFO     Epoch: 86, Batch: 900, Loss: 0.0167
+root        : INFO     Validating...
+root        : INFO     4837/5161 = 0.937221
+root        : INFO     Validation Loss for Epoch 86: 0.0200
+root        : INFO     Beginning Epoch 87
+root        : INFO     Epoch: 87, Batch: 100, Loss: 0.0159
+root        : INFO     Epoch: 87, Batch: 200, Loss: 0.0096
+root        : INFO     Epoch: 87, Batch: 300, Loss: 0.0219
+root        : INFO     Epoch: 87, Batch: 400, Loss: 0.0142
+root        : INFO     Epoch: 87, Batch: 500, Loss: 0.0243
+root        : INFO     Epoch: 87, Batch: 600, Loss: 0.0133
+root        : INFO     Epoch: 87, Batch: 700, Loss: 0.0143
+root        : INFO     Epoch: 87, Batch: 800, Loss: 0.0280
+root        : INFO     Epoch: 87, Batch: 900, Loss: 0.0136
+root        : INFO     Validating...
+root        : INFO     4803/5161 = 0.930634
+root        : INFO     Validation Loss for Epoch 87: 0.0203
+root        : INFO     Beginning Epoch 88
+root        : INFO     Epoch: 88, Batch: 100, Loss: 0.0165
+root        : INFO     Epoch: 88, Batch: 200, Loss: 0.0142
+root        : INFO     Epoch: 88, Batch: 300, Loss: 0.0286
+root        : INFO     Epoch: 88, Batch: 400, Loss: 0.0111
+root        : INFO     Epoch: 88, Batch: 500, Loss: 0.0104
+root        : INFO     Epoch: 88, Batch: 600, Loss: 0.0192
+root        : INFO     Epoch: 88, Batch: 700, Loss: 0.0142
+root        : INFO     Epoch: 88, Batch: 800, Loss: 0.0140
+root        : INFO     Epoch: 88, Batch: 900, Loss: 0.0359
+root        : INFO     Validating...
+root        : INFO     4682/5161 = 0.907189
+root        : INFO     Validation Loss for Epoch 88: 0.0214
+root        : INFO     Beginning Epoch 89
+root        : INFO     Epoch: 89, Batch: 100, Loss: 0.0293
+root        : INFO     Epoch: 89, Batch: 200, Loss: 0.0209
+root        : INFO     Epoch: 89, Batch: 300, Loss: 0.0220
+root        : INFO     Epoch: 89, Batch: 400, Loss: 0.0107
+root        : INFO     Epoch: 89, Batch: 500, Loss: 0.0141
+root        : INFO     Epoch: 89, Batch: 600, Loss: 0.0181
+root        : INFO     Epoch: 89, Batch: 700, Loss: 0.0151
+root        : INFO     Epoch: 89, Batch: 800, Loss: 0.0092
+root        : INFO     Epoch: 89, Batch: 900, Loss: 0.0283
+root        : INFO     Validating...
+root        : INFO     4817/5161 = 0.933346
+root        : INFO     Validation Loss for Epoch 89: 0.0207
+root        : INFO     Beginning Epoch 90
+root        : INFO     Epoch: 90, Batch: 100, Loss: 0.0179
+root        : INFO     Epoch: 90, Batch: 200, Loss: 0.0146
+root        : INFO     Epoch: 90, Batch: 300, Loss: 0.0241
+root        : INFO     Epoch: 90, Batch: 400, Loss: 0.0100
+root        : INFO     Epoch: 90, Batch: 500, Loss: 0.0139
+root        : INFO     Epoch: 90, Batch: 600, Loss: 0.0154
+root        : INFO     Epoch: 90, Batch: 700, Loss: 0.0113
+root        : INFO     Epoch: 90, Batch: 800, Loss: 0.0195
+root        : INFO     Epoch: 90, Batch: 900, Loss: 0.0154
+root        : INFO     Validating...
+root        : INFO     4808/5161 = 0.931602
+root        : INFO     Validation Loss for Epoch 90: 0.0202
+root        : INFO     Beginning Epoch 91
+root        : INFO     Epoch: 91, Batch: 100, Loss: 0.0220
+root        : INFO     Epoch: 91, Batch: 200, Loss: 0.0211
+root        : INFO     Epoch: 91, Batch: 300, Loss: 0.0223
+root        : INFO     Epoch: 91, Batch: 400, Loss: 0.0206
+root        : INFO     Epoch: 91, Batch: 500, Loss: 0.0323
+root        : INFO     Epoch: 91, Batch: 600, Loss: 0.0214
+root        : INFO     Epoch: 91, Batch: 700, Loss: 0.0130
+root        : INFO     Epoch: 91, Batch: 800, Loss: 0.0167
+root        : INFO     Epoch: 91, Batch: 900, Loss: 0.0108
+root        : INFO     Validating...
+root        : INFO     4849/5161 = 0.939547
+root        : INFO     Validation Loss for Epoch 91: 0.0202
+root        : INFO     Beginning Epoch 92
+root        : INFO     Epoch: 92, Batch: 100, Loss: 0.0254
+root        : INFO     Epoch: 92, Batch: 200, Loss: 0.0157
+root        : INFO     Epoch: 92, Batch: 300, Loss: 0.0090
+root        : INFO     Epoch: 92, Batch: 400, Loss: 0.0180
+root        : INFO     Epoch: 92, Batch: 500, Loss: 0.0201
+root        : INFO     Epoch: 92, Batch: 600, Loss: 0.0238
+root        : INFO     Epoch: 92, Batch: 700, Loss: 0.0200
+root        : INFO     Epoch: 92, Batch: 800, Loss: 0.0176
+root        : INFO     Epoch: 92, Batch: 900, Loss: 0.0112
+root        : INFO     Validating...
+root        : INFO     4768/5161 = 0.923852
+root        : INFO     Validation Loss for Epoch 92: 0.0204
+root        : INFO     Beginning Epoch 93
+root        : INFO     Epoch: 93, Batch: 100, Loss: 0.0086
+root        : INFO     Epoch: 93, Batch: 200, Loss: 0.0140
+root        : INFO     Epoch: 93, Batch: 300, Loss: 0.0157
+root        : INFO     Epoch: 93, Batch: 400, Loss: 0.0173
+root        : INFO     Epoch: 93, Batch: 500, Loss: 0.0181
+root        : INFO     Epoch: 93, Batch: 600, Loss: 0.0344
+root        : INFO     Epoch: 93, Batch: 700, Loss: 0.0119
+root        : INFO     Epoch: 93, Batch: 800, Loss: 0.0123
+root        : INFO     Epoch: 93, Batch: 900, Loss: 0.0289
+root        : INFO     Validating...
+root        : INFO     4864/5161 = 0.942453
+root        : INFO     Validation Loss for Epoch 93: 0.0211
+root        : INFO     Beginning Epoch 94
+root        : INFO     Epoch: 94, Batch: 100, Loss: 0.0147
+root        : INFO     Epoch: 94, Batch: 200, Loss: 0.0123
+root        : INFO     Epoch: 94, Batch: 300, Loss: 0.0425
+root        : INFO     Epoch: 94, Batch: 400, Loss: 0.0285
+root        : INFO     Epoch: 94, Batch: 500, Loss: 0.0127
+root        : INFO     Epoch: 94, Batch: 600, Loss: 0.0208
+root        : INFO     Epoch: 94, Batch: 700, Loss: 0.0296
+root        : INFO     Epoch: 94, Batch: 800, Loss: 0.0207
+root        : INFO     Epoch: 94, Batch: 900, Loss: 0.0160
+root        : INFO     Validating...
+root        : INFO     4815/5161 = 0.932959
+root        : INFO     Validation Loss for Epoch 94: 0.0202
+root        : INFO     Beginning Epoch 95
+root        : INFO     Epoch: 95, Batch: 100, Loss: 0.0247
+root        : INFO     Epoch: 95, Batch: 200, Loss: 0.0272
+root        : INFO     Epoch: 95, Batch: 300, Loss: 0.0119
+root        : INFO     Epoch: 95, Batch: 400, Loss: 0.0228
+root        : INFO     Epoch: 95, Batch: 500, Loss: 0.0177
+root        : INFO     Epoch: 95, Batch: 600, Loss: 0.0270
+root        : INFO     Epoch: 95, Batch: 700, Loss: 0.0142
+root        : INFO     Epoch: 95, Batch: 800, Loss: 0.0233
+root        : INFO     Epoch: 95, Batch: 900, Loss: 0.0262
+root        : INFO     Validating...
+root        : INFO     4837/5161 = 0.937221
+root        : INFO     Validation Loss for Epoch 95: 0.0203
+root        : INFO     Beginning Epoch 96
+root        : INFO     Epoch: 96, Batch: 100, Loss: 0.0229
+root        : INFO     Epoch: 96, Batch: 200, Loss: 0.0199
+root        : INFO     Epoch: 96, Batch: 300, Loss: 0.0149
+root        : INFO     Epoch: 96, Batch: 400, Loss: 0.0224
+root        : INFO     Epoch: 96, Batch: 500, Loss: 0.0079
+root        : INFO     Epoch: 96, Batch: 600, Loss: 0.0226
+root        : INFO     Epoch: 96, Batch: 700, Loss: 0.0185
+root        : INFO     Epoch: 96, Batch: 800, Loss: 0.0128
+root        : INFO     Epoch: 96, Batch: 900, Loss: 0.0149
+root        : INFO     Validating...
+root        : INFO     4712/5161 = 0.913001
+root        : INFO     Validation Loss for Epoch 96: 0.0210
+root        : INFO     Beginning Epoch 97
+root        : INFO     Epoch: 97, Batch: 100, Loss: 0.0092
+root        : INFO     Epoch: 97, Batch: 200, Loss: 0.0148
+root        : INFO     Epoch: 97, Batch: 300, Loss: 0.0207
+root        : INFO     Epoch: 97, Batch: 400, Loss: 0.0099
+root        : INFO     Epoch: 97, Batch: 500, Loss: 0.0062
+root        : INFO     Epoch: 97, Batch: 600, Loss: 0.0205
+root        : INFO     Epoch: 97, Batch: 700, Loss: 0.0227
+root        : INFO     Epoch: 97, Batch: 800, Loss: 0.0124
+root        : INFO     Epoch: 97, Batch: 900, Loss: 0.0169
+root        : INFO     Validating...
+root        : INFO     4797/5161 = 0.929471
+root        : INFO     Validation Loss for Epoch 97: 0.0204
+root        : INFO     Beginning Epoch 98
+root        : INFO     Epoch: 98, Batch: 100, Loss: 0.0125
+root        : INFO     Epoch: 98, Batch: 200, Loss: 0.0184
+root        : INFO     Epoch: 98, Batch: 300, Loss: 0.0116
+root        : INFO     Epoch: 98, Batch: 400, Loss: 0.0154
+root        : INFO     Epoch: 98, Batch: 500, Loss: 0.0235
+root        : INFO     Epoch: 98, Batch: 600, Loss: 0.0155
+root        : INFO     Epoch: 98, Batch: 700, Loss: 0.0146
+root        : INFO     Epoch: 98, Batch: 800, Loss: 0.0129
+root        : INFO     Epoch: 98, Batch: 900, Loss: 0.0306
+root        : INFO     Validating...
+root        : INFO     4788/5161 = 0.927727
+root        : INFO     Validation Loss for Epoch 98: 0.0206
+root        : INFO     Beginning Epoch 99
+root        : INFO     Epoch: 99, Batch: 100, Loss: 0.0189
+root        : INFO     Epoch: 99, Batch: 200, Loss: 0.0182
+root        : INFO     Epoch: 99, Batch: 300, Loss: 0.0093
+root        : INFO     Epoch: 99, Batch: 400, Loss: 0.0233
+root        : INFO     Epoch: 99, Batch: 500, Loss: 0.0132
+root        : INFO     Epoch: 99, Batch: 600, Loss: 0.0239
+root        : INFO     Epoch: 99, Batch: 700, Loss: 0.0212
+root        : INFO     Epoch: 99, Batch: 800, Loss: 0.0193
+root        : INFO     Epoch: 99, Batch: 900, Loss: 0.0135
+root        : INFO     Validating...
+root        : INFO     4825/5161 = 0.934896
+root        : INFO     Validation Loss for Epoch 99: 0.0200
+root        : INFO     Beginning Epoch 100
+root        : INFO     Epoch: 100, Batch: 100, Loss: 0.0151
+root        : INFO     Epoch: 100, Batch: 200, Loss: 0.0114
+root        : INFO     Epoch: 100, Batch: 300, Loss: 0.0186
+root        : INFO     Epoch: 100, Batch: 400, Loss: 0.0126
+root        : INFO     Epoch: 100, Batch: 500, Loss: 0.0047
+root        : INFO     Epoch: 100, Batch: 600, Loss: 0.0075
+root        : INFO     Epoch: 100, Batch: 700, Loss: 0.0095
+root        : INFO     Epoch: 100, Batch: 800, Loss: 0.0355
+root        : INFO     Epoch: 100, Batch: 900, Loss: 0.0230
+root        : INFO     Validating...
+root        : INFO     4819/5161 = 0.933734
+root        : INFO     Validation Loss for Epoch 100: 0.0207
+root        : INFO     Beginning Epoch 101
+root        : INFO     Epoch: 101, Batch: 100, Loss: 0.0127
+root        : INFO     Epoch: 101, Batch: 200, Loss: 0.0398
+root        : INFO     Epoch: 101, Batch: 300, Loss: 0.0126
+root        : INFO     Epoch: 101, Batch: 400, Loss: 0.0106
+root        : INFO     Epoch: 101, Batch: 500, Loss: 0.0124
+root        : INFO     Epoch: 101, Batch: 600, Loss: 0.0138
+root        : INFO     Epoch: 101, Batch: 700, Loss: 0.0159
+root        : INFO     Epoch: 101, Batch: 800, Loss: 0.0274
+root        : INFO     Epoch: 101, Batch: 900, Loss: 0.0290
+root        : INFO     Validating...
+root        : INFO     4685/5161 = 0.907770
+root        : INFO     Validation Loss for Epoch 101: 0.0212
+root        : INFO     Beginning Epoch 102
+root        : INFO     Epoch: 102, Batch: 100, Loss: 0.0160
+root        : INFO     Epoch: 102, Batch: 200, Loss: 0.0232
+root        : INFO     Epoch: 102, Batch: 300, Loss: 0.0255
+root        : INFO     Epoch: 102, Batch: 400, Loss: 0.0272
+root        : INFO     Epoch: 102, Batch: 500, Loss: 0.0144
+root        : INFO     Epoch: 102, Batch: 600, Loss: 0.0267
+root        : INFO     Epoch: 102, Batch: 700, Loss: 0.0100
+root        : INFO     Epoch: 102, Batch: 800, Loss: 0.0297
+root        : INFO     Epoch: 102, Batch: 900, Loss: 0.0198
+root        : INFO     Validating...
+root        : INFO     4715/5161 = 0.913583
+root        : INFO     Validation Loss for Epoch 102: 0.0208
+root        : INFO     Beginning Epoch 103
+root        : INFO     Epoch: 103, Batch: 100, Loss: 0.0294
+root        : INFO     Epoch: 103, Batch: 200, Loss: 0.0089
+root        : INFO     Epoch: 103, Batch: 300, Loss: 0.0140
+root        : INFO     Epoch: 103, Batch: 400, Loss: 0.0161
+root        : INFO     Epoch: 103, Batch: 500, Loss: 0.0099
+root        : INFO     Epoch: 103, Batch: 600, Loss: 0.0168
+root        : INFO     Epoch: 103, Batch: 700, Loss: 0.0277
+root        : INFO     Epoch: 103, Batch: 800, Loss: 0.0137
+root        : INFO     Epoch: 103, Batch: 900, Loss: 0.0263
+root        : INFO     Validating...
+root        : INFO     4855/5161 = 0.940709
+root        : INFO     Validation Loss for Epoch 103: 0.0203
+root        : INFO     Beginning Epoch 104
+root        : INFO     Epoch: 104, Batch: 100, Loss: 0.0192
+root        : INFO     Epoch: 104, Batch: 200, Loss: 0.0188
+root        : INFO     Epoch: 104, Batch: 300, Loss: 0.0162
+root        : INFO     Epoch: 104, Batch: 400, Loss: 0.0202
+root        : INFO     Epoch: 104, Batch: 500, Loss: 0.0367
+root        : INFO     Epoch: 104, Batch: 600, Loss: 0.0087
+root        : INFO     Epoch: 104, Batch: 700, Loss: 0.0197
+root        : INFO     Epoch: 104, Batch: 800, Loss: 0.0211
+root        : INFO     Epoch: 104, Batch: 900, Loss: 0.0186
+root        : INFO     Validating...
+root        : INFO     4783/5161 = 0.926758
+root        : INFO     Validation Loss for Epoch 104: 0.0205
+root        : INFO     Beginning Epoch 105
+root        : INFO     Epoch: 105, Batch: 100, Loss: 0.0224
+root        : INFO     Epoch: 105, Batch: 200, Loss: 0.0177
+root        : INFO     Epoch: 105, Batch: 300, Loss: 0.0174
+root        : INFO     Epoch: 105, Batch: 400, Loss: 0.0139
+root        : INFO     Epoch: 105, Batch: 500, Loss: 0.0141
+root        : INFO     Epoch: 105, Batch: 600, Loss: 0.0164
+root        : INFO     Epoch: 105, Batch: 700, Loss: 0.0146
+root        : INFO     Epoch: 105, Batch: 800, Loss: 0.0200
+root        : INFO     Epoch: 105, Batch: 900, Loss: 0.0257
+root        : INFO     Validating...
+root        : INFO     4810/5161 = 0.931990
+root        : INFO     Validation Loss for Epoch 105: 0.0206
+root        : INFO     Beginning Epoch 106
+root        : INFO     Epoch: 106, Batch: 100, Loss: 0.0261
+root        : INFO     Epoch: 106, Batch: 200, Loss: 0.0121
+root        : INFO     Epoch: 106, Batch: 300, Loss: 0.0205
+root        : INFO     Epoch: 106, Batch: 400, Loss: 0.0192
+root        : INFO     Epoch: 106, Batch: 500, Loss: 0.0139
+root        : INFO     Epoch: 106, Batch: 600, Loss: 0.0243
+root        : INFO     Epoch: 106, Batch: 700, Loss: 0.0207
+root        : INFO     Epoch: 106, Batch: 800, Loss: 0.0187
+root        : INFO     Epoch: 106, Batch: 900, Loss: 0.0172
+root        : INFO     Validating...
+root        : INFO     4866/5161 = 0.942841
+root        : INFO     Validation Loss for Epoch 106: 0.0201
+root        : INFO     Beginning Epoch 107
+root        : INFO     Epoch: 107, Batch: 100, Loss: 0.0140
+root        : INFO     Epoch: 107, Batch: 200, Loss: 0.0119
+root        : INFO     Epoch: 107, Batch: 300, Loss: 0.0236
+root        : INFO     Epoch: 107, Batch: 400, Loss: 0.0174
+root        : INFO     Epoch: 107, Batch: 500, Loss: 0.0349
+root        : INFO     Epoch: 107, Batch: 600, Loss: 0.0098
+root        : INFO     Epoch: 107, Batch: 700, Loss: 0.0223
+root        : INFO     Epoch: 107, Batch: 800, Loss: 0.0076
+root        : INFO     Epoch: 107, Batch: 900, Loss: 0.0154
+root        : INFO     Validating...
+root        : INFO     4843/5161 = 0.938384
+root        : INFO     Validation Loss for Epoch 107: 0.0203
+root        : INFO     Beginning Epoch 108
+root        : INFO     Epoch: 108, Batch: 100, Loss: 0.0223
+root        : INFO     Epoch: 108, Batch: 200, Loss: 0.0190
+root        : INFO     Epoch: 108, Batch: 300, Loss: 0.0146
+root        : INFO     Epoch: 108, Batch: 400, Loss: 0.0165
+root        : INFO     Epoch: 108, Batch: 500, Loss: 0.0139
+root        : INFO     Epoch: 108, Batch: 600, Loss: 0.0175
+root        : INFO     Epoch: 108, Batch: 700, Loss: 0.0129
+root        : INFO     Epoch: 108, Batch: 800, Loss: 0.0188
+root        : INFO     Epoch: 108, Batch: 900, Loss: 0.0224
+root        : INFO     Validating...
+root        : INFO     4851/5161 = 0.939934
+root        : INFO     Validation Loss for Epoch 108: 0.0204
+root        : INFO     Beginning Epoch 109
+root        : INFO     Epoch: 109, Batch: 100, Loss: 0.0163
+root        : INFO     Epoch: 109, Batch: 200, Loss: 0.0143
+root        : INFO     Epoch: 109, Batch: 300, Loss: 0.0193
+root        : INFO     Epoch: 109, Batch: 400, Loss: 0.0231
+root        : INFO     Epoch: 109, Batch: 500, Loss: 0.0111
+root        : INFO     Epoch: 109, Batch: 600, Loss: 0.0166
+root        : INFO     Epoch: 109, Batch: 700, Loss: 0.0180
+root        : INFO     Epoch: 109, Batch: 800, Loss: 0.0441
+root        : INFO     Epoch: 109, Batch: 900, Loss: 0.0317
+root        : INFO     Validating...
+root        : INFO     4790/5161 = 0.928115
+root        : INFO     Validation Loss for Epoch 109: 0.0205
+root        : INFO     Beginning Epoch 110
+root        : INFO     Epoch: 110, Batch: 100, Loss: 0.0184
+root        : INFO     Epoch: 110, Batch: 200, Loss: 0.0230
+root        : INFO     Epoch: 110, Batch: 300, Loss: 0.0398
+root        : INFO     Epoch: 110, Batch: 400, Loss: 0.0177
+root        : INFO     Epoch: 110, Batch: 500, Loss: 0.0114
+root        : INFO     Epoch: 110, Batch: 600, Loss: 0.0150
+root        : INFO     Epoch: 110, Batch: 700, Loss: 0.0101
+root        : INFO     Epoch: 110, Batch: 800, Loss: 0.0165
+root        : INFO     Epoch: 110, Batch: 900, Loss: 0.0145
+root        : INFO     Validating...
+root        : INFO     4825/5161 = 0.934896
+root        : INFO     Validation Loss for Epoch 110: 0.0205
+root        : INFO     Beginning Epoch 111
+root        : INFO     Epoch: 111, Batch: 100, Loss: 0.0123
+root        : INFO     Epoch: 111, Batch: 200, Loss: 0.0256
+root        : INFO     Epoch: 111, Batch: 300, Loss: 0.0143
+root        : INFO     Epoch: 111, Batch: 400, Loss: 0.0139
+root        : INFO     Epoch: 111, Batch: 500, Loss: 0.0207
+root        : INFO     Epoch: 111, Batch: 600, Loss: 0.0187
+root        : INFO     Epoch: 111, Batch: 700, Loss: 0.0149
+root        : INFO     Epoch: 111, Batch: 800, Loss: 0.0124
+root        : INFO     Epoch: 111, Batch: 900, Loss: 0.0153
+root        : INFO     Validating...
+root        : INFO     4828/5161 = 0.935478
+root        : INFO     Validation Loss for Epoch 111: 0.0198
+root        : INFO     Beginning Epoch 112
+root        : INFO     Epoch: 112, Batch: 100, Loss: 0.0258
+root        : INFO     Epoch: 112, Batch: 200, Loss: 0.0159
+root        : INFO     Epoch: 112, Batch: 300, Loss: 0.0079
+root        : INFO     Epoch: 112, Batch: 400, Loss: 0.0088
+root        : INFO     Epoch: 112, Batch: 500, Loss: 0.0101
+root        : INFO     Epoch: 112, Batch: 600, Loss: 0.0135
+root        : INFO     Epoch: 112, Batch: 700, Loss: 0.0120
+root        : INFO     Epoch: 112, Batch: 800, Loss: 0.0093
+root        : INFO     Epoch: 112, Batch: 900, Loss: 0.0077
+root        : INFO     Validating...
+root        : INFO     4743/5161 = 0.919008
+root        : INFO     Validation Loss for Epoch 112: 0.0207
+root        : INFO     Beginning Epoch 113
+root        : INFO     Epoch: 113, Batch: 100, Loss: 0.0283
+root        : INFO     Epoch: 113, Batch: 200, Loss: 0.0394
+root        : INFO     Epoch: 113, Batch: 300, Loss: 0.0176
+root        : INFO     Epoch: 113, Batch: 400, Loss: 0.0149
+root        : INFO     Epoch: 113, Batch: 500, Loss: 0.0128
+root        : INFO     Epoch: 113, Batch: 600, Loss: 0.0249
+root        : INFO     Epoch: 113, Batch: 700, Loss: 0.0225
+root        : INFO     Epoch: 113, Batch: 800, Loss: 0.0221
+root        : INFO     Epoch: 113, Batch: 900, Loss: 0.0132
+root        : INFO     Validating...
+root        : INFO     4780/5161 = 0.926177
+root        : INFO     Validation Loss for Epoch 113: 0.0207
+root        : INFO     Beginning Epoch 114
+root        : INFO     Epoch: 114, Batch: 100, Loss: 0.0237
+root        : INFO     Epoch: 114, Batch: 200, Loss: 0.0152
+root        : INFO     Epoch: 114, Batch: 300, Loss: 0.0140
+root        : INFO     Epoch: 114, Batch: 400, Loss: 0.0221
+root        : INFO     Epoch: 114, Batch: 500, Loss: 0.0220
+root        : INFO     Epoch: 114, Batch: 600, Loss: 0.0082
+root        : INFO     Epoch: 114, Batch: 700, Loss: 0.0169
+root        : INFO     Epoch: 114, Batch: 800, Loss: 0.0135
+root        : INFO     Epoch: 114, Batch: 900, Loss: 0.0216
+root        : INFO     Validating...
+root        : INFO     4819/5161 = 0.933734
+root        : INFO     Validation Loss for Epoch 114: 0.0198
+root        : INFO     Beginning Epoch 115
+root        : INFO     Epoch: 115, Batch: 100, Loss: 0.0081
+root        : INFO     Epoch: 115, Batch: 200, Loss: 0.0177
+root        : INFO     Epoch: 115, Batch: 300, Loss: 0.0116
+root        : INFO     Epoch: 115, Batch: 400, Loss: 0.0210
+root        : INFO     Epoch: 115, Batch: 500, Loss: 0.0247
+root        : INFO     Epoch: 115, Batch: 600, Loss: 0.0114
+root        : INFO     Epoch: 115, Batch: 700, Loss: 0.0163
+root        : INFO     Epoch: 115, Batch: 800, Loss: 0.0215
+root        : INFO     Epoch: 115, Batch: 900, Loss: 0.0139
+root        : INFO     Validating...
+root        : INFO     4853/5161 = 0.940322
+root        : INFO     Validation Loss for Epoch 115: 0.0201
+root        : INFO     Beginning Epoch 116
+root        : INFO     Epoch: 116, Batch: 100, Loss: 0.0263
+root        : INFO     Epoch: 116, Batch: 200, Loss: 0.0282
+root        : INFO     Epoch: 116, Batch: 300, Loss: 0.0293
+root        : INFO     Epoch: 116, Batch: 400, Loss: 0.0229
+root        : INFO     Epoch: 116, Batch: 500, Loss: 0.0362
+root        : INFO     Epoch: 116, Batch: 600, Loss: 0.0279
+root        : INFO     Epoch: 116, Batch: 700, Loss: 0.0338
+root        : INFO     Epoch: 116, Batch: 800, Loss: 0.0221
+root        : INFO     Epoch: 116, Batch: 900, Loss: 0.0200
+root        : INFO     Validating...
+root        : INFO     4796/5161 = 0.929277
+root        : INFO     Validation Loss for Epoch 116: 0.0203
+root        : INFO     Beginning Epoch 117
+root        : INFO     Epoch: 117, Batch: 100, Loss: 0.0103
+root        : INFO     Epoch: 117, Batch: 200, Loss: 0.0293
+root        : INFO     Epoch: 117, Batch: 300, Loss: 0.0260
+root        : INFO     Epoch: 117, Batch: 400, Loss: 0.0146
+root        : INFO     Epoch: 117, Batch: 500, Loss: 0.0230
+root        : INFO     Epoch: 117, Batch: 600, Loss: 0.0208
+root        : INFO     Epoch: 117, Batch: 700, Loss: 0.0260
+root        : INFO     Epoch: 117, Batch: 800, Loss: 0.0278
+root        : INFO     Epoch: 117, Batch: 900, Loss: 0.0278
+root        : INFO     Validating...
+root        : INFO     4815/5161 = 0.932959
+root        : INFO     Validation Loss for Epoch 117: 0.0202
+root        : INFO     Beginning Epoch 118
+root        : INFO     Epoch: 118, Batch: 100, Loss: 0.0090
+root        : INFO     Epoch: 118, Batch: 200, Loss: 0.0132
+root        : INFO     Epoch: 118, Batch: 300, Loss: 0.0239
+root        : INFO     Epoch: 118, Batch: 400, Loss: 0.0163
+root        : INFO     Epoch: 118, Batch: 500, Loss: 0.0281
+root        : INFO     Epoch: 118, Batch: 600, Loss: 0.0171
+root        : INFO     Epoch: 118, Batch: 700, Loss: 0.0096
+root        : INFO     Epoch: 118, Batch: 800, Loss: 0.0301
+root        : INFO     Epoch: 118, Batch: 900, Loss: 0.0078
+root        : INFO     Validating...
+root        : INFO     4776/5161 = 0.925402
+root        : INFO     Validation Loss for Epoch 118: 0.0202
+root        : INFO     Beginning Epoch 119
+root        : INFO     Epoch: 119, Batch: 100, Loss: 0.0134
+root        : INFO     Epoch: 119, Batch: 200, Loss: 0.0136
+root        : INFO     Epoch: 119, Batch: 300, Loss: 0.0224
+root        : INFO     Epoch: 119, Batch: 400, Loss: 0.0138
+root        : INFO     Epoch: 119, Batch: 500, Loss: 0.0302
+root        : INFO     Epoch: 119, Batch: 600, Loss: 0.0138
+root        : INFO     Epoch: 119, Batch: 700, Loss: 0.0122
+root        : INFO     Epoch: 119, Batch: 800, Loss: 0.0146
+root        : INFO     Epoch: 119, Batch: 900, Loss: 0.0133
+root        : INFO     Validating...
+root        : INFO     4811/5161 = 0.932184
+root        : INFO     Validation Loss for Epoch 119: 0.0203
+root        : INFO     Beginning Epoch 120
+root        : INFO     Epoch: 120, Batch: 100, Loss: 0.0120
+root        : INFO     Epoch: 120, Batch: 200, Loss: 0.0123
+root        : INFO     Epoch: 120, Batch: 300, Loss: 0.0202
+root        : INFO     Epoch: 120, Batch: 400, Loss: 0.0135
+root        : INFO     Epoch: 120, Batch: 500, Loss: 0.0175
+root        : INFO     Epoch: 120, Batch: 600, Loss: 0.0098
+root        : INFO     Epoch: 120, Batch: 700, Loss: 0.0146
+root        : INFO     Epoch: 120, Batch: 800, Loss: 0.0098
+root        : INFO     Epoch: 120, Batch: 900, Loss: 0.0137
+root        : INFO     Validating...
+root        : INFO     4808/5161 = 0.931602
+root        : INFO     Validation Loss for Epoch 120: 0.0205
+root        : INFO     Beginning Epoch 121
+root        : INFO     Epoch: 121, Batch: 100, Loss: 0.0160
+root        : INFO     Epoch: 121, Batch: 200, Loss: 0.0149
+root        : INFO     Epoch: 121, Batch: 300, Loss: 0.0096
+root        : INFO     Epoch: 121, Batch: 400, Loss: 0.0343
+root        : INFO     Epoch: 121, Batch: 500, Loss: 0.0152
+root        : INFO     Epoch: 121, Batch: 600, Loss: 0.0107
+root        : INFO     Epoch: 121, Batch: 700, Loss: 0.0180
+root        : INFO     Epoch: 121, Batch: 800, Loss: 0.0144
+root        : INFO     Epoch: 121, Batch: 900, Loss: 0.0066
+root        : INFO     Validating...
+root        : INFO     4802/5161 = 0.930440
+root        : INFO     Validation Loss for Epoch 121: 0.0203
+root        : INFO     Beginning Epoch 122
+root        : INFO     Epoch: 122, Batch: 100, Loss: 0.0255
+root        : INFO     Epoch: 122, Batch: 200, Loss: 0.0090
+root        : INFO     Epoch: 122, Batch: 300, Loss: 0.0136
+root        : INFO     Epoch: 122, Batch: 400, Loss: 0.0238
+root        : INFO     Epoch: 122, Batch: 500, Loss: 0.0169
+root        : INFO     Epoch: 122, Batch: 600, Loss: 0.0141
+root        : INFO     Epoch: 122, Batch: 700, Loss: 0.0261
+root        : INFO     Epoch: 122, Batch: 800, Loss: 0.0227
+root        : INFO     Epoch: 122, Batch: 900, Loss: 0.0129
+root        : INFO     Validating...
+root        : INFO     4753/5161 = 0.920946
+root        : INFO     Validation Loss for Epoch 122: 0.0210
+root        : INFO     Beginning Epoch 123
+root        : INFO     Epoch: 123, Batch: 100, Loss: 0.0109
+root        : INFO     Epoch: 123, Batch: 200, Loss: 0.0138
+root        : INFO     Epoch: 123, Batch: 300, Loss: 0.0071
+root        : INFO     Epoch: 123, Batch: 400, Loss: 0.0188
+root        : INFO     Epoch: 123, Batch: 500, Loss: 0.0146
+root        : INFO     Epoch: 123, Batch: 600, Loss: 0.0160
+root        : INFO     Epoch: 123, Batch: 700, Loss: 0.0086
+root        : INFO     Epoch: 123, Batch: 800, Loss: 0.0339
+root        : INFO     Epoch: 123, Batch: 900, Loss: 0.0186
+root        : INFO     Validating...
+root        : INFO     4796/5161 = 0.929277
+root        : INFO     Validation Loss for Epoch 123: 0.0209
+root        : INFO     Beginning Epoch 124
+root        : INFO     Epoch: 124, Batch: 100, Loss: 0.0226
+root        : INFO     Epoch: 124, Batch: 200, Loss: 0.0175
+root        : INFO     Epoch: 124, Batch: 300, Loss: 0.0197
+root        : INFO     Epoch: 124, Batch: 400, Loss: 0.0202
+root        : INFO     Epoch: 124, Batch: 500, Loss: 0.0098
+root        : INFO     Epoch: 124, Batch: 600, Loss: 0.0294
+root        : INFO     Epoch: 124, Batch: 700, Loss: 0.0200
+root        : INFO     Epoch: 124, Batch: 800, Loss: 0.0187
+root        : INFO     Epoch: 124, Batch: 900, Loss: 0.0193
+root        : INFO     Validating...
+root        : INFO     4806/5161 = 0.931215
+root        : INFO     Validation Loss for Epoch 124: 0.0204
+root        : INFO     Beginning Epoch 125
+root        : INFO     Epoch: 125, Batch: 100, Loss: 0.0123
+root        : INFO     Epoch: 125, Batch: 200, Loss: 0.0190
+root        : INFO     Epoch: 125, Batch: 300, Loss: 0.0146
+root        : INFO     Epoch: 125, Batch: 400, Loss: 0.0117
+root        : INFO     Epoch: 125, Batch: 500, Loss: 0.0160
+root        : INFO     Epoch: 125, Batch: 600, Loss: 0.0150
+root        : INFO     Epoch: 125, Batch: 700, Loss: 0.0164
+root        : INFO     Epoch: 125, Batch: 800, Loss: 0.0246
+root        : INFO     Epoch: 125, Batch: 900, Loss: 0.0108
+root        : INFO     Validating...
+root        : INFO     4858/5161 = 0.941290
+root        : INFO     Validation Loss for Epoch 125: 0.0199
+root        : INFO     Beginning Epoch 126
+root        : INFO     Epoch: 126, Batch: 100, Loss: 0.0166
+root        : INFO     Epoch: 126, Batch: 200, Loss: 0.0119
+root        : INFO     Epoch: 126, Batch: 300, Loss: 0.0185
+root        : INFO     Epoch: 126, Batch: 400, Loss: 0.0385
+root        : INFO     Epoch: 126, Batch: 500, Loss: 0.0107
+root        : INFO     Epoch: 126, Batch: 600, Loss: 0.0219
+root        : INFO     Epoch: 126, Batch: 700, Loss: 0.0243
+root        : INFO     Epoch: 126, Batch: 800, Loss: 0.0155
+root        : INFO     Epoch: 126, Batch: 900, Loss: 0.0187
+root        : INFO     Validating...
+root        : INFO     4860/5161 = 0.941678
+root        : INFO     Validation Loss for Epoch 126: 0.0200
+root        : INFO     Beginning Epoch 127
+root        : INFO     Epoch: 127, Batch: 100, Loss: 0.0134
+root        : INFO     Epoch: 127, Batch: 200, Loss: 0.0261
+root        : INFO     Epoch: 127, Batch: 300, Loss: 0.0176
+root        : INFO     Epoch: 127, Batch: 400, Loss: 0.0159
+root        : INFO     Epoch: 127, Batch: 500, Loss: 0.0305
+root        : INFO     Epoch: 127, Batch: 600, Loss: 0.0243
+root        : INFO     Epoch: 127, Batch: 700, Loss: 0.0146
+root        : INFO     Epoch: 127, Batch: 800, Loss: 0.0276
+root        : INFO     Epoch: 127, Batch: 900, Loss: 0.0130
+root        : INFO     Validating...
+root        : INFO     4754/5161 = 0.921139
+root        : INFO     Validation Loss for Epoch 127: 0.0202
+root        : INFO     Beginning Epoch 128
+root        : INFO     Epoch: 128, Batch: 100, Loss: 0.0123
+root        : INFO     Epoch: 128, Batch: 200, Loss: 0.0217
+root        : INFO     Epoch: 128, Batch: 300, Loss: 0.0129
+root        : INFO     Epoch: 128, Batch: 400, Loss: 0.0125
+root        : INFO     Epoch: 128, Batch: 500, Loss: 0.0160
+root        : INFO     Epoch: 128, Batch: 600, Loss: 0.0347
+root        : INFO     Epoch: 128, Batch: 700, Loss: 0.0177
+root        : INFO     Epoch: 128, Batch: 800, Loss: 0.0109
+root        : INFO     Epoch: 128, Batch: 900, Loss: 0.0189
+root        : INFO     Validating...
+root        : INFO     4832/5161 = 0.936253
+root        : INFO     Validation Loss for Epoch 128: 0.0201
+root        : INFO     Beginning Epoch 129
+root        : INFO     Epoch: 129, Batch: 100, Loss: 0.0115
+root        : INFO     Epoch: 129, Batch: 200, Loss: 0.0188
+root        : INFO     Epoch: 129, Batch: 300, Loss: 0.0159
+root        : INFO     Epoch: 129, Batch: 400, Loss: 0.0154
+root        : INFO     Epoch: 129, Batch: 500, Loss: 0.0251
+root        : INFO     Epoch: 129, Batch: 600, Loss: 0.0166
+root        : INFO     Epoch: 129, Batch: 700, Loss: 0.0116
+root        : INFO     Epoch: 129, Batch: 800, Loss: 0.0281
+root        : INFO     Epoch: 129, Batch: 900, Loss: 0.0091
+root        : INFO     Validating...
+root        : INFO     4753/5161 = 0.920946
+root        : INFO     Validation Loss for Epoch 129: 0.0206
+root        : INFO     Beginning Epoch 130
+root        : INFO     Epoch: 130, Batch: 100, Loss: 0.0119
+root        : INFO     Epoch: 130, Batch: 200, Loss: 0.0112
+root        : INFO     Epoch: 130, Batch: 300, Loss: 0.0176
+root        : INFO     Epoch: 130, Batch: 400, Loss: 0.0165
+root        : INFO     Epoch: 130, Batch: 500, Loss: 0.0137
+root        : INFO     Epoch: 130, Batch: 600, Loss: 0.0118
+root        : INFO     Epoch: 130, Batch: 700, Loss: 0.0137
+root        : INFO     Epoch: 130, Batch: 800, Loss: 0.0147
+root        : INFO     Epoch: 130, Batch: 900, Loss: 0.0139
+root        : INFO     Validating...
+root        : INFO     4812/5161 = 0.932377
+root        : INFO     Validation Loss for Epoch 130: 0.0197
+root        : INFO     Beginning Epoch 131
+root        : INFO     Epoch: 131, Batch: 100, Loss: 0.0224
+root        : INFO     Epoch: 131, Batch: 200, Loss: 0.0105
+root        : INFO     Epoch: 131, Batch: 300, Loss: 0.0092
+root        : INFO     Epoch: 131, Batch: 400, Loss: 0.0246
+root        : INFO     Epoch: 131, Batch: 500, Loss: 0.0219
+root        : INFO     Epoch: 131, Batch: 600, Loss: 0.0200
+root        : INFO     Epoch: 131, Batch: 700, Loss: 0.0120
+root        : INFO     Epoch: 131, Batch: 800, Loss: 0.0170
+root        : INFO     Epoch: 131, Batch: 900, Loss: 0.0101
+root        : INFO     Validating...
+root        : INFO     4799/5161 = 0.929859
+root        : INFO     Validation Loss for Epoch 131: 0.0199
+root        : INFO     Beginning Epoch 132
+root        : INFO     Epoch: 132, Batch: 100, Loss: 0.0103
+root        : INFO     Epoch: 132, Batch: 200, Loss: 0.0482
+root        : INFO     Epoch: 132, Batch: 300, Loss: 0.0105
+root        : INFO     Epoch: 132, Batch: 400, Loss: 0.0173
+root        : INFO     Epoch: 132, Batch: 500, Loss: 0.0190
+root        : INFO     Epoch: 132, Batch: 600, Loss: 0.0205
+root        : INFO     Epoch: 132, Batch: 700, Loss: 0.0087
+root        : INFO     Epoch: 132, Batch: 800, Loss: 0.0269
+root        : INFO     Epoch: 132, Batch: 900, Loss: 0.0266
+root        : INFO     Validating...
+root        : INFO     4725/5161 = 0.915520
+root        : INFO     Validation Loss for Epoch 132: 0.0209
+root        : INFO     Beginning Epoch 133
+root        : INFO     Epoch: 133, Batch: 100, Loss: 0.0579
+root        : INFO     Epoch: 133, Batch: 200, Loss: 0.0298
+root        : INFO     Epoch: 133, Batch: 300, Loss: 0.0295
+root        : INFO     Epoch: 133, Batch: 400, Loss: 0.0130
+root        : INFO     Epoch: 133, Batch: 500, Loss: 0.0300
+root        : INFO     Epoch: 133, Batch: 600, Loss: 0.0173
+root        : INFO     Epoch: 133, Batch: 700, Loss: 0.0392
+root        : INFO     Epoch: 133, Batch: 800, Loss: 0.0361
+root        : INFO     Epoch: 133, Batch: 900, Loss: 0.0222
+root        : INFO     Validating...
+root        : INFO     4807/5161 = 0.931409
+root        : INFO     Validation Loss for Epoch 133: 0.0197
+root        : INFO     Beginning Epoch 134
+root        : INFO     Epoch: 134, Batch: 100, Loss: 0.0236
+root        : INFO     Epoch: 134, Batch: 200, Loss: 0.0187
+root        : INFO     Epoch: 134, Batch: 300, Loss: 0.0359
+root        : INFO     Epoch: 134, Batch: 400, Loss: 0.0216
+root        : INFO     Epoch: 134, Batch: 500, Loss: 0.0184
+root        : INFO     Epoch: 134, Batch: 600, Loss: 0.0257
+root        : INFO     Epoch: 134, Batch: 700, Loss: 0.0161
+root        : INFO     Epoch: 134, Batch: 800, Loss: 0.0111
+root        : INFO     Epoch: 134, Batch: 900, Loss: 0.0152
+root        : INFO     Validating...
+root        : INFO     4836/5161 = 0.937028
+root        : INFO     Validation Loss for Epoch 134: 0.0198
+root        : INFO     Beginning Epoch 135
+root        : INFO     Epoch: 135, Batch: 100, Loss: 0.0271
+root        : INFO     Epoch: 135, Batch: 200, Loss: 0.0140
+root        : INFO     Epoch: 135, Batch: 300, Loss: 0.0238
+root        : INFO     Epoch: 135, Batch: 400, Loss: 0.0116
+root        : INFO     Epoch: 135, Batch: 500, Loss: 0.0088
+root        : INFO     Epoch: 135, Batch: 600, Loss: 0.0182
+root        : INFO     Epoch: 135, Batch: 700, Loss: 0.0117
+root        : INFO     Epoch: 135, Batch: 800, Loss: 0.0215
+root        : INFO     Epoch: 135, Batch: 900, Loss: 0.0192
+root        : INFO     Validating...
+root        : INFO     4794/5161 = 0.928890
+root        : INFO     Validation Loss for Epoch 135: 0.0204
+root        : INFO     Beginning Epoch 136
+root        : INFO     Epoch: 136, Batch: 100, Loss: 0.0248
+root        : INFO     Epoch: 136, Batch: 200, Loss: 0.0117
+root        : INFO     Epoch: 136, Batch: 300, Loss: 0.0100
+root        : INFO     Epoch: 136, Batch: 400, Loss: 0.0193
+root        : INFO     Epoch: 136, Batch: 500, Loss: 0.0229
+root        : INFO     Epoch: 136, Batch: 600, Loss: 0.0234
+root        : INFO     Epoch: 136, Batch: 700, Loss: 0.0277
+root        : INFO     Epoch: 136, Batch: 800, Loss: 0.0250
+root        : INFO     Epoch: 136, Batch: 900, Loss: 0.0131
+root        : INFO     Validating...
+root        : INFO     4832/5161 = 0.936253
+root        : INFO     Validation Loss for Epoch 136: 0.0202
+root        : INFO     Beginning Epoch 137
+root        : INFO     Epoch: 137, Batch: 100, Loss: 0.0102
+root        : INFO     Epoch: 137, Batch: 200, Loss: 0.0176
+root        : INFO     Epoch: 137, Batch: 300, Loss: 0.0177
+root        : INFO     Epoch: 137, Batch: 400, Loss: 0.0098
+root        : INFO     Epoch: 137, Batch: 500, Loss: 0.0109
+root        : INFO     Epoch: 137, Batch: 600, Loss: 0.0271
+root        : INFO     Epoch: 137, Batch: 700, Loss: 0.0151
+root        : INFO     Epoch: 137, Batch: 800, Loss: 0.0237
+root        : INFO     Epoch: 137, Batch: 900, Loss: 0.0197
+root        : INFO     Validating...
+root        : INFO     4814/5161 = 0.932765
+root        : INFO     Validation Loss for Epoch 137: 0.0202
+root        : INFO     Beginning Epoch 138
+root        : INFO     Epoch: 138, Batch: 100, Loss: 0.0154
+root        : INFO     Epoch: 138, Batch: 200, Loss: 0.0145
+root        : INFO     Epoch: 138, Batch: 300, Loss: 0.0207
+root        : INFO     Epoch: 138, Batch: 400, Loss: 0.0223
+root        : INFO     Epoch: 138, Batch: 500, Loss: 0.0243
+root        : INFO     Epoch: 138, Batch: 600, Loss: 0.0088
+root        : INFO     Epoch: 138, Batch: 700, Loss: 0.0271
+root        : INFO     Epoch: 138, Batch: 800, Loss: 0.0218
+root        : INFO     Epoch: 138, Batch: 900, Loss: 0.0134
+root        : INFO     Validating...
+root        : INFO     4840/5161 = 0.937803
+root        : INFO     Validation Loss for Epoch 138: 0.0199
+root        : INFO     Beginning Epoch 139
+root        : INFO     Epoch: 139, Batch: 100, Loss: 0.0200
+root        : INFO     Epoch: 139, Batch: 200, Loss: 0.0186
+root        : INFO     Epoch: 139, Batch: 300, Loss: 0.0263
+root        : INFO     Epoch: 139, Batch: 400, Loss: 0.0153
+root        : INFO     Epoch: 139, Batch: 500, Loss: 0.0291
+root        : INFO     Epoch: 139, Batch: 600, Loss: 0.0225
+root        : INFO     Epoch: 139, Batch: 700, Loss: 0.0175
+root        : INFO     Epoch: 139, Batch: 800, Loss: 0.0140
+root        : INFO     Epoch: 139, Batch: 900, Loss: 0.0094
+root        : INFO     Validating...
+root        : INFO     4793/5161 = 0.928696
+root        : INFO     Validation Loss for Epoch 139: 0.0203
+root        : INFO     Beginning Epoch 140
+root        : INFO     Epoch: 140, Batch: 100, Loss: 0.0174
+root        : INFO     Epoch: 140, Batch: 200, Loss: 0.0243
+root        : INFO     Epoch: 140, Batch: 300, Loss: 0.0219
+root        : INFO     Epoch: 140, Batch: 400, Loss: 0.0214
+root        : INFO     Epoch: 140, Batch: 500, Loss: 0.0105
+root        : INFO     Epoch: 140, Batch: 600, Loss: 0.0123
+root        : INFO     Epoch: 140, Batch: 700, Loss: 0.0225
+root        : INFO     Epoch: 140, Batch: 800, Loss: 0.0298
+root        : INFO     Epoch: 140, Batch: 900, Loss: 0.0125
+root        : INFO     Validating...
+root        : INFO     4848/5161 = 0.939353
+root        : INFO     Validation Loss for Epoch 140: 0.0199
+root        : INFO     Beginning Epoch 141
+root        : INFO     Epoch: 141, Batch: 100, Loss: 0.0083
+root        : INFO     Epoch: 141, Batch: 200, Loss: 0.0181
+root        : INFO     Epoch: 141, Batch: 300, Loss: 0.0466
+root        : INFO     Epoch: 141, Batch: 400, Loss: 0.0249
+root        : INFO     Epoch: 141, Batch: 500, Loss: 0.0195
+root        : INFO     Epoch: 141, Batch: 600, Loss: 0.0201
+root        : INFO     Epoch: 141, Batch: 700, Loss: 0.0349
+root        : INFO     Epoch: 141, Batch: 800, Loss: 0.0240
+root        : INFO     Epoch: 141, Batch: 900, Loss: 0.0078
+root        : INFO     Validating...
+root        : INFO     4873/5161 = 0.944197
+root        : INFO     Validation Loss for Epoch 141: 0.0200
+root        : INFO     Beginning Epoch 142
+root        : INFO     Epoch: 142, Batch: 100, Loss: 0.0461
+root        : INFO     Epoch: 142, Batch: 200, Loss: 0.0171
+root        : INFO     Epoch: 142, Batch: 300, Loss: 0.0142
+root        : INFO     Epoch: 142, Batch: 400, Loss: 0.0167
+root        : INFO     Epoch: 142, Batch: 500, Loss: 0.0198
+root        : INFO     Epoch: 142, Batch: 600, Loss: 0.0149
+root        : INFO     Epoch: 142, Batch: 700, Loss: 0.0122
+root        : INFO     Epoch: 142, Batch: 800, Loss: 0.0108
+root        : INFO     Epoch: 142, Batch: 900, Loss: 0.0216
+root        : INFO     Validating...
+root        : INFO     4734/5161 = 0.917264
+root        : INFO     Validation Loss for Epoch 142: 0.0206
+root        : INFO     Beginning Epoch 143
+root        : INFO     Epoch: 143, Batch: 100, Loss: 0.0165
+root        : INFO     Epoch: 143, Batch: 200, Loss: 0.0199
+root        : INFO     Epoch: 143, Batch: 300, Loss: 0.0225
+root        : INFO     Epoch: 143, Batch: 400, Loss: 0.0202
+root        : INFO     Epoch: 143, Batch: 500, Loss: 0.0098
+root        : INFO     Epoch: 143, Batch: 600, Loss: 0.0171
+root        : INFO     Epoch: 143, Batch: 700, Loss: 0.0127
+root        : INFO     Epoch: 143, Batch: 800, Loss: 0.0132
+root        : INFO     Epoch: 143, Batch: 900, Loss: 0.0190
+root        : INFO     Validating...
+root        : INFO     4779/5161 = 0.925983
+root        : INFO     Validation Loss for Epoch 143: 0.0202
+root        : INFO     Beginning Epoch 144
+root        : INFO     Epoch: 144, Batch: 100, Loss: 0.0160
+root        : INFO     Epoch: 144, Batch: 200, Loss: 0.0172
+root        : INFO     Epoch: 144, Batch: 300, Loss: 0.0190
+root        : INFO     Epoch: 144, Batch: 400, Loss: 0.0146
+root        : INFO     Epoch: 144, Batch: 500, Loss: 0.0278
+root        : INFO     Epoch: 144, Batch: 600, Loss: 0.0134
+root        : INFO     Epoch: 144, Batch: 700, Loss: 0.0252
+root        : INFO     Epoch: 144, Batch: 800, Loss: 0.0246
+root        : INFO     Epoch: 144, Batch: 900, Loss: 0.0069
+root        : INFO     Validating...
+root        : INFO     4674/5161 = 0.905638
+root        : INFO     Validation Loss for Epoch 144: 0.0211
+root        : INFO     Beginning Epoch 145
+root        : INFO     Epoch: 145, Batch: 100, Loss: 0.0273
+root        : INFO     Epoch: 145, Batch: 200, Loss: 0.0178
+root        : INFO     Epoch: 145, Batch: 300, Loss: 0.0184
+root        : INFO     Epoch: 145, Batch: 400, Loss: 0.0222
+root        : INFO     Epoch: 145, Batch: 500, Loss: 0.0209
+root        : INFO     Epoch: 145, Batch: 600, Loss: 0.0106
+root        : INFO     Epoch: 145, Batch: 700, Loss: 0.0447
+root        : INFO     Epoch: 145, Batch: 800, Loss: 0.0202
+root        : INFO     Epoch: 145, Batch: 900, Loss: 0.0175
+root        : INFO     Validating...
+root        : INFO     4711/5161 = 0.912808
+root        : INFO     Validation Loss for Epoch 145: 0.0206
+root        : INFO     Beginning Epoch 146
+root        : INFO     Epoch: 146, Batch: 100, Loss: 0.0214
+root        : INFO     Epoch: 146, Batch: 200, Loss: 0.0085
+root        : INFO     Epoch: 146, Batch: 300, Loss: 0.0298
+root        : INFO     Epoch: 146, Batch: 400, Loss: 0.0209
+root        : INFO     Epoch: 146, Batch: 500, Loss: 0.0146
+root        : INFO     Epoch: 146, Batch: 600, Loss: 0.0151
+root        : INFO     Epoch: 146, Batch: 700, Loss: 0.0176
+root        : INFO     Epoch: 146, Batch: 800, Loss: 0.0138
+root        : INFO     Epoch: 146, Batch: 900, Loss: 0.0152
+root        : INFO     Validating...
+root        : INFO     4857/5161 = 0.941097
+root        : INFO     Validation Loss for Epoch 146: 0.0199
+root        : INFO     Beginning Epoch 147
+root        : INFO     Epoch: 147, Batch: 100, Loss: 0.0185
+root        : INFO     Epoch: 147, Batch: 200, Loss: 0.0094
+root        : INFO     Epoch: 147, Batch: 300, Loss: 0.0210
+root        : INFO     Epoch: 147, Batch: 400, Loss: 0.0296
+root        : INFO     Epoch: 147, Batch: 500, Loss: 0.0201
+root        : INFO     Epoch: 147, Batch: 600, Loss: 0.0261
+root        : INFO     Epoch: 147, Batch: 700, Loss: 0.0182
+root        : INFO     Epoch: 147, Batch: 800, Loss: 0.0208
+root        : INFO     Epoch: 147, Batch: 900, Loss: 0.0100
+root        : INFO     Validating...
+root        : INFO     4830/5161 = 0.935865
+root        : INFO     Validation Loss for Epoch 147: 0.0196
+root        : INFO     Beginning Epoch 148
+root        : INFO     Epoch: 148, Batch: 100, Loss: 0.0201
+root        : INFO     Epoch: 148, Batch: 200, Loss: 0.0206
+root        : INFO     Epoch: 148, Batch: 300, Loss: 0.0123
+root        : INFO     Epoch: 148, Batch: 400, Loss: 0.0217
+root        : INFO     Epoch: 148, Batch: 500, Loss: 0.0186
+root        : INFO     Epoch: 148, Batch: 600, Loss: 0.0085
+root        : INFO     Epoch: 148, Batch: 700, Loss: 0.0292
+root        : INFO     Epoch: 148, Batch: 800, Loss: 0.0157
+root        : INFO     Epoch: 148, Batch: 900, Loss: 0.0068
+root        : INFO     Validating...
+root        : INFO     4856/5161 = 0.940903
+root        : INFO     Validation Loss for Epoch 148: 0.0198
+root        : INFO     Beginning Epoch 149
+root        : INFO     Epoch: 149, Batch: 100, Loss: 0.0091
+root        : INFO     Epoch: 149, Batch: 200, Loss: 0.0153
+root        : INFO     Epoch: 149, Batch: 300, Loss: 0.0101
+root        : INFO     Epoch: 149, Batch: 400, Loss: 0.0251
+root        : INFO     Epoch: 149, Batch: 500, Loss: 0.0136
+root        : INFO     Epoch: 149, Batch: 600, Loss: 0.0135
+root        : INFO     Epoch: 149, Batch: 700, Loss: 0.0156
+root        : INFO     Epoch: 149, Batch: 800, Loss: 0.0271
+root        : INFO     Epoch: 149, Batch: 900, Loss: 0.0231
+root        : INFO     Validating...
+root        : INFO     4826/5161 = 0.935090
+root        : INFO     Validation Loss for Epoch 149: 0.0196
+root        : INFO     Beginning Epoch 150
+root        : INFO     Epoch: 150, Batch: 100, Loss: 0.0407
+root        : INFO     Epoch: 150, Batch: 200, Loss: 0.0364
+root        : INFO     Epoch: 150, Batch: 300, Loss: 0.0142
+root        : INFO     Epoch: 150, Batch: 400, Loss: 0.0356
+root        : INFO     Epoch: 150, Batch: 500, Loss: 0.0281
+root        : INFO     Epoch: 150, Batch: 600, Loss: 0.0150
+root        : INFO     Epoch: 150, Batch: 700, Loss: 0.0163
+root        : INFO     Epoch: 150, Batch: 800, Loss: 0.0239
+root        : INFO     Epoch: 150, Batch: 900, Loss: 0.0091
+root        : INFO     Validating...
+root        : INFO     4798/5161 = 0.929665
+root        : INFO     Validation Loss for Epoch 150: 0.0203
+root        : INFO     Beginning Epoch 151
+root        : INFO     Epoch: 151, Batch: 100, Loss: 0.0108
+root        : INFO     Epoch: 151, Batch: 200, Loss: 0.0270
+root        : INFO     Epoch: 151, Batch: 300, Loss: 0.0193
+root        : INFO     Epoch: 151, Batch: 400, Loss: 0.0148
+root        : INFO     Epoch: 151, Batch: 500, Loss: 0.0273
+root        : INFO     Epoch: 151, Batch: 600, Loss: 0.0191
+root        : INFO     Epoch: 151, Batch: 700, Loss: 0.0126
+root        : INFO     Epoch: 151, Batch: 800, Loss: 0.0184
+root        : INFO     Epoch: 151, Batch: 900, Loss: 0.0206
+root        : INFO     Validating...
+root        : INFO     4804/5161 = 0.930827
+root        : INFO     Validation Loss for Epoch 151: 0.0199
+root        : INFO     Beginning Epoch 152
+root        : INFO     Epoch: 152, Batch: 100, Loss: 0.0187
+root        : INFO     Epoch: 152, Batch: 200, Loss: 0.0151
+root        : INFO     Epoch: 152, Batch: 300, Loss: 0.0299
+root        : INFO     Epoch: 152, Batch: 400, Loss: 0.0237
+root        : INFO     Epoch: 152, Batch: 500, Loss: 0.0081
+root        : INFO     Epoch: 152, Batch: 600, Loss: 0.0164
+root        : INFO     Epoch: 152, Batch: 700, Loss: 0.0179
+root        : INFO     Epoch: 152, Batch: 800, Loss: 0.0101
+root        : INFO     Epoch: 152, Batch: 900, Loss: 0.0090
+root        : INFO     Validating...
+root        : INFO     4856/5161 = 0.940903
+root        : INFO     Validation Loss for Epoch 152: 0.0199
+root        : INFO     Beginning Epoch 153
+root        : INFO     Epoch: 153, Batch: 100, Loss: 0.0087
+root        : INFO     Epoch: 153, Batch: 200, Loss: 0.0086
+root        : INFO     Epoch: 153, Batch: 300, Loss: 0.0433
+root        : INFO     Epoch: 153, Batch: 400, Loss: 0.0115
+root        : INFO     Epoch: 153, Batch: 500, Loss: 0.0263
+root        : INFO     Epoch: 153, Batch: 600, Loss: 0.0449
+root        : INFO     Epoch: 153, Batch: 700, Loss: 0.0092
+root        : INFO     Epoch: 153, Batch: 800, Loss: 0.0209
+root        : INFO     Epoch: 153, Batch: 900, Loss: 0.0223
+root        : INFO     Validating...
+root        : INFO     4684/5161 = 0.907576
+root        : INFO     Validation Loss for Epoch 153: 0.0206
+root        : INFO     Beginning Epoch 154
+root        : INFO     Epoch: 154, Batch: 100, Loss: 0.0331
+root        : INFO     Epoch: 154, Batch: 200, Loss: 0.0238
+root        : INFO     Epoch: 154, Batch: 300, Loss: 0.0196
+root        : INFO     Epoch: 154, Batch: 400, Loss: 0.0195
+root        : INFO     Epoch: 154, Batch: 500, Loss: 0.0491
+root        : INFO     Epoch: 154, Batch: 600, Loss: 0.0451
+root        : INFO     Epoch: 154, Batch: 700, Loss: 0.0083
+root        : INFO     Epoch: 154, Batch: 800, Loss: 0.0130
+root        : INFO     Epoch: 154, Batch: 900, Loss: 0.0165
+root        : INFO     Validating...
+root        : INFO     4688/5161 = 0.908351
+root        : INFO     Validation Loss for Epoch 154: 0.0208
+root        : INFO     Beginning Epoch 155
+root        : INFO     Epoch: 155, Batch: 100, Loss: 0.0101
+root        : INFO     Epoch: 155, Batch: 200, Loss: 0.0237
+root        : INFO     Epoch: 155, Batch: 300, Loss: 0.0179
+root        : INFO     Epoch: 155, Batch: 400, Loss: 0.0177
+root        : INFO     Epoch: 155, Batch: 500, Loss: 0.0191
+root        : INFO     Epoch: 155, Batch: 600, Loss: 0.0121
+root        : INFO     Epoch: 155, Batch: 700, Loss: 0.0221
+root        : INFO     Epoch: 155, Batch: 800, Loss: 0.0093
+root        : INFO     Epoch: 155, Batch: 900, Loss: 0.0134
+root        : INFO     Validating...
+root        : INFO     4841/5161 = 0.937997
+root        : INFO     Validation Loss for Epoch 155: 0.0199
+root        : INFO     Beginning Epoch 156
+root        : INFO     Epoch: 156, Batch: 100, Loss: 0.0170
+root        : INFO     Epoch: 156, Batch: 200, Loss: 0.0107
+root        : INFO     Epoch: 156, Batch: 300, Loss: 0.0146
+root        : INFO     Epoch: 156, Batch: 400, Loss: 0.0139
+root        : INFO     Epoch: 156, Batch: 500, Loss: 0.0106
+root        : INFO     Epoch: 156, Batch: 600, Loss: 0.0159
+root        : INFO     Epoch: 156, Batch: 700, Loss: 0.0157
+root        : INFO     Epoch: 156, Batch: 800, Loss: 0.0159
+root        : INFO     Epoch: 156, Batch: 900, Loss: 0.0151
+root        : INFO     Validating...
+root        : INFO     4857/5161 = 0.941097
+root        : INFO     Validation Loss for Epoch 156: 0.0196
+root        : INFO     Beginning Epoch 157
+root        : INFO     Epoch: 157, Batch: 100, Loss: 0.0131
+root        : INFO     Epoch: 157, Batch: 200, Loss: 0.0113
+root        : INFO     Epoch: 157, Batch: 300, Loss: 0.0210
+root        : INFO     Epoch: 157, Batch: 400, Loss: 0.0286
+root        : INFO     Epoch: 157, Batch: 500, Loss: 0.0422
+root        : INFO     Epoch: 157, Batch: 600, Loss: 0.0111
+root        : INFO     Epoch: 157, Batch: 700, Loss: 0.0215
+root        : INFO     Epoch: 157, Batch: 800, Loss: 0.0163
+root        : INFO     Epoch: 157, Batch: 900, Loss: 0.0258
+root        : INFO     Validating...
+root        : INFO     4830/5161 = 0.935865
+root        : INFO     Validation Loss for Epoch 157: 0.0206
+root        : INFO     Beginning Epoch 158
+root        : INFO     Epoch: 158, Batch: 100, Loss: 0.0280
+root        : INFO     Epoch: 158, Batch: 200, Loss: 0.0179
+root        : INFO     Epoch: 158, Batch: 300, Loss: 0.0154
+root        : INFO     Epoch: 158, Batch: 400, Loss: 0.0083
+root        : INFO     Epoch: 158, Batch: 500, Loss: 0.0316
+root        : INFO     Epoch: 158, Batch: 600, Loss: 0.0211
+root        : INFO     Epoch: 158, Batch: 700, Loss: 0.0126
+root        : INFO     Epoch: 158, Batch: 800, Loss: 0.0304
+root        : INFO     Epoch: 158, Batch: 900, Loss: 0.0222
+root        : INFO     Validating...
+root        : INFO     4799/5161 = 0.929859
+root        : INFO     Validation Loss for Epoch 158: 0.0199
+root        : INFO     Beginning Epoch 159
+root        : INFO     Epoch: 159, Batch: 100, Loss: 0.0093
+root        : INFO     Epoch: 159, Batch: 200, Loss: 0.0175
+root        : INFO     Epoch: 159, Batch: 300, Loss: 0.0135
+root        : INFO     Epoch: 159, Batch: 400, Loss: 0.0097
+root        : INFO     Epoch: 159, Batch: 500, Loss: 0.0197
+root        : INFO     Epoch: 159, Batch: 600, Loss: 0.0297
+root        : INFO     Epoch: 159, Batch: 700, Loss: 0.0204
+root        : INFO     Epoch: 159, Batch: 800, Loss: 0.0232
+root        : INFO     Epoch: 159, Batch: 900, Loss: 0.0177
+root        : INFO     Validating...
+root        : INFO     4630/5161 = 0.897113
+root        : INFO     Validation Loss for Epoch 159: 0.0212
+root        : INFO     Beginning Epoch 160
+root        : INFO     Epoch: 160, Batch: 100, Loss: 0.0264
+root        : INFO     Epoch: 160, Batch: 200, Loss: 0.0177
+root        : INFO     Epoch: 160, Batch: 300, Loss: 0.0179
+root        : INFO     Epoch: 160, Batch: 400, Loss: 0.0244
+root        : INFO     Epoch: 160, Batch: 500, Loss: 0.0174
+root        : INFO     Epoch: 160, Batch: 600, Loss: 0.0180
+root        : INFO     Epoch: 160, Batch: 700, Loss: 0.0175
+root        : INFO     Epoch: 160, Batch: 800, Loss: 0.0159
+root        : INFO     Epoch: 160, Batch: 900, Loss: 0.0118
+root        : INFO     Validating...
+root        : INFO     4772/5161 = 0.924627
+root        : INFO     Validation Loss for Epoch 160: 0.0198
+root        : INFO     Beginning Epoch 161
+root        : INFO     Epoch: 161, Batch: 100, Loss: 0.0150
+root        : INFO     Epoch: 161, Batch: 200, Loss: 0.0095
+root        : INFO     Epoch: 161, Batch: 300, Loss: 0.0204
+root        : INFO     Epoch: 161, Batch: 400, Loss: 0.0133
+root        : INFO     Epoch: 161, Batch: 500, Loss: 0.0281
+root        : INFO     Epoch: 161, Batch: 600, Loss: 0.0165
+root        : INFO     Epoch: 161, Batch: 700, Loss: 0.0126
+root        : INFO     Epoch: 161, Batch: 800, Loss: 0.0146
+root        : INFO     Epoch: 161, Batch: 900, Loss: 0.0085
+root        : INFO     Validating...
+root        : INFO     4816/5161 = 0.933152
+root        : INFO     Validation Loss for Epoch 161: 0.0203
+root        : INFO     Beginning Epoch 162
+root        : INFO     Epoch: 162, Batch: 100, Loss: 0.0192
+root        : INFO     Epoch: 162, Batch: 200, Loss: 0.0162
+root        : INFO     Epoch: 162, Batch: 300, Loss: 0.0132
+root        : INFO     Epoch: 162, Batch: 400, Loss: 0.0106
+root        : INFO     Epoch: 162, Batch: 500, Loss: 0.0165
+root        : INFO     Epoch: 162, Batch: 600, Loss: 0.0146
+root        : INFO     Epoch: 162, Batch: 700, Loss: 0.0095
+root        : INFO     Epoch: 162, Batch: 800, Loss: 0.0057
+root        : INFO     Epoch: 162, Batch: 900, Loss: 0.0116
+root        : INFO     Validating...
+root        : INFO     4827/5161 = 0.935284
+root        : INFO     Validation Loss for Epoch 162: 0.0200
+root        : INFO     Beginning Epoch 163
+root        : INFO     Epoch: 163, Batch: 100, Loss: 0.0154
+root        : INFO     Epoch: 163, Batch: 200, Loss: 0.0111
+root        : INFO     Epoch: 163, Batch: 300, Loss: 0.0250
+root        : INFO     Epoch: 163, Batch: 400, Loss: 0.0202
+root        : INFO     Epoch: 163, Batch: 500, Loss: 0.0272
+root        : INFO     Epoch: 163, Batch: 600, Loss: 0.0197
+root        : INFO     Epoch: 163, Batch: 700, Loss: 0.0193
+root        : INFO     Epoch: 163, Batch: 800, Loss: 0.0152
+root        : INFO     Epoch: 163, Batch: 900, Loss: 0.0179
+root        : INFO     Validating...
+root        : INFO     4793/5161 = 0.928696
+root        : INFO     Validation Loss for Epoch 163: 0.0200
+root        : INFO     Beginning Epoch 164
+root        : INFO     Epoch: 164, Batch: 100, Loss: 0.0314
+root        : INFO     Epoch: 164, Batch: 200, Loss: 0.0155
+root        : INFO     Epoch: 164, Batch: 300, Loss: 0.0119
+root        : INFO     Epoch: 164, Batch: 400, Loss: 0.0243
+root        : INFO     Epoch: 164, Batch: 500, Loss: 0.0264
+root        : INFO     Epoch: 164, Batch: 600, Loss: 0.0129
+root        : INFO     Epoch: 164, Batch: 700, Loss: 0.0109
+root        : INFO     Epoch: 164, Batch: 800, Loss: 0.0146
+root        : INFO     Epoch: 164, Batch: 900, Loss: 0.0201
+root        : INFO     Validating...
+root        : INFO     4805/5161 = 0.931021
+root        : INFO     Validation Loss for Epoch 164: 0.0199
+root        : INFO     Beginning Epoch 165
+root        : INFO     Epoch: 165, Batch: 100, Loss: 0.0161
+root        : INFO     Epoch: 165, Batch: 200, Loss: 0.0146
+root        : INFO     Epoch: 165, Batch: 300, Loss: 0.0263
+root        : INFO     Epoch: 165, Batch: 400, Loss: 0.0211
+root        : INFO     Epoch: 165, Batch: 500, Loss: 0.0238
+root        : INFO     Epoch: 165, Batch: 600, Loss: 0.0112
+root        : INFO     Epoch: 165, Batch: 700, Loss: 0.0141
+root        : INFO     Epoch: 165, Batch: 800, Loss: 0.0134
+root        : INFO     Epoch: 165, Batch: 900, Loss: 0.0091
+root        : INFO     Validating...
+root        : INFO     4798/5161 = 0.929665
+root        : INFO     Validation Loss for Epoch 165: 0.0203
+root        : INFO     Beginning Epoch 166
+root        : INFO     Epoch: 166, Batch: 100, Loss: 0.0133
+root        : INFO     Epoch: 166, Batch: 200, Loss: 0.0136
+root        : INFO     Epoch: 166, Batch: 300, Loss: 0.0225
+root        : INFO     Epoch: 166, Batch: 400, Loss: 0.0090
+root        : INFO     Epoch: 166, Batch: 500, Loss: 0.0205
+root        : INFO     Epoch: 166, Batch: 600, Loss: 0.0244
+root        : INFO     Epoch: 166, Batch: 700, Loss: 0.0217
+root        : INFO     Epoch: 166, Batch: 800, Loss: 0.0143
+root        : INFO     Epoch: 166, Batch: 900, Loss: 0.0269
+root        : INFO     Validating...
+root        : INFO     4708/5161 = 0.912226
+root        : INFO     Validation Loss for Epoch 166: 0.0205
+root        : INFO     Beginning Epoch 167
+root        : INFO     Epoch: 167, Batch: 100, Loss: 0.0123
+root        : INFO     Epoch: 167, Batch: 200, Loss: 0.0109
+root        : INFO     Epoch: 167, Batch: 300, Loss: 0.0082
+root        : INFO     Epoch: 167, Batch: 400, Loss: 0.0112
+root        : INFO     Epoch: 167, Batch: 500, Loss: 0.0128
+root        : INFO     Epoch: 167, Batch: 600, Loss: 0.0212
+root        : INFO     Epoch: 167, Batch: 700, Loss: 0.0182
+root        : INFO     Epoch: 167, Batch: 800, Loss: 0.0107
+root        : INFO     Epoch: 167, Batch: 900, Loss: 0.0225
+root        : INFO     Validating...
+root        : INFO     4789/5161 = 0.927921
+root        : INFO     Validation Loss for Epoch 167: 0.0207
+root        : INFO     Beginning Epoch 168
+root        : INFO     Epoch: 168, Batch: 100, Loss: 0.0281
+root        : INFO     Epoch: 168, Batch: 200, Loss: 0.0109
+root        : INFO     Epoch: 168, Batch: 300, Loss: 0.0125
+root        : INFO     Epoch: 168, Batch: 400, Loss: 0.0266
+root        : INFO     Epoch: 168, Batch: 500, Loss: 0.0270
+root        : INFO     Epoch: 168, Batch: 600, Loss: 0.0144
+root        : INFO     Epoch: 168, Batch: 700, Loss: 0.0257
+root        : INFO     Epoch: 168, Batch: 800, Loss: 0.0090
+root        : INFO     Epoch: 168, Batch: 900, Loss: 0.0195
+root        : INFO     Validating...
+root        : INFO     4840/5161 = 0.937803
+root        : INFO     Validation Loss for Epoch 168: 0.0199
+root        : INFO     Beginning Epoch 169
+root        : INFO     Epoch: 169, Batch: 100, Loss: 0.0151
+root        : INFO     Epoch: 169, Batch: 200, Loss: 0.0192
+root        : INFO     Epoch: 169, Batch: 300, Loss: 0.0198
+root        : INFO     Epoch: 169, Batch: 400, Loss: 0.0210
+root        : INFO     Epoch: 169, Batch: 500, Loss: 0.0110
+root        : INFO     Epoch: 169, Batch: 600, Loss: 0.0395
+root        : INFO     Epoch: 169, Batch: 700, Loss: 0.0200
+root        : INFO     Epoch: 169, Batch: 800, Loss: 0.0071
+root        : INFO     Epoch: 169, Batch: 900, Loss: 0.0223
+root        : INFO     Validating...
+root        : INFO     4832/5161 = 0.936253
+root        : INFO     Validation Loss for Epoch 169: 0.0208
+root        : INFO     Beginning Epoch 170
+root        : INFO     Epoch: 170, Batch: 100, Loss: 0.0177
+root        : INFO     Epoch: 170, Batch: 200, Loss: 0.0174
+root        : INFO     Epoch: 170, Batch: 300, Loss: 0.0190
+root        : INFO     Epoch: 170, Batch: 400, Loss: 0.0176
+root        : INFO     Epoch: 170, Batch: 500, Loss: 0.0161
+root        : INFO     Epoch: 170, Batch: 600, Loss: 0.0151
+root        : INFO     Epoch: 170, Batch: 700, Loss: 0.0229
+root        : INFO     Epoch: 170, Batch: 800, Loss: 0.0158
+root        : INFO     Epoch: 170, Batch: 900, Loss: 0.0175
+root        : INFO     Validating...
+root        : INFO     4766/5161 = 0.923464
+root        : INFO     Validation Loss for Epoch 170: 0.0198
+root        : INFO     Beginning Epoch 171
+root        : INFO     Epoch: 171, Batch: 100, Loss: 0.0131
+root        : INFO     Epoch: 171, Batch: 200, Loss: 0.0270
+root        : INFO     Epoch: 171, Batch: 300, Loss: 0.0184
+root        : INFO     Epoch: 171, Batch: 400, Loss: 0.0227
+root        : INFO     Epoch: 171, Batch: 500, Loss: 0.0128
+root        : INFO     Epoch: 171, Batch: 600, Loss: 0.0147
+root        : INFO     Epoch: 171, Batch: 700, Loss: 0.0270
+root        : INFO     Epoch: 171, Batch: 800, Loss: 0.0175
+root        : INFO     Epoch: 171, Batch: 900, Loss: 0.0228
+root        : INFO     Validating...
+root        : INFO     4795/5161 = 0.929084
+root        : INFO     Validation Loss for Epoch 171: 0.0199
+root        : INFO     Beginning Epoch 172
+root        : INFO     Epoch: 172, Batch: 100, Loss: 0.0212
+root        : INFO     Epoch: 172, Batch: 200, Loss: 0.0259
+root        : INFO     Epoch: 172, Batch: 300, Loss: 0.0113
+root        : INFO     Epoch: 172, Batch: 400, Loss: 0.0138
+root        : INFO     Epoch: 172, Batch: 500, Loss: 0.0145
+root        : INFO     Epoch: 172, Batch: 600, Loss: 0.0317
+root        : INFO     Epoch: 172, Batch: 700, Loss: 0.0219
+root        : INFO     Epoch: 172, Batch: 800, Loss: 0.0138
+root        : INFO     Epoch: 172, Batch: 900, Loss: 0.0133
+root        : INFO     Validating...
+root        : INFO     4792/5161 = 0.928502
+root        : INFO     Validation Loss for Epoch 172: 0.0202
+root        : INFO     Beginning Epoch 173
+root        : INFO     Epoch: 173, Batch: 100, Loss: 0.0239
+root        : INFO     Epoch: 173, Batch: 200, Loss: 0.0128
+root        : INFO     Epoch: 173, Batch: 300, Loss: 0.0093
+root        : INFO     Epoch: 173, Batch: 400, Loss: 0.0260
+root        : INFO     Epoch: 173, Batch: 500, Loss: 0.0222
+root        : INFO     Epoch: 173, Batch: 600, Loss: 0.0181
+root        : INFO     Epoch: 173, Batch: 700, Loss: 0.0126
+root        : INFO     Epoch: 173, Batch: 800, Loss: 0.0191
+root        : INFO     Epoch: 173, Batch: 900, Loss: 0.0158
+root        : INFO     Validating...
+root        : INFO     4842/5161 = 0.938190
+root        : INFO     Validation Loss for Epoch 173: 0.0196
+root        : INFO     Beginning Epoch 174
+root        : INFO     Epoch: 174, Batch: 100, Loss: 0.0119
+root        : INFO     Epoch: 174, Batch: 200, Loss: 0.0102
+root        : INFO     Epoch: 174, Batch: 300, Loss: 0.0176
+root        : INFO     Epoch: 174, Batch: 400, Loss: 0.0123
+root        : INFO     Epoch: 174, Batch: 500, Loss: 0.0213
+root        : INFO     Epoch: 174, Batch: 600, Loss: 0.0129
+root        : INFO     Epoch: 174, Batch: 700, Loss: 0.0123
+root        : INFO     Epoch: 174, Batch: 800, Loss: 0.0139
+root        : INFO     Epoch: 174, Batch: 900, Loss: 0.0374
+root        : INFO     Validating...
+root        : INFO     4811/5161 = 0.932184
+root        : INFO     Validation Loss for Epoch 174: 0.0198
+root        : INFO     Beginning Epoch 175
+root        : INFO     Epoch: 175, Batch: 100, Loss: 0.0197
+root        : INFO     Epoch: 175, Batch: 200, Loss: 0.0186
+root        : INFO     Epoch: 175, Batch: 300, Loss: 0.0330
+root        : INFO     Epoch: 175, Batch: 400, Loss: 0.0134
+root        : INFO     Epoch: 175, Batch: 500, Loss: 0.0122
+root        : INFO     Epoch: 175, Batch: 600, Loss: 0.0184
+root        : INFO     Epoch: 175, Batch: 700, Loss: 0.0108
+root        : INFO     Epoch: 175, Batch: 800, Loss: 0.0117
+root        : INFO     Epoch: 175, Batch: 900, Loss: 0.0170
+root        : INFO     Validating...
+root        : INFO     4793/5161 = 0.928696
+root        : INFO     Validation Loss for Epoch 175: 0.0198
+root        : INFO     Beginning Epoch 176
+root        : INFO     Epoch: 176, Batch: 100, Loss: 0.0236
+root        : INFO     Epoch: 176, Batch: 200, Loss: 0.0111
+root        : INFO     Epoch: 176, Batch: 300, Loss: 0.0117
+root        : INFO     Epoch: 176, Batch: 400, Loss: 0.0123
+root        : INFO     Epoch: 176, Batch: 500, Loss: 0.0228
+root        : INFO     Epoch: 176, Batch: 600, Loss: 0.0120
+root        : INFO     Epoch: 176, Batch: 700, Loss: 0.0312
+root        : INFO     Epoch: 176, Batch: 800, Loss: 0.0161
+root        : INFO     Epoch: 176, Batch: 900, Loss: 0.0297
+root        : INFO     Validating...
+root        : INFO     4745/5161 = 0.919395
+root        : INFO     Validation Loss for Epoch 176: 0.0200
+root        : INFO     Beginning Epoch 177
+root        : INFO     Epoch: 177, Batch: 100, Loss: 0.0301
+root        : INFO     Epoch: 177, Batch: 200, Loss: 0.0131
+root        : INFO     Epoch: 177, Batch: 300, Loss: 0.0116
+root        : INFO     Epoch: 177, Batch: 400, Loss: 0.0376
+root        : INFO     Epoch: 177, Batch: 500, Loss: 0.0137
+root        : INFO     Epoch: 177, Batch: 600, Loss: 0.0475
+root        : INFO     Epoch: 177, Batch: 700, Loss: 0.0116
+root        : INFO     Epoch: 177, Batch: 800, Loss: 0.0197
+root        : INFO     Epoch: 177, Batch: 900, Loss: 0.0177
+root        : INFO     Validating...
+root        : INFO     4891/5161 = 0.947685
+root        : INFO     Validation Loss for Epoch 177: 0.0197
+root        : INFO     Beginning Epoch 178
+root        : INFO     Epoch: 178, Batch: 100, Loss: 0.0195
+root        : INFO     Epoch: 178, Batch: 200, Loss: 0.0185
+root        : INFO     Epoch: 178, Batch: 300, Loss: 0.0286
+root        : INFO     Epoch: 178, Batch: 400, Loss: 0.0217
+root        : INFO     Epoch: 178, Batch: 500, Loss: 0.0161
+root        : INFO     Epoch: 178, Batch: 600, Loss: 0.0197
+root        : INFO     Epoch: 178, Batch: 700, Loss: 0.0215
+root        : INFO     Epoch: 178, Batch: 800, Loss: 0.0224
+root        : INFO     Epoch: 178, Batch: 900, Loss: 0.0223
+root        : INFO     Validating...
+root        : INFO     4843/5161 = 0.938384
+root        : INFO     Validation Loss for Epoch 178: 0.0200
+root        : INFO     Beginning Epoch 179
+root        : INFO     Epoch: 179, Batch: 100, Loss: 0.0191
+root        : INFO     Epoch: 179, Batch: 200, Loss: 0.0168
+root        : INFO     Epoch: 179, Batch: 300, Loss: 0.0093
+root        : INFO     Epoch: 179, Batch: 400, Loss: 0.0132
+root        : INFO     Epoch: 179, Batch: 500, Loss: 0.0154
+root        : INFO     Epoch: 179, Batch: 600, Loss: 0.0247
+root        : INFO     Epoch: 179, Batch: 700, Loss: 0.0139
+root        : INFO     Epoch: 179, Batch: 800, Loss: 0.0196
+root        : INFO     Epoch: 179, Batch: 900, Loss: 0.0228
+root        : INFO     Validating...
+root        : INFO     4776/5161 = 0.925402
+root        : INFO     Validation Loss for Epoch 179: 0.0200
+root        : INFO     Beginning Epoch 180
+root        : INFO     Epoch: 180, Batch: 100, Loss: 0.0215
+root        : INFO     Epoch: 180, Batch: 200, Loss: 0.0202
+root        : INFO     Epoch: 180, Batch: 300, Loss: 0.0147
+root        : INFO     Epoch: 180, Batch: 400, Loss: 0.0280
+root        : INFO     Epoch: 180, Batch: 500, Loss: 0.0159
+root        : INFO     Epoch: 180, Batch: 600, Loss: 0.0123
+root        : INFO     Epoch: 180, Batch: 700, Loss: 0.0096
+root        : INFO     Epoch: 180, Batch: 800, Loss: 0.0192
+root        : INFO     Epoch: 180, Batch: 900, Loss: 0.0123
+root        : INFO     Validating...
+root        : INFO     4743/5161 = 0.919008
+root        : INFO     Validation Loss for Epoch 180: 0.0204
+root        : INFO     Beginning Epoch 181
+root        : INFO     Epoch: 181, Batch: 100, Loss: 0.0102
+root        : INFO     Epoch: 181, Batch: 200, Loss: 0.0224
+root        : INFO     Epoch: 181, Batch: 300, Loss: 0.0125
+root        : INFO     Epoch: 181, Batch: 400, Loss: 0.0174
+root        : INFO     Epoch: 181, Batch: 500, Loss: 0.0104
+root        : INFO     Epoch: 181, Batch: 600, Loss: 0.0128
+root        : INFO     Epoch: 181, Batch: 700, Loss: 0.0111
+root        : INFO     Epoch: 181, Batch: 800, Loss: 0.0188
+root        : INFO     Epoch: 181, Batch: 900, Loss: 0.0294
+root        : INFO     Validating...
+root        : INFO     4855/5161 = 0.940709
+root        : INFO     Validation Loss for Epoch 181: 0.0199
+root        : INFO     Beginning Epoch 182
+root        : INFO     Epoch: 182, Batch: 100, Loss: 0.0186
+root        : INFO     Epoch: 182, Batch: 200, Loss: 0.0131
+root        : INFO     Epoch: 182, Batch: 300, Loss: 0.0229
+root        : INFO     Epoch: 182, Batch: 400, Loss: 0.0149
+root        : INFO     Epoch: 182, Batch: 500, Loss: 0.0271
+root        : INFO     Epoch: 182, Batch: 600, Loss: 0.0164
+root        : INFO     Epoch: 182, Batch: 700, Loss: 0.0289
+root        : INFO     Epoch: 182, Batch: 800, Loss: 0.0156
+root        : INFO     Epoch: 182, Batch: 900, Loss: 0.0194
+root        : INFO     Validating...
+root        : INFO     4650/5161 = 0.900988
+root        : INFO     Validation Loss for Epoch 182: 0.0205
+root        : INFO     Beginning Epoch 183
+root        : INFO     Epoch: 183, Batch: 100, Loss: 0.0167
+root        : INFO     Epoch: 183, Batch: 200, Loss: 0.0214
+root        : INFO     Epoch: 183, Batch: 300, Loss: 0.0194
+root        : INFO     Epoch: 183, Batch: 400, Loss: 0.0274
+root        : INFO     Epoch: 183, Batch: 500, Loss: 0.0112
+root        : INFO     Epoch: 183, Batch: 600, Loss: 0.0106
+root        : INFO     Epoch: 183, Batch: 700, Loss: 0.0120
+root        : INFO     Epoch: 183, Batch: 800, Loss: 0.0095
+root        : INFO     Epoch: 183, Batch: 900, Loss: 0.0121
+root        : INFO     Validating...
+root        : INFO     4716/5161 = 0.913776
+root        : INFO     Validation Loss for Epoch 183: 0.0204
+root        : INFO     Beginning Epoch 184
+root        : INFO     Epoch: 184, Batch: 100, Loss: 0.0083
+root        : INFO     Epoch: 184, Batch: 200, Loss: 0.0143
+root        : INFO     Epoch: 184, Batch: 300, Loss: 0.0143
+root        : INFO     Epoch: 184, Batch: 400, Loss: 0.0193
+root        : INFO     Epoch: 184, Batch: 500, Loss: 0.0131
+root        : INFO     Epoch: 184, Batch: 600, Loss: 0.0200
+root        : INFO     Epoch: 184, Batch: 700, Loss: 0.0121
+root        : INFO     Epoch: 184, Batch: 800, Loss: 0.0098
+root        : INFO     Epoch: 184, Batch: 900, Loss: 0.0227
+root        : INFO     Validating...
+root        : INFO     4797/5161 = 0.929471
+root        : INFO     Validation Loss for Epoch 184: 0.0199
+root        : INFO     Beginning Epoch 185
+root        : INFO     Epoch: 185, Batch: 100, Loss: 0.0220
+root        : INFO     Epoch: 185, Batch: 200, Loss: 0.0198
+root        : INFO     Epoch: 185, Batch: 300, Loss: 0.0194
+root        : INFO     Epoch: 185, Batch: 400, Loss: 0.0233
+root        : INFO     Epoch: 185, Batch: 500, Loss: 0.0144
+root        : INFO     Epoch: 185, Batch: 600, Loss: 0.0222
+root        : INFO     Epoch: 185, Batch: 700, Loss: 0.0147
+root        : INFO     Epoch: 185, Batch: 800, Loss: 0.0156
+root        : INFO     Epoch: 185, Batch: 900, Loss: 0.0086
+root        : INFO     Validating...
+root        : INFO     4783/5161 = 0.926758
+root        : INFO     Validation Loss for Epoch 185: 0.0199
+root        : INFO     Beginning Epoch 186
+root        : INFO     Epoch: 186, Batch: 100, Loss: 0.0130
+root        : INFO     Epoch: 186, Batch: 200, Loss: 0.0244
+root        : INFO     Epoch: 186, Batch: 300, Loss: 0.0198
+root        : INFO     Epoch: 186, Batch: 400, Loss: 0.0115
+root        : INFO     Epoch: 186, Batch: 500, Loss: 0.0094
+root        : INFO     Epoch: 186, Batch: 600, Loss: 0.0322
+root        : INFO     Epoch: 186, Batch: 700, Loss: 0.0289
+root        : INFO     Epoch: 186, Batch: 800, Loss: 0.0417
+root        : INFO     Epoch: 186, Batch: 900, Loss: 0.0174
+root        : INFO     Validating...
+root        : INFO     4654/5161 = 0.901763
+root        : INFO     Validation Loss for Epoch 186: 0.0205
+root        : INFO     Beginning Epoch 187
+root        : INFO     Epoch: 187, Batch: 100, Loss: 0.0249
+root        : INFO     Epoch: 187, Batch: 200, Loss: 0.0203
+root        : INFO     Epoch: 187, Batch: 300, Loss: 0.0398
+root        : INFO     Epoch: 187, Batch: 400, Loss: 0.0466
+root        : INFO     Epoch: 187, Batch: 500, Loss: 0.0163
+root        : INFO     Epoch: 187, Batch: 600, Loss: 0.0212
+root        : INFO     Epoch: 187, Batch: 700, Loss: 0.0109
+root        : INFO     Epoch: 187, Batch: 800, Loss: 0.0180
+root        : INFO     Epoch: 187, Batch: 900, Loss: 0.0369
+root        : INFO     Validating...
+root        : INFO     4828/5161 = 0.935478
+root        : INFO     Validation Loss for Epoch 187: 0.0200
+root        : INFO     Beginning Epoch 188
+root        : INFO     Epoch: 188, Batch: 100, Loss: 0.0145
+root        : INFO     Epoch: 188, Batch: 200, Loss: 0.0067
+root        : INFO     Epoch: 188, Batch: 300, Loss: 0.0253
+root        : INFO     Epoch: 188, Batch: 400, Loss: 0.0274
+root        : INFO     Epoch: 188, Batch: 500, Loss: 0.0244
+root        : INFO     Epoch: 188, Batch: 600, Loss: 0.0243
+root        : INFO     Epoch: 188, Batch: 700, Loss: 0.0201
+root        : INFO     Epoch: 188, Batch: 800, Loss: 0.0117
+root        : INFO     Epoch: 188, Batch: 900, Loss: 0.0360
+root        : INFO     Validating...
+root        : INFO     4855/5161 = 0.940709
+root        : INFO     Validation Loss for Epoch 188: 0.0199
+root        : INFO     Beginning Epoch 189
+root        : INFO     Epoch: 189, Batch: 100, Loss: 0.0090
+root        : INFO     Epoch: 189, Batch: 200, Loss: 0.0132
+root        : INFO     Epoch: 189, Batch: 300, Loss: 0.0145
+root        : INFO     Epoch: 189, Batch: 400, Loss: 0.0246
+root        : INFO     Epoch: 189, Batch: 500, Loss: 0.0243
+root        : INFO     Epoch: 189, Batch: 600, Loss: 0.0206
+root        : INFO     Epoch: 189, Batch: 700, Loss: 0.0135
+root        : INFO     Epoch: 189, Batch: 800, Loss: 0.0275
+root        : INFO     Epoch: 189, Batch: 900, Loss: 0.0184
+root        : INFO     Validating...
+root        : INFO     4724/5161 = 0.915326
+root        : INFO     Validation Loss for Epoch 189: 0.0205
+root        : INFO     Beginning Epoch 190
+root        : INFO     Epoch: 190, Batch: 100, Loss: 0.0272
+root        : INFO     Epoch: 190, Batch: 200, Loss: 0.0153
+root        : INFO     Epoch: 190, Batch: 300, Loss: 0.0159
+root        : INFO     Epoch: 190, Batch: 400, Loss: 0.0279
+root        : INFO     Epoch: 190, Batch: 500, Loss: 0.0174
+root        : INFO     Epoch: 190, Batch: 600, Loss: 0.0127
+root        : INFO     Epoch: 190, Batch: 700, Loss: 0.0293
+root        : INFO     Epoch: 190, Batch: 800, Loss: 0.0350
+root        : INFO     Epoch: 190, Batch: 900, Loss: 0.0303
+root        : INFO     Validating...
+root        : INFO     4773/5161 = 0.924821
+root        : INFO     Validation Loss for Epoch 190: 0.0197
+root        : INFO     Beginning Epoch 191
+root        : INFO     Epoch: 191, Batch: 100, Loss: 0.0292
+root        : INFO     Epoch: 191, Batch: 200, Loss: 0.0178
+root        : INFO     Epoch: 191, Batch: 300, Loss: 0.0139
+root        : INFO     Epoch: 191, Batch: 400, Loss: 0.0144
+root        : INFO     Epoch: 191, Batch: 500, Loss: 0.0131
+root        : INFO     Epoch: 191, Batch: 600, Loss: 0.0280
+root        : INFO     Epoch: 191, Batch: 700, Loss: 0.0154
+root        : INFO     Epoch: 191, Batch: 800, Loss: 0.0271
+root        : INFO     Epoch: 191, Batch: 900, Loss: 0.0166
+root        : INFO     Validating...
+root        : INFO     4842/5161 = 0.938190
+root        : INFO     Validation Loss for Epoch 191: 0.0199
+root        : INFO     Beginning Epoch 192
+root        : INFO     Epoch: 192, Batch: 100, Loss: 0.0098
+root        : INFO     Epoch: 192, Batch: 200, Loss: 0.0134
+root        : INFO     Epoch: 192, Batch: 300, Loss: 0.0242
+root        : INFO     Epoch: 192, Batch: 400, Loss: 0.0123
+root        : INFO     Epoch: 192, Batch: 500, Loss: 0.0165
+root        : INFO     Epoch: 192, Batch: 600, Loss: 0.0152
+root        : INFO     Epoch: 192, Batch: 700, Loss: 0.0128
+root        : INFO     Epoch: 192, Batch: 800, Loss: 0.0132
+root        : INFO     Epoch: 192, Batch: 900, Loss: 0.0161
+root        : INFO     Validating...
+root        : INFO     4837/5161 = 0.937221
+root        : INFO     Validation Loss for Epoch 192: 0.0195
+root        : INFO     Beginning Epoch 193
+root        : INFO     Epoch: 193, Batch: 100, Loss: 0.0164
+root        : INFO     Epoch: 193, Batch: 200, Loss: 0.0282
+root        : INFO     Epoch: 193, Batch: 300, Loss: 0.0139
+root        : INFO     Epoch: 193, Batch: 400, Loss: 0.0131
+root        : INFO     Epoch: 193, Batch: 500, Loss: 0.0106
+root        : INFO     Epoch: 193, Batch: 600, Loss: 0.0299
+root        : INFO     Epoch: 193, Batch: 700, Loss: 0.0107
+root        : INFO     Epoch: 193, Batch: 800, Loss: 0.0128
+root        : INFO     Epoch: 193, Batch: 900, Loss: 0.0137
+root        : INFO     Validating...
+root        : INFO     4804/5161 = 0.930827
+root        : INFO     Validation Loss for Epoch 193: 0.0203
+root        : INFO     Beginning Epoch 194
+root        : INFO     Epoch: 194, Batch: 100, Loss: 0.0344
+root        : INFO     Epoch: 194, Batch: 200, Loss: 0.0172
+root        : INFO     Epoch: 194, Batch: 300, Loss: 0.0177
+root        : INFO     Epoch: 194, Batch: 400, Loss: 0.0180
+root        : INFO     Epoch: 194, Batch: 500, Loss: 0.0243
+root        : INFO     Epoch: 194, Batch: 600, Loss: 0.0186
+root        : INFO     Epoch: 194, Batch: 700, Loss: 0.0146
+root        : INFO     Epoch: 194, Batch: 800, Loss: 0.0297
+root        : INFO     Epoch: 194, Batch: 900, Loss: 0.0115
+root        : INFO     Validating...
+root        : INFO     4750/5161 = 0.920364
+root        : INFO     Validation Loss for Epoch 194: 0.0200
+root        : INFO     Beginning Epoch 195
+root        : INFO     Epoch: 195, Batch: 100, Loss: 0.0242
+root        : INFO     Epoch: 195, Batch: 200, Loss: 0.0197
+root        : INFO     Epoch: 195, Batch: 300, Loss: 0.0141
+root        : INFO     Epoch: 195, Batch: 400, Loss: 0.0118
+root        : INFO     Epoch: 195, Batch: 500, Loss: 0.0160
+root        : INFO     Epoch: 195, Batch: 600, Loss: 0.0148
+root        : INFO     Epoch: 195, Batch: 700, Loss: 0.0216
+root        : INFO     Epoch: 195, Batch: 800, Loss: 0.0171
+root        : INFO     Epoch: 195, Batch: 900, Loss: 0.0154
+root        : INFO     Validating...
+root        : INFO     4857/5161 = 0.941097
+root        : INFO     Validation Loss for Epoch 195: 0.0197
+root        : INFO     Beginning Epoch 196
+root        : INFO     Epoch: 196, Batch: 100, Loss: 0.0143
+root        : INFO     Epoch: 196, Batch: 200, Loss: 0.0265
+root        : INFO     Epoch: 196, Batch: 300, Loss: 0.0087
+root        : INFO     Epoch: 196, Batch: 400, Loss: 0.0190
+root        : INFO     Epoch: 196, Batch: 500, Loss: 0.0117
+root        : INFO     Epoch: 196, Batch: 600, Loss: 0.0121
+root        : INFO     Epoch: 196, Batch: 700, Loss: 0.0153
+root        : INFO     Epoch: 196, Batch: 800, Loss: 0.0152
+root        : INFO     Epoch: 196, Batch: 900, Loss: 0.0099
+root        : INFO     Validating...
+root        : INFO     4850/5161 = 0.939740
+root        : INFO     Validation Loss for Epoch 196: 0.0193
+root        : INFO     Beginning Epoch 197
+root        : INFO     Epoch: 197, Batch: 100, Loss: 0.0159
+root        : INFO     Epoch: 197, Batch: 200, Loss: 0.0401
+root        : INFO     Epoch: 197, Batch: 300, Loss: 0.0193
+root        : INFO     Epoch: 197, Batch: 400, Loss: 0.0183
+root        : INFO     Epoch: 197, Batch: 500, Loss: 0.0171
+root        : INFO     Epoch: 197, Batch: 600, Loss: 0.0136
+root        : INFO     Epoch: 197, Batch: 700, Loss: 0.0168
+root        : INFO     Epoch: 197, Batch: 800, Loss: 0.0210
+root        : INFO     Epoch: 197, Batch: 900, Loss: 0.0252
+root        : INFO     Validating...
+root        : INFO     4854/5161 = 0.940515
+root        : INFO     Validation Loss for Epoch 197: 0.0197
+root        : INFO     Beginning Epoch 198
+root        : INFO     Epoch: 198, Batch: 100, Loss: 0.0137
+root        : INFO     Epoch: 198, Batch: 200, Loss: 0.0079
+root        : INFO     Epoch: 198, Batch: 300, Loss: 0.0339
+root        : INFO     Epoch: 198, Batch: 400, Loss: 0.0132
+root        : INFO     Epoch: 198, Batch: 500, Loss: 0.0141
+root        : INFO     Epoch: 198, Batch: 600, Loss: 0.0119
+root        : INFO     Epoch: 198, Batch: 700, Loss: 0.0352
+root        : INFO     Epoch: 198, Batch: 800, Loss: 0.0219
+root        : INFO     Epoch: 198, Batch: 900, Loss: 0.0158
+root        : INFO     Validating...
+root        : INFO     4774/5161 = 0.925015
+root        : INFO     Validation Loss for Epoch 198: 0.0196
+root        : INFO     Beginning Epoch 199
+root        : INFO     Epoch: 199, Batch: 100, Loss: 0.0186
+root        : INFO     Epoch: 199, Batch: 200, Loss: 0.0091
+root        : INFO     Epoch: 199, Batch: 300, Loss: 0.0121
+root        : INFO     Epoch: 199, Batch: 400, Loss: 0.0165
+root        : INFO     Epoch: 199, Batch: 500, Loss: 0.0085
+root        : INFO     Epoch: 199, Batch: 600, Loss: 0.0141
+root        : INFO     Epoch: 199, Batch: 700, Loss: 0.0164
+root        : INFO     Epoch: 199, Batch: 800, Loss: 0.0275
+root        : INFO     Epoch: 199, Batch: 900, Loss: 0.0138
+Traceback (most recent call last):
+  File "train_network.py", line 370, in <module>
+    run()
+  File "train_network.py", line 331, in run
+    train_results = train(epoch, net, device, train_data, optimizer, args.batches_per_epoch, vis=args.vis)
+  File "train_network.py", line 168, in train
+    xc = x.to(device)
+RuntimeError: CUDA error: unspecified launch failure
+CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.

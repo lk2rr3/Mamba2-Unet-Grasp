@@ -1,0 +1,434 @@
+(grconv) xinda-wang@xinda-wang-Legion-Y9000P-IRX8:~/Desktop/robotic-grasping$ python train_network.py --dataset cornell --dataset-path ../Mamba/archive --description training_cornell --network swin
+root        : INFO     CUDA detected. Running with GPU acceleration.
+root        : INFO     Loading Cornell Dataset...
+root        : INFO     Dataset size is 885
+root        : INFO     Training size: 796
+root        : INFO     Validation size: 89
+root        : INFO     Done
+root        : INFO     Loading Network...
+SwinTransformerSys expand initial----depths:[2, 2, 2, 2];depths_decoder:[1, 2, 2, 2];drop_path_rate:0.1;num_classes:1
+---final upsample expand_first---
+root        : INFO     Done
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1           [-1, 96, 56, 56]           6,240
+         LayerNorm-2             [-1, 3136, 96]             192
+        PatchEmbed-3             [-1, 3136, 96]               0
+           Dropout-4             [-1, 3136, 96]               0
+         LayerNorm-5             [-1, 3136, 96]             192
+            Linear-6              [-1, 49, 288]          27,936
+           Softmax-7            [-1, 3, 49, 49]               0
+           Dropout-8            [-1, 3, 49, 49]               0
+            Linear-9               [-1, 49, 96]           9,312
+          Dropout-10               [-1, 49, 96]               0
+  WindowAttention-11               [-1, 49, 96]               0
+         Identity-12             [-1, 3136, 96]               0
+        LayerNorm-13             [-1, 3136, 96]             192
+           Linear-14            [-1, 3136, 384]          37,248
+             ReLU-15            [-1, 3136, 384]               0
+          Dropout-16            [-1, 3136, 384]               0
+           Linear-17             [-1, 3136, 96]          36,960
+          Dropout-18             [-1, 3136, 96]               0
+              Mlp-19             [-1, 3136, 96]               0
+         Identity-20             [-1, 3136, 96]               0
+SwinTransformerBlock-21             [-1, 3136, 96]               0
+        LayerNorm-22             [-1, 3136, 96]             192
+           Linear-23              [-1, 49, 288]          27,936
+          Softmax-24            [-1, 3, 49, 49]               0
+          Dropout-25            [-1, 3, 49, 49]               0
+           Linear-26               [-1, 49, 96]           9,312
+          Dropout-27               [-1, 49, 96]               0
+  WindowAttention-28               [-1, 49, 96]               0
+         DropPath-29             [-1, 3136, 96]               0
+        LayerNorm-30             [-1, 3136, 96]             192
+           Linear-31            [-1, 3136, 384]          37,248
+             ReLU-32            [-1, 3136, 384]               0
+          Dropout-33            [-1, 3136, 384]               0
+           Linear-34             [-1, 3136, 96]          36,960
+          Dropout-35             [-1, 3136, 96]               0
+              Mlp-36             [-1, 3136, 96]               0
+         DropPath-37             [-1, 3136, 96]               0
+SwinTransformerBlock-38             [-1, 3136, 96]               0
+        LayerNorm-39             [-1, 784, 384]             768
+           Linear-40             [-1, 784, 192]          73,728
+     PatchMerging-41             [-1, 784, 192]               0
+       BasicLayer-42             [-1, 784, 192]               0
+        LayerNorm-43             [-1, 784, 192]             384
+           Linear-44              [-1, 49, 576]         111,168
+          Softmax-45            [-1, 6, 49, 49]               0
+          Dropout-46            [-1, 6, 49, 49]               0
+           Linear-47              [-1, 49, 192]          37,056
+          Dropout-48              [-1, 49, 192]               0
+  WindowAttention-49              [-1, 49, 192]               0
+         DropPath-50             [-1, 784, 192]               0
+        LayerNorm-51             [-1, 784, 192]             384
+           Linear-52             [-1, 784, 768]         148,224
+             ReLU-53             [-1, 784, 768]               0
+          Dropout-54             [-1, 784, 768]               0
+           Linear-55             [-1, 784, 192]         147,648
+          Dropout-56             [-1, 784, 192]               0
+              Mlp-57             [-1, 784, 192]               0
+         DropPath-58             [-1, 784, 192]               0
+SwinTransformerBlock-59             [-1, 784, 192]               0
+        LayerNorm-60             [-1, 784, 192]             384
+           Linear-61              [-1, 49, 576]         111,168
+          Softmax-62            [-1, 6, 49, 49]               0
+          Dropout-63            [-1, 6, 49, 49]               0
+           Linear-64              [-1, 49, 192]          37,056
+          Dropout-65              [-1, 49, 192]               0
+  WindowAttention-66              [-1, 49, 192]               0
+         DropPath-67             [-1, 784, 192]               0
+        LayerNorm-68             [-1, 784, 192]             384
+           Linear-69             [-1, 784, 768]         148,224
+             ReLU-70             [-1, 784, 768]               0
+          Dropout-71             [-1, 784, 768]               0
+           Linear-72             [-1, 784, 192]         147,648
+          Dropout-73             [-1, 784, 192]               0
+              Mlp-74             [-1, 784, 192]               0
+         DropPath-75             [-1, 784, 192]               0
+SwinTransformerBlock-76             [-1, 784, 192]               0
+        LayerNorm-77             [-1, 196, 768]           1,536
+           Linear-78             [-1, 196, 384]         294,912
+     PatchMerging-79             [-1, 196, 384]               0
+       BasicLayer-80             [-1, 196, 384]               0
+        LayerNorm-81             [-1, 196, 384]             768
+           Linear-82             [-1, 49, 1152]         443,520
+          Softmax-83           [-1, 12, 49, 49]               0
+          Dropout-84           [-1, 12, 49, 49]               0
+           Linear-85              [-1, 49, 384]         147,840
+          Dropout-86              [-1, 49, 384]               0
+  WindowAttention-87              [-1, 49, 384]               0
+         DropPath-88             [-1, 196, 384]               0
+        LayerNorm-89             [-1, 196, 384]             768
+           Linear-90            [-1, 196, 1536]         591,360
+             ReLU-91            [-1, 196, 1536]               0
+          Dropout-92            [-1, 196, 1536]               0
+           Linear-93             [-1, 196, 384]         590,208
+          Dropout-94             [-1, 196, 384]               0
+              Mlp-95             [-1, 196, 384]               0
+         DropPath-96             [-1, 196, 384]               0
+SwinTransformerBlock-97             [-1, 196, 384]               0
+        LayerNorm-98             [-1, 196, 384]             768
+           Linear-99             [-1, 49, 1152]         443,520
+         Softmax-100           [-1, 12, 49, 49]               0
+         Dropout-101           [-1, 12, 49, 49]               0
+          Linear-102              [-1, 49, 384]         147,840
+         Dropout-103              [-1, 49, 384]               0
+ WindowAttention-104              [-1, 49, 384]               0
+        DropPath-105             [-1, 196, 384]               0
+       LayerNorm-106             [-1, 196, 384]             768
+          Linear-107            [-1, 196, 1536]         591,360
+            ReLU-108            [-1, 196, 1536]               0
+         Dropout-109            [-1, 196, 1536]               0
+          Linear-110             [-1, 196, 384]         590,208
+         Dropout-111             [-1, 196, 384]               0
+             Mlp-112             [-1, 196, 384]               0
+        DropPath-113             [-1, 196, 384]               0
+SwinTransformerBlock-114             [-1, 196, 384]               0
+       LayerNorm-115             [-1, 49, 1536]           3,072
+          Linear-116              [-1, 49, 768]       1,179,648
+    PatchMerging-117              [-1, 49, 768]               0
+      BasicLayer-118              [-1, 49, 768]               0
+       LayerNorm-119              [-1, 49, 768]           1,536
+          Linear-120             [-1, 49, 2304]       1,771,776
+         Softmax-121           [-1, 24, 49, 49]               0
+         Dropout-122           [-1, 24, 49, 49]               0
+          Linear-123              [-1, 49, 768]         590,592
+         Dropout-124              [-1, 49, 768]               0
+ WindowAttention-125              [-1, 49, 768]               0
+        DropPath-126              [-1, 49, 768]               0
+       LayerNorm-127              [-1, 49, 768]           1,536
+          Linear-128             [-1, 49, 3072]       2,362,368
+            ReLU-129             [-1, 49, 3072]               0
+         Dropout-130             [-1, 49, 3072]               0
+          Linear-131              [-1, 49, 768]       2,360,064
+         Dropout-132              [-1, 49, 768]               0
+             Mlp-133              [-1, 49, 768]               0
+        DropPath-134              [-1, 49, 768]               0
+SwinTransformerBlock-135              [-1, 49, 768]               0
+       LayerNorm-136              [-1, 49, 768]           1,536
+          Linear-137             [-1, 49, 2304]       1,771,776
+         Softmax-138           [-1, 24, 49, 49]               0
+         Dropout-139           [-1, 24, 49, 49]               0
+          Linear-140              [-1, 49, 768]         590,592
+         Dropout-141              [-1, 49, 768]               0
+ WindowAttention-142              [-1, 49, 768]               0
+        DropPath-143              [-1, 49, 768]               0
+       LayerNorm-144              [-1, 49, 768]           1,536
+          Linear-145             [-1, 49, 3072]       2,362,368
+            ReLU-146             [-1, 49, 3072]               0
+         Dropout-147             [-1, 49, 3072]               0
+          Linear-148              [-1, 49, 768]       2,360,064
+         Dropout-149              [-1, 49, 768]               0
+             Mlp-150              [-1, 49, 768]               0
+        DropPath-151              [-1, 49, 768]               0
+SwinTransformerBlock-152              [-1, 49, 768]               0
+      BasicLayer-153              [-1, 49, 768]               0
+       LayerNorm-154              [-1, 49, 768]           1,536
+          Linear-155             [-1, 49, 1536]       1,179,648
+       LayerNorm-156             [-1, 196, 384]             768
+     PatchExpand-157             [-1, 196, 384]               0
+          Linear-158             [-1, 196, 384]         295,296
+       LayerNorm-159             [-1, 196, 384]             768
+          Linear-160             [-1, 49, 1152]         443,520
+         Softmax-161           [-1, 12, 49, 49]               0
+         Dropout-162           [-1, 12, 49, 49]               0
+          Linear-163              [-1, 49, 384]         147,840
+         Dropout-164              [-1, 49, 384]               0
+ WindowAttention-165              [-1, 49, 384]               0
+        DropPath-166             [-1, 196, 384]               0
+       LayerNorm-167             [-1, 196, 384]             768
+          Linear-168            [-1, 196, 1536]         591,360
+            ReLU-169            [-1, 196, 1536]               0
+         Dropout-170            [-1, 196, 1536]               0
+          Linear-171             [-1, 196, 384]         590,208
+         Dropout-172             [-1, 196, 384]               0
+             Mlp-173             [-1, 196, 384]               0
+        DropPath-174             [-1, 196, 384]               0
+SwinTransformerBlock-175             [-1, 196, 384]               0
+       LayerNorm-176             [-1, 196, 384]             768
+          Linear-177             [-1, 49, 1152]         443,520
+         Softmax-178           [-1, 12, 49, 49]               0
+         Dropout-179           [-1, 12, 49, 49]               0
+          Linear-180              [-1, 49, 384]         147,840
+         Dropout-181              [-1, 49, 384]               0
+ WindowAttention-182              [-1, 49, 384]               0
+        DropPath-183             [-1, 196, 384]               0
+       LayerNorm-184             [-1, 196, 384]             768
+          Linear-185            [-1, 196, 1536]         591,360
+            ReLU-186            [-1, 196, 1536]               0
+         Dropout-187            [-1, 196, 1536]               0
+          Linear-188             [-1, 196, 384]         590,208
+         Dropout-189             [-1, 196, 384]               0
+             Mlp-190             [-1, 196, 384]               0
+        DropPath-191             [-1, 196, 384]               0
+SwinTransformerBlock-192             [-1, 196, 384]               0
+          Linear-193             [-1, 196, 768]         294,912
+       LayerNorm-194             [-1, 784, 192]             384
+     PatchExpand-195             [-1, 784, 192]               0
+   BasicLayer_up-196             [-1, 784, 192]               0
+          Linear-197             [-1, 784, 192]          73,920
+       LayerNorm-198             [-1, 784, 192]             384
+          Linear-199              [-1, 49, 576]         111,168
+         Softmax-200            [-1, 6, 49, 49]               0
+         Dropout-201            [-1, 6, 49, 49]               0
+          Linear-202              [-1, 49, 192]          37,056
+         Dropout-203              [-1, 49, 192]               0
+ WindowAttention-204              [-1, 49, 192]               0
+        DropPath-205             [-1, 784, 192]               0
+       LayerNorm-206             [-1, 784, 192]             384
+          Linear-207             [-1, 784, 768]         148,224
+            ReLU-208             [-1, 784, 768]               0
+         Dropout-209             [-1, 784, 768]               0
+          Linear-210             [-1, 784, 192]         147,648
+         Dropout-211             [-1, 784, 192]               0
+             Mlp-212             [-1, 784, 192]               0
+        DropPath-213             [-1, 784, 192]               0
+SwinTransformerBlock-214             [-1, 784, 192]               0
+       LayerNorm-215             [-1, 784, 192]             384
+          Linear-216              [-1, 49, 576]         111,168
+         Softmax-217            [-1, 6, 49, 49]               0
+         Dropout-218            [-1, 6, 49, 49]               0
+          Linear-219              [-1, 49, 192]          37,056
+         Dropout-220              [-1, 49, 192]               0
+ WindowAttention-221              [-1, 49, 192]               0
+        DropPath-222             [-1, 784, 192]               0
+       LayerNorm-223             [-1, 784, 192]             384
+          Linear-224             [-1, 784, 768]         148,224
+            ReLU-225             [-1, 784, 768]               0
+         Dropout-226             [-1, 784, 768]               0
+          Linear-227             [-1, 784, 192]         147,648
+         Dropout-228             [-1, 784, 192]               0
+             Mlp-229             [-1, 784, 192]               0
+        DropPath-230             [-1, 784, 192]               0
+SwinTransformerBlock-231             [-1, 784, 192]               0
+          Linear-232             [-1, 784, 384]          73,728
+       LayerNorm-233             [-1, 3136, 96]             192
+     PatchExpand-234             [-1, 3136, 96]               0
+   BasicLayer_up-235             [-1, 3136, 96]               0
+          Linear-236             [-1, 3136, 96]          18,528
+       LayerNorm-237             [-1, 3136, 96]             192
+          Linear-238              [-1, 49, 288]          27,936
+         Softmax-239            [-1, 3, 49, 49]               0
+         Dropout-240            [-1, 3, 49, 49]               0
+          Linear-241               [-1, 49, 96]           9,312
+         Dropout-242               [-1, 49, 96]               0
+ WindowAttention-243               [-1, 49, 96]               0
+        Identity-244             [-1, 3136, 96]               0
+       LayerNorm-245             [-1, 3136, 96]             192
+          Linear-246            [-1, 3136, 384]          37,248
+            ReLU-247            [-1, 3136, 384]               0
+         Dropout-248            [-1, 3136, 384]               0
+          Linear-249             [-1, 3136, 96]          36,960
+         Dropout-250             [-1, 3136, 96]               0
+             Mlp-251             [-1, 3136, 96]               0
+        Identity-252             [-1, 3136, 96]               0
+SwinTransformerBlock-253             [-1, 3136, 96]               0
+       LayerNorm-254             [-1, 3136, 96]             192
+          Linear-255              [-1, 49, 288]          27,936
+         Softmax-256            [-1, 3, 49, 49]               0
+         Dropout-257            [-1, 3, 49, 49]               0
+          Linear-258               [-1, 49, 96]           9,312
+         Dropout-259               [-1, 49, 96]               0
+ WindowAttention-260               [-1, 49, 96]               0
+        DropPath-261             [-1, 3136, 96]               0
+       LayerNorm-262             [-1, 3136, 96]             192
+          Linear-263            [-1, 3136, 384]          37,248
+            ReLU-264            [-1, 3136, 384]               0
+         Dropout-265            [-1, 3136, 384]               0
+          Linear-266             [-1, 3136, 96]          36,960
+         Dropout-267             [-1, 3136, 96]               0
+             Mlp-268             [-1, 3136, 96]               0
+        DropPath-269             [-1, 3136, 96]               0
+SwinTransformerBlock-270             [-1, 3136, 96]               0
+   BasicLayer_up-271             [-1, 3136, 96]               0
+       LayerNorm-272             [-1, 3136, 96]             192
+          Linear-273           [-1, 3136, 1536]         147,456
+       LayerNorm-274            [-1, 50176, 96]             192
+FinalPatchExpand_X4-275            [-1, 50176, 96]               0
+          Conv2d-276          [-1, 1, 224, 224]              96
+          Conv2d-277          [-1, 1, 224, 224]              96
+          Conv2d-278          [-1, 1, 224, 224]              96
+          Conv2d-279          [-1, 1, 224, 224]              96
+================================================================
+Total params: 27,147,648
+Trainable params: 27,147,648
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.77
+Forward/backward pass size (MB): 503.07
+Params size (MB): 103.56
+Estimated Total Size (MB): 607.39
+----------------------------------------------------------------
+root        : INFO     Beginning Epoch 00
+root        : INFO     Epoch: 0, Batch: 100, Loss: 0.3350
+root        : INFO     Epoch: 0, Batch: 200, Loss: 0.1287
+root        : INFO     Epoch: 0, Batch: 300, Loss: 0.1996
+root        : INFO     Epoch: 0, Batch: 400, Loss: 0.1070
+root        : INFO     Epoch: 0, Batch: 500, Loss: 0.2253
+root        : INFO     Epoch: 0, Batch: 600, Loss: 0.1828
+root        : INFO     Epoch: 0, Batch: 700, Loss: 0.1336
+root        : INFO     Epoch: 0, Batch: 800, Loss: 0.2091
+root        : INFO     Epoch: 0, Batch: 900, Loss: 0.2284
+root        : INFO     Validating...
+root        : INFO     50/89 = 0.561798
+root        : INFO     Validation Loss for Epoch 0: 0.1853
+root        : INFO     Beginning Epoch 01
+root        : INFO     Epoch: 1, Batch: 100, Loss: 0.1368
+root        : INFO     Epoch: 1, Batch: 200, Loss: 0.1007
+root        : INFO     Epoch: 1, Batch: 300, Loss: 0.1177
+root        : INFO     Epoch: 1, Batch: 400, Loss: 0.1168
+root        : INFO     Epoch: 1, Batch: 500, Loss: 0.0835
+root        : INFO     Epoch: 1, Batch: 600, Loss: 0.2179
+root        : INFO     Epoch: 1, Batch: 700, Loss: 0.2622
+root        : INFO     Epoch: 1, Batch: 800, Loss: 0.2665
+root        : INFO     Epoch: 1, Batch: 900, Loss: 0.2808
+root        : INFO     Validating...
+root        : INFO     29/89 = 0.325843
+root        : INFO     Validation Loss for Epoch 1: 0.2355
+root        : INFO     Beginning Epoch 02
+root        : INFO     Epoch: 2, Batch: 100, Loss: 0.2160
+root        : INFO     Epoch: 2, Batch: 200, Loss: 0.0981
+root        : INFO     Epoch: 2, Batch: 300, Loss: 0.0754
+root        : INFO     Epoch: 2, Batch: 400, Loss: 0.3721
+root        : INFO     Epoch: 2, Batch: 500, Loss: 0.2057
+root        : INFO     Epoch: 2, Batch: 600, Loss: 0.0878
+root        : INFO     Epoch: 2, Batch: 700, Loss: 0.1667
+root        : INFO     Epoch: 2, Batch: 800, Loss: 0.2883
+root        : INFO     Epoch: 2, Batch: 900, Loss: 0.2600
+root        : INFO     Validating...
+root        : INFO     38/89 = 0.426966
+root        : INFO     Validation Loss for Epoch 2: 0.2010
+root        : INFO     Beginning Epoch 03
+root        : INFO     Epoch: 3, Batch: 100, Loss: 0.2562
+root        : INFO     Epoch: 3, Batch: 200, Loss: 0.2210
+root        : INFO     Epoch: 3, Batch: 300, Loss: 0.0923
+root        : INFO     Epoch: 3, Batch: 400, Loss: 0.0970
+root        : INFO     Epoch: 3, Batch: 500, Loss: 0.1435
+root        : INFO     Epoch: 3, Batch: 600, Loss: 0.1202
+root        : INFO     Epoch: 3, Batch: 700, Loss: 0.3081
+root        : INFO     Epoch: 3, Batch: 800, Loss: 0.6184
+root        : INFO     Epoch: 3, Batch: 900, Loss: 0.0914
+root        : INFO     Validating...
+root        : INFO     51/89 = 0.573034
+root        : INFO     Validation Loss for Epoch 3: 0.1818
+root        : INFO     Beginning Epoch 04
+root        : INFO     Epoch: 4, Batch: 100, Loss: 0.1926
+root        : INFO     Epoch: 4, Batch: 200, Loss: 0.0590
+root        : INFO     Epoch: 4, Batch: 300, Loss: 0.2353
+root        : INFO     Epoch: 4, Batch: 400, Loss: 0.2119
+root        : INFO     Epoch: 4, Batch: 500, Loss: 0.0900
+root        : INFO     Epoch: 4, Batch: 600, Loss: 0.2731
+root        : INFO     Epoch: 4, Batch: 700, Loss: 0.1064
+root        : INFO     Epoch: 4, Batch: 800, Loss: 0.1590
+root        : INFO     Epoch: 4, Batch: 900, Loss: 0.0871
+root        : INFO     Validating...
+root        : INFO     67/89 = 0.752809
+root        : INFO     Validation Loss for Epoch 4: 0.1502
+root        : INFO     Beginning Epoch 05
+root        : INFO     Epoch: 5, Batch: 100, Loss: 0.2483
+root        : INFO     Epoch: 5, Batch: 200, Loss: 0.3429
+root        : INFO     Epoch: 5, Batch: 300, Loss: 0.1196
+root        : INFO     Epoch: 5, Batch: 400, Loss: 0.1938
+root        : INFO     Epoch: 5, Batch: 500, Loss: 0.1376
+root        : INFO     Epoch: 5, Batch: 600, Loss: 0.3205
+root        : INFO     Epoch: 5, Batch: 700, Loss: 0.2032
+root        : INFO     Epoch: 5, Batch: 800, Loss: 0.1081
+root        : INFO     Epoch: 5, Batch: 900, Loss: 0.1259
+root        : INFO     Validating...
+root        : INFO     66/89 = 0.741573
+root        : INFO     Validation Loss for Epoch 5: 0.1743
+root        : INFO     Beginning Epoch 06
+root        : INFO     Epoch: 6, Batch: 100, Loss: 0.1601
+root        : INFO     Epoch: 6, Batch: 200, Loss: 0.2968
+root        : INFO     Epoch: 6, Batch: 300, Loss: 0.3763
+root        : INFO     Epoch: 6, Batch: 400, Loss: 0.1872
+root        : INFO     Epoch: 6, Batch: 500, Loss: 0.2058
+root        : INFO     Epoch: 6, Batch: 600, Loss: 0.4097
+root        : INFO     Epoch: 6, Batch: 700, Loss: 0.1512
+root        : INFO     Epoch: 6, Batch: 800, Loss: 0.2062
+root        : INFO     Epoch: 6, Batch: 900, Loss: 0.1311
+root        : INFO     Validating...
+root        : INFO     54/89 = 0.606742
+root        : INFO     Validation Loss for Epoch 6: 0.1768
+root        : INFO     Beginning Epoch 07
+root        : INFO     Epoch: 7, Batch: 100, Loss: 0.0952
+root        : INFO     Epoch: 7, Batch: 200, Loss: 0.1564
+root        : INFO     Epoch: 7, Batch: 300, Loss: 0.2158
+root        : INFO     Epoch: 7, Batch: 400, Loss: 0.1863
+root        : INFO     Epoch: 7, Batch: 500, Loss: 0.1249
+root        : INFO     Epoch: 7, Batch: 600, Loss: 0.3279
+root        : INFO     Epoch: 7, Batch: 700, Loss: 0.2196
+root        : INFO     Epoch: 7, Batch: 800, Loss: 0.1682
+root        : INFO     Epoch: 7, Batch: 900, Loss: 0.0539
+root        : INFO     Validating...
+root        : INFO     62/89 = 0.696629
+root        : INFO     Validation Loss for Epoch 7: 0.1559
+root        : INFO     Beginning Epoch 08
+root        : INFO     Epoch: 8, Batch: 100, Loss: 0.1576
+root        : INFO     Epoch: 8, Batch: 200, Loss: 0.1224
+root        : INFO     Epoch: 8, Batch: 300, Loss: 0.1544
+root        : INFO     Epoch: 8, Batch: 400, Loss: 0.2915
+root        : INFO     Epoch: 8, Batch: 500, Loss: 0.1206
+root        : INFO     Epoch: 8, Batch: 600, Loss: 0.1119
+root        : INFO     Epoch: 8, Batch: 700, Loss: 0.1331
+root        : INFO     Epoch: 8, Batch: 800, Loss: 0.2738
+root        : INFO     Epoch: 8, Batch: 900, Loss: 0.1148
+root        : INFO     Validating...
+root        : INFO     58/89 = 0.651685
+root        : INFO     Validation Loss for Epoch 8: 0.1456
+root        : INFO     Beginning Epoch 09
+root        : INFO     Epoch: 9, Batch: 100, Loss: 0.2105
+root        : INFO     Epoch: 9, Batch: 200, Loss: 0.2159
+root        : INFO     Epoch: 9, Batch: 300, Loss: 0.1512
+root        : INFO     Epoch: 9, Batch: 400, Loss: 0.1409
+root        : INFO     Epoch: 9, Batch: 500, Loss: 0.1274
+root        : INFO     Epoch: 9, Batch: 600, Loss: 0.2671
+root        : INFO     Epoch: 9, Batch: 700, Loss: 0.0972
+root        : INFO     Epoch: 9, Batch: 800, Loss: 0.1194
+root        : INFO     Epoch: 9, Batch: 900, Loss: 0.3126
+root        : INFO     Validating...
+root        : INFO     59/89 = 0.662921
+root        : INFO     Validation Loss for Epoch 9: 0.1925
+root        : INFO     Total training time: 30.52 minutes

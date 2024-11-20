@@ -1,0 +1,579 @@
+(grconv) xinda-wang@xinda-wang-Legion-Y9000P-IRX8:~/Desktop/robotic-grasping$ python train_network.py --network large  --dataset cornell --dataset-path ../Mamba/archive --description training_cornell
+root        : INFO     CUDA detected. Running with GPU acceleration.
+root        : INFO     Loading Cornell Dataset...
+root        : INFO     Dataset size is 885
+root        : INFO     Training size: 796
+root        : INFO     Validation size: 89
+root        : INFO     Done
+root        : INFO     Loading Network...
+root        : INFO     Done
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+          Identity-1          [-1, 4, 224, 224]               0
+            Conv2d-2         [-1, 64, 112, 112]           2,304
+       BatchNorm2d-3         [-1, 64, 112, 112]             128
+              ReLU-4         [-1, 64, 112, 112]               0
+         ConvLayer-5         [-1, 64, 112, 112]               0
+          Identity-6         [-1, 64, 112, 112]               0
+            Conv2d-7         [-1, 64, 112, 112]          36,864
+       BatchNorm2d-8         [-1, 64, 112, 112]             128
+              ReLU-9         [-1, 64, 112, 112]               0
+        ConvLayer-10         [-1, 64, 112, 112]               0
+         Identity-11         [-1, 64, 112, 112]               0
+           Conv2d-12         [-1, 64, 112, 112]          36,864
+      BatchNorm2d-13         [-1, 64, 112, 112]             128
+         Identity-14         [-1, 64, 112, 112]               0
+        ConvLayer-15         [-1, 64, 112, 112]               0
+         Identity-16         [-1, 64, 112, 112]               0
+           Conv2d-17          [-1, 512, 56, 56]         294,912
+      BatchNorm2d-18          [-1, 512, 56, 56]           1,024
+             ReLU-19          [-1, 512, 56, 56]               0
+        ConvLayer-20          [-1, 512, 56, 56]               0
+         Identity-21          [-1, 512, 56, 56]               0
+           Conv2d-22          [-1, 128, 56, 56]          65,536
+      BatchNorm2d-23          [-1, 128, 56, 56]             256
+         Identity-24          [-1, 128, 56, 56]               0
+        ConvLayer-25          [-1, 128, 56, 56]               0
+             Stem-26            [-1, 3136, 128]               0
+           Conv2d-27          [-1, 128, 56, 56]           1,280
+        LayerNorm-28            [-1, 3136, 128]             256
+           Mamba2-29            [-1, 3136, 128]               0
+         Identity-30            [-1, 3136, 128]               0
+           Conv2d-31          [-1, 128, 56, 56]           1,280
+        LayerNorm-32            [-1, 3136, 128]             256
+           Linear-33            [-1, 3136, 512]          66,048
+             GELU-34            [-1, 3136, 512]               0
+          Dropout-35            [-1, 3136, 512]               0
+           Linear-36            [-1, 3136, 128]          65,664
+          Dropout-37            [-1, 3136, 128]               0
+              Mlp-38            [-1, 3136, 128]               0
+         Identity-39            [-1, 3136, 128]               0
+     VMAMBA2Block-40            [-1, 3136, 128]               0
+           Conv2d-41          [-1, 128, 56, 56]           1,280
+        LayerNorm-42            [-1, 3136, 128]             256
+           Mamba2-43            [-1, 3136, 128]               0
+         DropPath-44            [-1, 3136, 128]               0
+           Conv2d-45          [-1, 128, 56, 56]           1,280
+        LayerNorm-46            [-1, 3136, 128]             256
+           Linear-47            [-1, 3136, 512]          66,048
+             GELU-48            [-1, 3136, 512]               0
+          Dropout-49            [-1, 3136, 512]               0
+           Linear-50            [-1, 3136, 128]          65,664
+          Dropout-51            [-1, 3136, 128]               0
+              Mlp-52            [-1, 3136, 128]               0
+         DropPath-53            [-1, 3136, 128]               0
+     VMAMBA2Block-54            [-1, 3136, 128]               0
+         Identity-55          [-1, 128, 56, 56]               0
+           Conv2d-56         [-1, 1024, 56, 56]         132,096
+         Identity-57         [-1, 1024, 56, 56]               0
+             ReLU-58         [-1, 1024, 56, 56]               0
+        ConvLayer-59         [-1, 1024, 56, 56]               0
+         Identity-60         [-1, 1024, 56, 56]               0
+           Conv2d-61         [-1, 1024, 28, 28]          10,240
+         Identity-62         [-1, 1024, 28, 28]               0
+             ReLU-63         [-1, 1024, 28, 28]               0
+        ConvLayer-64         [-1, 1024, 28, 28]               0
+         Identity-65         [-1, 1024, 28, 28]               0
+           Conv2d-66          [-1, 256, 28, 28]         262,400
+      BatchNorm2d-67          [-1, 256, 28, 28]             512
+         Identity-68          [-1, 256, 28, 28]               0
+        ConvLayer-69          [-1, 256, 28, 28]               0
+     PatchMerging-70             [-1, 784, 256]               0
+       BasicLayer-71  [[-1, 3136, 128], [-1, 784, 256]]               0
+        LayerNorm-72            [-1, 3136, 128]             256
+           Conv2d-73          [-1, 256, 28, 28]           2,560
+        LayerNorm-74             [-1, 784, 256]             512
+           Mamba2-75             [-1, 784, 256]               0
+         DropPath-76             [-1, 784, 256]               0
+           Conv2d-77          [-1, 256, 28, 28]           2,560
+        LayerNorm-78             [-1, 784, 256]             512
+           Linear-79            [-1, 784, 1024]         263,168
+             GELU-80            [-1, 784, 1024]               0
+          Dropout-81            [-1, 784, 1024]               0
+           Linear-82             [-1, 784, 256]         262,400
+          Dropout-83             [-1, 784, 256]               0
+              Mlp-84             [-1, 784, 256]               0
+         DropPath-85             [-1, 784, 256]               0
+     VMAMBA2Block-86             [-1, 784, 256]               0
+           Conv2d-87          [-1, 256, 28, 28]           2,560
+        LayerNorm-88             [-1, 784, 256]             512
+           Mamba2-89             [-1, 784, 256]               0
+         DropPath-90             [-1, 784, 256]               0
+           Conv2d-91          [-1, 256, 28, 28]           2,560
+        LayerNorm-92             [-1, 784, 256]             512
+           Linear-93            [-1, 784, 1024]         263,168
+             GELU-94            [-1, 784, 1024]               0
+          Dropout-95            [-1, 784, 1024]               0
+           Linear-96             [-1, 784, 256]         262,400
+          Dropout-97             [-1, 784, 256]               0
+              Mlp-98             [-1, 784, 256]               0
+         DropPath-99             [-1, 784, 256]               0
+    VMAMBA2Block-100             [-1, 784, 256]               0
+          Conv2d-101          [-1, 256, 28, 28]           2,560
+       LayerNorm-102             [-1, 784, 256]             512
+          Mamba2-103             [-1, 784, 256]               0
+        DropPath-104             [-1, 784, 256]               0
+          Conv2d-105          [-1, 256, 28, 28]           2,560
+       LayerNorm-106             [-1, 784, 256]             512
+          Linear-107            [-1, 784, 1024]         263,168
+            GELU-108            [-1, 784, 1024]               0
+         Dropout-109            [-1, 784, 1024]               0
+          Linear-110             [-1, 784, 256]         262,400
+         Dropout-111             [-1, 784, 256]               0
+             Mlp-112             [-1, 784, 256]               0
+        DropPath-113             [-1, 784, 256]               0
+    VMAMBA2Block-114             [-1, 784, 256]               0
+          Conv2d-115          [-1, 256, 28, 28]           2,560
+       LayerNorm-116             [-1, 784, 256]             512
+          Mamba2-117             [-1, 784, 256]               0
+        DropPath-118             [-1, 784, 256]               0
+          Conv2d-119          [-1, 256, 28, 28]           2,560
+       LayerNorm-120             [-1, 784, 256]             512
+          Linear-121            [-1, 784, 1024]         263,168
+            GELU-122            [-1, 784, 1024]               0
+         Dropout-123            [-1, 784, 1024]               0
+          Linear-124             [-1, 784, 256]         262,400
+         Dropout-125             [-1, 784, 256]               0
+             Mlp-126             [-1, 784, 256]               0
+        DropPath-127             [-1, 784, 256]               0
+    VMAMBA2Block-128             [-1, 784, 256]               0
+        Identity-129          [-1, 256, 28, 28]               0
+          Conv2d-130         [-1, 2048, 28, 28]         526,336
+        Identity-131         [-1, 2048, 28, 28]               0
+            ReLU-132         [-1, 2048, 28, 28]               0
+       ConvLayer-133         [-1, 2048, 28, 28]               0
+        Identity-134         [-1, 2048, 28, 28]               0
+          Conv2d-135         [-1, 2048, 14, 14]          20,480
+        Identity-136         [-1, 2048, 14, 14]               0
+            ReLU-137         [-1, 2048, 14, 14]               0
+       ConvLayer-138         [-1, 2048, 14, 14]               0
+        Identity-139         [-1, 2048, 14, 14]               0
+          Conv2d-140          [-1, 512, 14, 14]       1,049,088
+     BatchNorm2d-141          [-1, 512, 14, 14]           1,024
+        Identity-142          [-1, 512, 14, 14]               0
+       ConvLayer-143          [-1, 512, 14, 14]               0
+    PatchMerging-144             [-1, 196, 512]               0
+      BasicLayer-145  [[-1, 784, 256], [-1, 196, 512]]               0
+       LayerNorm-146             [-1, 784, 256]             512
+          Conv2d-147          [-1, 512, 14, 14]           5,120
+       LayerNorm-148             [-1, 196, 512]           1,024
+          Mamba2-149             [-1, 196, 512]               0
+        DropPath-150             [-1, 196, 512]               0
+          Conv2d-151          [-1, 512, 14, 14]           5,120
+       LayerNorm-152             [-1, 196, 512]           1,024
+          Linear-153            [-1, 196, 2048]       1,050,624
+            GELU-154            [-1, 196, 2048]               0
+         Dropout-155            [-1, 196, 2048]               0
+          Linear-156             [-1, 196, 512]       1,049,088
+         Dropout-157             [-1, 196, 512]               0
+             Mlp-158             [-1, 196, 512]               0
+        DropPath-159             [-1, 196, 512]               0
+    VMAMBA2Block-160             [-1, 196, 512]               0
+          Conv2d-161          [-1, 512, 14, 14]           5,120
+       LayerNorm-162             [-1, 196, 512]           1,024
+          Mamba2-163             [-1, 196, 512]               0
+        DropPath-164             [-1, 196, 512]               0
+          Conv2d-165          [-1, 512, 14, 14]           5,120
+       LayerNorm-166             [-1, 196, 512]           1,024
+          Linear-167            [-1, 196, 2048]       1,050,624
+            GELU-168            [-1, 196, 2048]               0
+         Dropout-169            [-1, 196, 2048]               0
+          Linear-170             [-1, 196, 512]       1,049,088
+         Dropout-171             [-1, 196, 512]               0
+             Mlp-172             [-1, 196, 512]               0
+        DropPath-173             [-1, 196, 512]               0
+    VMAMBA2Block-174             [-1, 196, 512]               0
+          Conv2d-175          [-1, 512, 14, 14]           5,120
+       LayerNorm-176             [-1, 196, 512]           1,024
+          Mamba2-177             [-1, 196, 512]               0
+        DropPath-178             [-1, 196, 512]               0
+          Conv2d-179          [-1, 512, 14, 14]           5,120
+       LayerNorm-180             [-1, 196, 512]           1,024
+          Linear-181            [-1, 196, 2048]       1,050,624
+            GELU-182            [-1, 196, 2048]               0
+         Dropout-183            [-1, 196, 2048]               0
+          Linear-184             [-1, 196, 512]       1,049,088
+         Dropout-185             [-1, 196, 512]               0
+             Mlp-186             [-1, 196, 512]               0
+        DropPath-187             [-1, 196, 512]               0
+    VMAMBA2Block-188             [-1, 196, 512]               0
+          Conv2d-189          [-1, 512, 14, 14]           5,120
+       LayerNorm-190             [-1, 196, 512]           1,024
+          Mamba2-191             [-1, 196, 512]               0
+        DropPath-192             [-1, 196, 512]               0
+          Conv2d-193          [-1, 512, 14, 14]           5,120
+       LayerNorm-194             [-1, 196, 512]           1,024
+          Linear-195            [-1, 196, 2048]       1,050,624
+            GELU-196            [-1, 196, 2048]               0
+         Dropout-197            [-1, 196, 2048]               0
+          Linear-198             [-1, 196, 512]       1,049,088
+         Dropout-199             [-1, 196, 512]               0
+             Mlp-200             [-1, 196, 512]               0
+        DropPath-201             [-1, 196, 512]               0
+    VMAMBA2Block-202             [-1, 196, 512]               0
+          Conv2d-203          [-1, 512, 14, 14]           5,120
+       LayerNorm-204             [-1, 196, 512]           1,024
+          Mamba2-205             [-1, 196, 512]               0
+        DropPath-206             [-1, 196, 512]               0
+          Conv2d-207          [-1, 512, 14, 14]           5,120
+       LayerNorm-208             [-1, 196, 512]           1,024
+          Linear-209            [-1, 196, 2048]       1,050,624
+            GELU-210            [-1, 196, 2048]               0
+         Dropout-211            [-1, 196, 2048]               0
+          Linear-212             [-1, 196, 512]       1,049,088
+         Dropout-213             [-1, 196, 512]               0
+             Mlp-214             [-1, 196, 512]               0
+        DropPath-215             [-1, 196, 512]               0
+    VMAMBA2Block-216             [-1, 196, 512]               0
+          Conv2d-217          [-1, 512, 14, 14]           5,120
+       LayerNorm-218             [-1, 196, 512]           1,024
+          Mamba2-219             [-1, 196, 512]               0
+        DropPath-220             [-1, 196, 512]               0
+          Conv2d-221          [-1, 512, 14, 14]           5,120
+       LayerNorm-222             [-1, 196, 512]           1,024
+          Linear-223            [-1, 196, 2048]       1,050,624
+            GELU-224            [-1, 196, 2048]               0
+         Dropout-225            [-1, 196, 2048]               0
+          Linear-226             [-1, 196, 512]       1,049,088
+         Dropout-227             [-1, 196, 512]               0
+             Mlp-228             [-1, 196, 512]               0
+        DropPath-229             [-1, 196, 512]               0
+    VMAMBA2Block-230             [-1, 196, 512]               0
+          Conv2d-231          [-1, 512, 14, 14]           5,120
+       LayerNorm-232             [-1, 196, 512]           1,024
+          Mamba2-233             [-1, 196, 512]               0
+        DropPath-234             [-1, 196, 512]               0
+          Conv2d-235          [-1, 512, 14, 14]           5,120
+       LayerNorm-236             [-1, 196, 512]           1,024
+          Linear-237            [-1, 196, 2048]       1,050,624
+            GELU-238            [-1, 196, 2048]               0
+         Dropout-239            [-1, 196, 2048]               0
+          Linear-240             [-1, 196, 512]       1,049,088
+         Dropout-241             [-1, 196, 512]               0
+             Mlp-242             [-1, 196, 512]               0
+        DropPath-243             [-1, 196, 512]               0
+    VMAMBA2Block-244             [-1, 196, 512]               0
+          Conv2d-245          [-1, 512, 14, 14]           5,120
+       LayerNorm-246             [-1, 196, 512]           1,024
+          Mamba2-247             [-1, 196, 512]               0
+        DropPath-248             [-1, 196, 512]               0
+          Conv2d-249          [-1, 512, 14, 14]           5,120
+       LayerNorm-250             [-1, 196, 512]           1,024
+          Linear-251            [-1, 196, 2048]       1,050,624
+            GELU-252            [-1, 196, 2048]               0
+         Dropout-253            [-1, 196, 2048]               0
+          Linear-254             [-1, 196, 512]       1,049,088
+         Dropout-255             [-1, 196, 512]               0
+             Mlp-256             [-1, 196, 512]               0
+        DropPath-257             [-1, 196, 512]               0
+    VMAMBA2Block-258             [-1, 196, 512]               0
+          Conv2d-259          [-1, 512, 14, 14]           5,120
+       LayerNorm-260             [-1, 196, 512]           1,024
+          Mamba2-261             [-1, 196, 512]               0
+        DropPath-262             [-1, 196, 512]               0
+          Conv2d-263          [-1, 512, 14, 14]           5,120
+       LayerNorm-264             [-1, 196, 512]           1,024
+          Linear-265            [-1, 196, 2048]       1,050,624
+            GELU-266            [-1, 196, 2048]               0
+         Dropout-267            [-1, 196, 2048]               0
+          Linear-268             [-1, 196, 512]       1,049,088
+         Dropout-269             [-1, 196, 512]               0
+             Mlp-270             [-1, 196, 512]               0
+        DropPath-271             [-1, 196, 512]               0
+    VMAMBA2Block-272             [-1, 196, 512]               0
+          Conv2d-273          [-1, 512, 14, 14]           5,120
+       LayerNorm-274             [-1, 196, 512]           1,024
+          Mamba2-275             [-1, 196, 512]               0
+        DropPath-276             [-1, 196, 512]               0
+          Conv2d-277          [-1, 512, 14, 14]           5,120
+       LayerNorm-278             [-1, 196, 512]           1,024
+          Linear-279            [-1, 196, 2048]       1,050,624
+            GELU-280            [-1, 196, 2048]               0
+         Dropout-281            [-1, 196, 2048]               0
+          Linear-282             [-1, 196, 512]       1,049,088
+         Dropout-283             [-1, 196, 512]               0
+             Mlp-284             [-1, 196, 512]               0
+        DropPath-285             [-1, 196, 512]               0
+    VMAMBA2Block-286             [-1, 196, 512]               0
+          Conv2d-287          [-1, 512, 14, 14]           5,120
+       LayerNorm-288             [-1, 196, 512]           1,024
+          Mamba2-289             [-1, 196, 512]               0
+        DropPath-290             [-1, 196, 512]               0
+          Conv2d-291          [-1, 512, 14, 14]           5,120
+       LayerNorm-292             [-1, 196, 512]           1,024
+          Linear-293            [-1, 196, 2048]       1,050,624
+            GELU-294            [-1, 196, 2048]               0
+         Dropout-295            [-1, 196, 2048]               0
+          Linear-296             [-1, 196, 512]       1,049,088
+         Dropout-297             [-1, 196, 512]               0
+             Mlp-298             [-1, 196, 512]               0
+        DropPath-299             [-1, 196, 512]               0
+    VMAMBA2Block-300             [-1, 196, 512]               0
+          Conv2d-301          [-1, 512, 14, 14]           5,120
+       LayerNorm-302             [-1, 196, 512]           1,024
+          Mamba2-303             [-1, 196, 512]               0
+        DropPath-304             [-1, 196, 512]               0
+          Conv2d-305          [-1, 512, 14, 14]           5,120
+       LayerNorm-306             [-1, 196, 512]           1,024
+          Linear-307            [-1, 196, 2048]       1,050,624
+            GELU-308            [-1, 196, 2048]               0
+         Dropout-309            [-1, 196, 2048]               0
+          Linear-310             [-1, 196, 512]       1,049,088
+         Dropout-311             [-1, 196, 512]               0
+             Mlp-312             [-1, 196, 512]               0
+        DropPath-313             [-1, 196, 512]               0
+    VMAMBA2Block-314             [-1, 196, 512]               0
+        Identity-315          [-1, 512, 14, 14]               0
+          Conv2d-316         [-1, 4096, 14, 14]       2,101,248
+        Identity-317         [-1, 4096, 14, 14]               0
+            ReLU-318         [-1, 4096, 14, 14]               0
+       ConvLayer-319         [-1, 4096, 14, 14]               0
+        Identity-320         [-1, 4096, 14, 14]               0
+          Conv2d-321           [-1, 4096, 7, 7]          40,960
+        Identity-322           [-1, 4096, 7, 7]               0
+            ReLU-323           [-1, 4096, 7, 7]               0
+       ConvLayer-324           [-1, 4096, 7, 7]               0
+        Identity-325           [-1, 4096, 7, 7]               0
+          Conv2d-326           [-1, 1024, 7, 7]       4,195,328
+     BatchNorm2d-327           [-1, 1024, 7, 7]           2,048
+        Identity-328           [-1, 1024, 7, 7]               0
+       ConvLayer-329           [-1, 1024, 7, 7]               0
+    PatchMerging-330             [-1, 49, 1024]               0
+      BasicLayer-331  [[-1, 196, 512], [-1, 49, 1024]]               0
+       LayerNorm-332             [-1, 196, 512]           1,024
+          Conv2d-333           [-1, 1024, 7, 7]          10,240
+       LayerNorm-334             [-1, 49, 1024]           2,048
+          Linear-335             [-1, 49, 3072]       3,145,728
+         Dropout-336           [-1, 16, 49, 49]               0
+          Linear-337             [-1, 49, 1024]       1,049,600
+StandardAttention-338             [-1, 49, 1024]               0
+        DropPath-339             [-1, 49, 1024]               0
+          Conv2d-340           [-1, 1024, 7, 7]          10,240
+       LayerNorm-341             [-1, 49, 1024]           2,048
+          Linear-342             [-1, 49, 4096]       4,198,400
+            GELU-343             [-1, 49, 4096]               0
+         Dropout-344             [-1, 49, 4096]               0
+          Linear-345             [-1, 49, 1024]       4,195,328
+         Dropout-346             [-1, 49, 1024]               0
+             Mlp-347             [-1, 49, 1024]               0
+        DropPath-348             [-1, 49, 1024]               0
+    VMAMBA2Block-349             [-1, 49, 1024]               0
+          Conv2d-350           [-1, 1024, 7, 7]          10,240
+       LayerNorm-351             [-1, 49, 1024]           2,048
+          Linear-352             [-1, 49, 3072]       3,145,728
+         Dropout-353           [-1, 16, 49, 49]               0
+          Linear-354             [-1, 49, 1024]       1,049,600
+StandardAttention-355             [-1, 49, 1024]               0
+        DropPath-356             [-1, 49, 1024]               0
+          Conv2d-357           [-1, 1024, 7, 7]          10,240
+       LayerNorm-358             [-1, 49, 1024]           2,048
+          Linear-359             [-1, 49, 4096]       4,198,400
+            GELU-360             [-1, 49, 4096]               0
+         Dropout-361             [-1, 49, 4096]               0
+          Linear-362             [-1, 49, 1024]       4,195,328
+         Dropout-363             [-1, 49, 1024]               0
+             Mlp-364             [-1, 49, 1024]               0
+        DropPath-365             [-1, 49, 1024]               0
+    VMAMBA2Block-366             [-1, 49, 1024]               0
+          Conv2d-367           [-1, 1024, 7, 7]          10,240
+       LayerNorm-368             [-1, 49, 1024]           2,048
+          Linear-369             [-1, 49, 3072]       3,145,728
+         Dropout-370           [-1, 16, 49, 49]               0
+          Linear-371             [-1, 49, 1024]       1,049,600
+StandardAttention-372             [-1, 49, 1024]               0
+        DropPath-373             [-1, 49, 1024]               0
+          Conv2d-374           [-1, 1024, 7, 7]          10,240
+       LayerNorm-375             [-1, 49, 1024]           2,048
+          Linear-376             [-1, 49, 4096]       4,198,400
+            GELU-377             [-1, 49, 4096]               0
+         Dropout-378             [-1, 49, 4096]               0
+          Linear-379             [-1, 49, 1024]       4,195,328
+         Dropout-380             [-1, 49, 1024]               0
+             Mlp-381             [-1, 49, 1024]               0
+        DropPath-382             [-1, 49, 1024]               0
+    VMAMBA2Block-383             [-1, 49, 1024]               0
+          Conv2d-384           [-1, 1024, 7, 7]          10,240
+       LayerNorm-385             [-1, 49, 1024]           2,048
+          Linear-386             [-1, 49, 3072]       3,145,728
+         Dropout-387           [-1, 16, 49, 49]               0
+          Linear-388             [-1, 49, 1024]       1,049,600
+StandardAttention-389             [-1, 49, 1024]               0
+        DropPath-390             [-1, 49, 1024]               0
+          Conv2d-391           [-1, 1024, 7, 7]          10,240
+       LayerNorm-392             [-1, 49, 1024]           2,048
+          Linear-393             [-1, 49, 4096]       4,198,400
+            GELU-394             [-1, 49, 4096]               0
+         Dropout-395             [-1, 49, 4096]               0
+          Linear-396             [-1, 49, 1024]       4,195,328
+         Dropout-397             [-1, 49, 1024]               0
+             Mlp-398             [-1, 49, 1024]               0
+        DropPath-399             [-1, 49, 1024]               0
+    VMAMBA2Block-400             [-1, 49, 1024]               0
+      BasicLayer-401  [[-1, 49, 1024], [-1, 49, 1024]]               0
+       LayerNorm-402             [-1, 49, 1024]           2,048
+Backbone_VMAMBA2-403  [[-1, 128, 56, 56], [-1, 256, 28, 28], [-1, 512, 14, 14], [-1, 1024, 7, 7]]               0
+ ConvTranspose2d-404          [-1, 512, 14, 14]       8,389,120
+ ConvTranspose2d-405          [-1, 256, 28, 28]       4,194,560
+ ConvTranspose2d-406          [-1, 128, 56, 56]       1,048,704
+ ConvTranspose2d-407        [-1, 256, 112, 112]       1,048,832
+ ConvTranspose2d-408         [-1, 32, 224, 224]         131,104
+         Dropout-409         [-1, 32, 224, 224]               0
+          Conv2d-410          [-1, 1, 224, 224]              33
+         Dropout-411         [-1, 32, 224, 224]               0
+          Conv2d-412          [-1, 1, 224, 224]              33
+         Dropout-413         [-1, 32, 224, 224]               0
+          Conv2d-414          [-1, 1, 224, 224]              33
+         Dropout-415         [-1, 32, 224, 224]               0
+          Conv2d-416          [-1, 1, 224, 224]              33
+================================================================
+Total params: 101,791,140
+Trainable params: 101,791,140
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.77
+Forward/backward pass size (MB): 1270772623850.66
+Params size (MB): 388.30
+Estimated Total Size (MB): 1270772624239.72
+----------------------------------------------------------------
+root        : INFO     Beginning Epoch 00
+root        : INFO     Epoch: 0, Batch: 100, Loss: 0.0571
+root        : INFO     Epoch: 0, Batch: 200, Loss: 0.1456
+root        : INFO     Epoch: 0, Batch: 300, Loss: 0.1025
+root        : INFO     Epoch: 0, Batch: 400, Loss: 0.1016
+root        : INFO     Epoch: 0, Batch: 500, Loss: 0.0381
+root        : INFO     Epoch: 0, Batch: 600, Loss: 0.1064
+root        : INFO     Epoch: 0, Batch: 700, Loss: 0.1353
+root        : INFO     Epoch: 0, Batch: 800, Loss: 0.0679
+root        : INFO     Epoch: 0, Batch: 900, Loss: 0.0702
+root        : INFO     Validating...
+root        : INFO     82/89 = 0.921348
+root        : INFO     Validation Loss for Epoch 0: 0.0593
+root        : INFO     Beginning Epoch 01
+root        : INFO     Epoch: 1, Batch: 100, Loss: 0.1315
+root        : INFO     Epoch: 1, Batch: 200, Loss: 0.0447
+root        : INFO     Epoch: 1, Batch: 300, Loss: 0.0580
+root        : INFO     Epoch: 1, Batch: 400, Loss: 0.0434
+root        : INFO     Epoch: 1, Batch: 500, Loss: 0.0349
+root        : INFO     Epoch: 1, Batch: 600, Loss: 0.0876
+root        : INFO     Epoch: 1, Batch: 700, Loss: 0.1574
+root        : INFO     Epoch: 1, Batch: 800, Loss: 0.0230
+root        : INFO     Epoch: 1, Batch: 900, Loss: 0.0336
+root        : INFO     Validating...
+root        : INFO     81/89 = 0.910112
+root        : INFO     Validation Loss for Epoch 1: 0.0655
+root        : INFO     Beginning Epoch 02
+root        : INFO     Epoch: 2, Batch: 100, Loss: 0.0349
+root        : INFO     Epoch: 2, Batch: 200, Loss: 0.0383
+root        : INFO     Epoch: 2, Batch: 300, Loss: 0.0213
+root        : INFO     Epoch: 2, Batch: 400, Loss: 0.0676
+root        : INFO     Epoch: 2, Batch: 500, Loss: 0.0387
+root        : INFO     Epoch: 2, Batch: 600, Loss: 0.0454
+root        : INFO     Epoch: 2, Batch: 700, Loss: 0.0413
+root        : INFO     Epoch: 2, Batch: 800, Loss: 0.0363
+root        : INFO     Epoch: 2, Batch: 900, Loss: 0.0330
+root        : INFO     Validating...
+root        : INFO     81/89 = 0.910112
+root        : INFO     Validation Loss for Epoch 2: 0.0602
+root        : INFO     Beginning Epoch 03
+root        : INFO     Epoch: 3, Batch: 100, Loss: 0.0682
+root        : INFO     Epoch: 3, Batch: 200, Loss: 0.0622
+root        : INFO     Epoch: 3, Batch: 300, Loss: 0.0303
+root        : INFO     Epoch: 3, Batch: 400, Loss: 0.0369
+root        : INFO     Epoch: 3, Batch: 500, Loss: 0.0802
+root        : INFO     Epoch: 3, Batch: 600, Loss: 0.0865
+root        : INFO     Epoch: 3, Batch: 700, Loss: 0.0825
+root        : INFO     Epoch: 3, Batch: 800, Loss: 0.0550
+root        : INFO     Epoch: 3, Batch: 900, Loss: 0.0252
+root        : INFO     Validating...
+root        : INFO     84/89 = 0.943820
+root        : INFO     Validation Loss for Epoch 3: 0.0731
+root        : INFO     Beginning Epoch 04
+root        : INFO     Epoch: 4, Batch: 100, Loss: 0.0408
+root        : INFO     Epoch: 4, Batch: 200, Loss: 0.0277
+root        : INFO     Epoch: 4, Batch: 300, Loss: 0.1593
+root        : INFO     Epoch: 4, Batch: 400, Loss: 0.0698
+root        : INFO     Epoch: 4, Batch: 500, Loss: 0.0405
+root        : INFO     Epoch: 4, Batch: 600, Loss: 0.0322
+root        : INFO     Epoch: 4, Batch: 700, Loss: 0.0537
+root        : INFO     Epoch: 4, Batch: 800, Loss: 0.1391
+root        : INFO     Epoch: 4, Batch: 900, Loss: 0.0352
+root        : INFO     Validating...
+root        : INFO     80/89 = 0.898876
+root        : INFO     Validation Loss for Epoch 4: 0.0830
+root        : INFO     Beginning Epoch 05
+root        : INFO     Epoch: 5, Batch: 100, Loss: 0.0252
+root        : INFO     Epoch: 5, Batch: 200, Loss: 0.0324
+root        : INFO     Epoch: 5, Batch: 300, Loss: 0.0310
+root        : INFO     Epoch: 5, Batch: 400, Loss: 0.0417
+root        : INFO     Epoch: 5, Batch: 500, Loss: 0.0203
+root        : INFO     Epoch: 5, Batch: 600, Loss: 0.0831
+root        : INFO     Epoch: 5, Batch: 700, Loss: 0.0340
+root        : INFO     Epoch: 5, Batch: 800, Loss: 0.0651
+root        : INFO     Epoch: 5, Batch: 900, Loss: 0.1063
+root        : INFO     Validating...
+root        : INFO     86/89 = 0.966292
+root        : INFO     Validation Loss for Epoch 5: 0.0627
+root        : INFO     Beginning Epoch 06
+root        : INFO     Epoch: 6, Batch: 100, Loss: 0.0803
+root        : INFO     Epoch: 6, Batch: 200, Loss: 0.0995
+root        : INFO     Epoch: 6, Batch: 300, Loss: 0.0329
+root        : INFO     Epoch: 6, Batch: 400, Loss: 0.0687
+root        : INFO     Epoch: 6, Batch: 500, Loss: 0.1285
+root        : INFO     Epoch: 6, Batch: 600, Loss: 0.0238
+root        : INFO     Epoch: 6, Batch: 700, Loss: 0.0828
+root        : INFO     Epoch: 6, Batch: 800, Loss: 0.0452
+root        : INFO     Epoch: 6, Batch: 900, Loss: 0.0773
+root        : INFO     Validating...
+root        : INFO     80/89 = 0.898876
+root        : INFO     Validation Loss for Epoch 6: 0.0633
+root        : INFO     Beginning Epoch 07
+root        : INFO     Epoch: 7, Batch: 100, Loss: 0.0357
+root        : INFO     Epoch: 7, Batch: 200, Loss: 0.0845
+root        : INFO     Epoch: 7, Batch: 300, Loss: 0.0619
+root        : INFO     Epoch: 7, Batch: 400, Loss: 0.0302
+root        : INFO     Epoch: 7, Batch: 500, Loss: 0.0569
+root        : INFO     Epoch: 7, Batch: 600, Loss: 0.0692
+root        : INFO     Epoch: 7, Batch: 700, Loss: 0.0347
+root        : INFO     Epoch: 7, Batch: 800, Loss: 0.0380
+root        : INFO     Epoch: 7, Batch: 900, Loss: 0.0520
+root        : INFO     Validating...
+root        : INFO     82/89 = 0.921348
+root        : INFO     Validation Loss for Epoch 7: 0.0815
+root        : INFO     Beginning Epoch 08
+root        : INFO     Epoch: 8, Batch: 100, Loss: 0.0352
+root        : INFO     Epoch: 8, Batch: 200, Loss: 0.0236
+root        : INFO     Epoch: 8, Batch: 300, Loss: 0.0232
+root        : INFO     Epoch: 8, Batch: 400, Loss: 0.0580
+root        : INFO     Epoch: 8, Batch: 500, Loss: 0.0439
+root        : INFO     Epoch: 8, Batch: 600, Loss: 0.0364
+root        : INFO     Epoch: 8, Batch: 700, Loss: 0.0305
+root        : INFO     Epoch: 8, Batch: 800, Loss: 0.0374
+root        : INFO     Epoch: 8, Batch: 900, Loss: 0.0657
+Traceback (most recent call last):
+  File "/home/xinda-wang/miniconda3/envs/grconv/lib/python3.6/multiprocessing/util.py", line 262, in _run_finalizers
+    finalizer()
+  File "/home/xinda-wang/miniconda3/envs/grconv/lib/python3.6/multiprocessing/util.py", line 186, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/home/xinda-wang/miniconda3/envs/grconv/lib/python3.6/shutil.py", line 490, in rmtree
+    onerror(os.rmdir, path, sys.exc_info())
+  File "/home/xinda-wang/miniconda3/envs/grconv/lib/python3.6/shutil.py", line 488, in rmtree
+    os.rmdir(path)
+OSError: [Errno 39] Directory not empty: '/tmp/pymp-bn6x6jzf'
+root        : INFO     Validating...
+root        : INFO     83/89 = 0.932584
+root        : INFO     Validation Loss for Epoch 8: 0.0508
+root        : INFO     Beginning Epoch 09
+root        : INFO     Epoch: 9, Batch: 100, Loss: 0.0561
+root        : INFO     Epoch: 9, Batch: 200, Loss: 0.0533
+root        : INFO     Epoch: 9, Batch: 300, Loss: 0.0329
+root        : INFO     Epoch: 9, Batch: 400, Loss: 0.0322
+root        : INFO     Epoch: 9, Batch: 500, Loss: 0.0763
+root        : INFO     Epoch: 9, Batch: 600, Loss: 0.0310
+root        : INFO     Epoch: 9, Batch: 700, Loss: 0.0216
+root        : INFO     Epoch: 9, Batch: 800, Loss: 0.0228
+root        : INFO     Epoch: 9, Batch: 900, Loss: 0.0492
+root        : INFO     Validating...
+root        : INFO     85/89 = 0.955056
+root        : INFO     Validation Loss for Epoch 9: 0.0649
+root        : INFO     Total training time: 46.76 minutes
